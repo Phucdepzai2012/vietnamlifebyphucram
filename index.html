@@ -525,6 +525,10 @@ select option{background:var(--brown);}
 
   <!-- LB -->
   <div id="section-lb" class="section">
+    <!-- HELP BUTTON -->
+    <button onclick="showHelp()" style="width:100%;padding:16px;font-size:1.15rem;font-weight:800;background:linear-gradient(135deg,#1a4a8a,#2471a3,#1abc9c);color:white;border:3px solid #1abc9c;border-radius:14px;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 20px rgba(26,188,156,0.4);letter-spacing:0.5px;font-family:'Baloo 2',cursive;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:10px;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+      📖 <span>HƯỚNG DẪN CHƠI CHI TIẾT</span> <span style="font-size:0.85rem;opacity:0.85;">– Nhấn để xem!</span>
+    </button>
     <div class="card">
       <h2>🏆 Bảng Xếp Hạng</h2>
       <div class="tabs">
@@ -536,6 +540,139 @@ select option{background:var(--brown);}
       </div>
       <div id="lb-content"></div>
     </div>
+  </div>
+</div>
+
+<!-- HELP MODAL -->
+<div id="help-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);overflow-y:auto;padding:12px;">
+  <div style="max-width:700px;margin:0 auto;padding-bottom:30px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;background:linear-gradient(135deg,#1a4a8a,#2471a3);border-radius:14px;padding:14px 18px;border:2px solid #1abc9c;">
+      <div>
+        <div style="font-size:1.4rem;font-weight:800;color:white;">📖 HƯỚNG DẪN CHƠI</div>
+        <div style="font-size:0.8rem;color:#aee6ff;">Vietnam Life – by PHUCRAM</div>
+      </div>
+      <button onclick="closeHelp()" style="background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);color:white;font-size:1.3rem;width:42px;height:42px;border-radius:50%;cursor:pointer;font-family:'Baloo 2',cursive;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+
+    <!-- 1. Tổng quan -->
+    <div style="background:linear-gradient(135deg,rgba(26,107,46,0.3),rgba(39,174,96,0.15));border:2px solid #27ae60;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#2ecc71;margin-bottom:10px;">🎮 TỔNG QUAN TRÒ CHƠI</div>
+      <p style="font-size:0.85rem;color:#ddd;line-height:1.7;">Bạn sống một cuộc đời người Việt từ thuở mới sinh đến khi qua đời. Mỗi lần bấm <strong style="color:#f0a500;">⏩ Sống Tiếp</strong> là trôi qua <strong style="color:#f0a500;">1 mùa (3 tháng)</strong>. Mục tiêu: <strong style="color:#2ecc71;">Sống thật lâu</strong> hoặc <strong style="color:#f0a500;">Kiếm thật nhiều tiền</strong> để leo lên Bảng Xếp Hạng!</p>
+      <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.82rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;"><span style="color:#2ecc71;">🌸 Xuân</span> – Cây trồng tốt tươi, may mắn cao</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;"><span style="color:#e74c3c;">☀️ Hè</span> – Dễ bệnh, thu nhập cao</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;"><span style="color:#f39c12;">🍂 Thu</span> – Mùa thu hoạch, ổn định</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;"><span style="color:#3498db;">❄️ Đông</span> – HP giảm, dễ già yếu</div>
+      </div>
+    </div>
+
+    <!-- 2. Chỉ số -->
+    <div style="background:linear-gradient(135deg,rgba(192,57,43,0.25),rgba(231,76,60,0.15));border:2px solid #e74c3c;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#e74c3c;margin-bottom:10px;">📊 CÁC CHỈ SỐ QUAN TRỌNG</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.83rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;border-left:3px solid #e74c3c;"><strong style="color:#e74c3c;">❤️ HP (Sức Khoẻ)</strong><br><span style="color:#ccc;">Giảm 0 = chết. Tăng qua ngủ nghỉ, ăn uống, không stress.</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;border-left:3px solid #f39c12;"><strong style="color:#f39c12;">😊 Hạnh Phúc</strong><br><span style="color:#ccc;">Thấp làm HP giảm. Tăng khi có nhà, có vợ/chồng, mua đồ.</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;border-left:3px solid #e67e22;"><strong style="color:#e67e22;">😤 Stress</strong><br><span style="color:#ccc;">Cao quá làm mất HP. Tự giảm dần theo mùa. Tránh vay nợ nhiều.</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;border-left:3px solid #3498db;"><strong style="color:#3498db;">🧠 IQ</strong><br><span style="color:#ccc;">Ảnh hưởng điểm học, lương. Tăng khi học thêm, đọc sách.</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;border-left:3px solid #f1c40f;"><strong style="color:#f1c40f;">💛 EQ</strong><br><span style="color:#ccc;">Ảnh hưởng quan hệ xã hội, kết hôn. Tăng qua hoạt động xã hội.</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;border-left:3px solid #f0a500;"><strong style="color:#f0a500;">💰 Tiền</strong><br><span style="color:#ccc;">Kiếm qua việc làm, nông nghiệp, cổ phiếu. Tiêu vào nhà, xe, đồ.</span></div>
+      </div>
+    </div>
+
+    <!-- 3. Học vấn & Nghề nghiệp -->
+    <div style="background:linear-gradient(135deg,rgba(106,27,154,0.25),rgba(155,89,182,0.15));border:2px solid #9b59b6;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#9b59b6;margin-bottom:10px;">🎓 HỌC VẤN & NGHỀ NGHIỆP</div>
+      <p style="font-size:0.83rem;color:#ddd;margin-bottom:8px;line-height:1.6;"><strong style="color:#9b59b6;">Trẻ em (0–17t):</strong> Tự học miễn phí. Sau 18 tuổi mở khóa bằng Đại Học, Cao Đẳng, Nghề.</p>
+      <p style="font-size:0.83rem;color:#ddd;margin-bottom:8px;line-height:1.6;"><strong style="color:#9b59b6;">Học càng cao = Lương càng lớn.</strong> Bằng cấp mở khóa các nghề cao cấp như Bác Sĩ, Kỹ Sư, Giám Đốc, Nhà Đầu Tư CK.</p>
+      <div style="font-size:0.82rem;color:#ccc;background:rgba(0,0,0,0.3);border-radius:8px;padding:10px;line-height:1.8;">
+        👷 Công nhân → 💼 Nhân viên → 📊 Kế toán → 💻 Kỹ sư IT → 🏥 Bác sĩ / ⚖️ Luật sư / 🏦 Giám đốc
+      </div>
+      <p style="font-size:0.8rem;color:#aaa;margin-top:8px;">💡 Mẹo: Học xong Đại học sớm sẽ có nhiều năm làm việc lương cao hơn!</p>
+    </div>
+
+    <!-- 4. Nông nghiệp -->
+    <div style="background:linear-gradient(135deg,rgba(26,107,46,0.25),rgba(39,174,96,0.15));border:2px solid #1abc9c;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#1abc9c;margin-bottom:10px;">🌾 NÔNG NGHIỆP</div>
+      <p style="font-size:0.83rem;color:#ddd;margin-bottom:8px;line-height:1.6;">Mua vật nuôi / cây trồng trong tab <strong style="color:#1abc9c;">🌾 Nông</strong>. Mỗi mùa sẽ thu hoạch tự động. Vật nuôi có thể bị bệnh – mua <strong>Vaccine</strong> và <strong>Thuốc sâu</strong> để bảo vệ!</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:0.8rem;text-align:center;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:7px;">🐔 Gà<br><span style="color:#2ecc71;">Thu nhập trung bình</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:7px;">🐷 Heo<br><span style="color:#2ecc71;">Thu nhập khá</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:7px;">🐟 Cá<br><span style="color:#2ecc71;">Ít rủi ro</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:7px;">🥬 Rau<br><span style="color:#2ecc71;">Thu nhanh</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:7px;">🌾 Lúa<br><span style="color:#2ecc71;">Thu nhập cao</span></div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:7px;">🐄 Bò<br><span style="color:#f0a500;">Cao nhất!</span></div>
+      </div>
+    </div>
+
+    <!-- 5. Mua sắm & Nhà xe -->
+    <div style="background:linear-gradient(135deg,rgba(240,165,0,0.2),rgba(255,215,0,0.1));border:2px solid #f0a500;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#f0a500;margin-bottom:10px;">🛒 MUA SẮM – NHÀ & XE</div>
+      <p style="font-size:0.83rem;color:#ddd;margin-bottom:8px;line-height:1.6;">Vào tab <strong style="color:#f0a500;">🛒 Mua</strong> để mua nhà, xe, vật phẩm tiêu dùng. Nhà và xe <strong>tăng Hạnh Phúc</strong> mỗi mùa. Có thể <strong>vay ngân hàng</strong> để mua nhà – nhưng nợ nhiều sẽ stress cao!</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.8rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;">🏠 <strong style="color:#f0a500;">Nhà</strong> – Tăng HP tái sinh, +Hạnh Phúc mỗi mùa</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;">🚗 <strong style="color:#f0a500;">Xe</strong> – Nhanh tới nơi, +Hạnh Phúc, mở event đặc biệt</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;">🍜 Đồ ăn – Tăng HP tức thời</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;">💊 Thuốc – Hồi HP khi ốm yếu</div>
+      </div>
+    </div>
+
+    <!-- 6. Hôn nhân & Gia đình -->
+    <div style="background:linear-gradient(135deg,rgba(231,76,60,0.2),rgba(192,57,43,0.15));border:2px solid #e74c3c;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#ff6b6b;margin-bottom:10px;">💑 HÔN NHÂN & GIA ĐÌNH</div>
+      <p style="font-size:0.83rem;color:#ddd;margin-bottom:8px;line-height:1.6;">Sau 18 tuổi, vào tab <strong style="color:#ff6b6b;">💑 Hôn Nhân</strong> để tìm bạn đời. EQ cao giúp dễ thành công hơn. Có vợ/chồng <strong>tăng Hạnh Phúc</strong> mỗi mùa!</p>
+      <div style="font-size:0.82rem;color:#ccc;background:rgba(0,0,0,0.3);border-radius:8px;padding:10px;line-height:1.8;">
+        💍 Kết hôn → 👶 Sinh con (tốn tiền nhưng +Hạnh Phúc nhiều) → 👨‍👩‍👧‍👦 Gia đình đông vui
+      </div>
+      <p style="font-size:0.8rem;color:#aaa;margin-top:8px;">💡 Mẹo: Có nhà trước khi lấy vợ/chồng sẽ tăng cơ hội thành công!</p>
+    </div>
+
+    <!-- 7. Cổ phiếu -->
+    <div style="background:linear-gradient(135deg,rgba(26,74,138,0.3),rgba(41,128,185,0.15));border:2px solid #2980b9;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#3498db;margin-bottom:10px;">📈 CỔ PHIẾU (CK)</div>
+      <p style="font-size:0.83rem;color:#ddd;margin-bottom:8px;line-height:1.6;">Mở khóa sau 22 tuổi + có bằng cấp phù hợp. Giá cổ phiếu <strong style="color:#3498db;">tự động thay đổi mỗi mùa</strong>. Mua khi thấy giá thấp, bán khi giá cao – lợi nhuận có thể rất lớn!</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.8rem;">
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;">🟢 <strong style="color:#2ecc71;">Giá tăng</strong> – Bán để chốt lời</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;">🔴 <strong style="color:#e74c3c;">Giá giảm</strong> – Giữ hoặc mua thêm</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;">📊 Xem lịch sử giá trong biểu đồ</div>
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px;">⚠️ Không đặt tất cả vào 1 mã!</div>
+      </div>
+      <p style="font-size:0.8rem;color:#aaa;margin-top:8px;">💡 Mẹo: Đa dạng hóa danh mục – mua nhiều mã khác nhau để giảm rủi ro!</p>
+    </div>
+
+    <!-- 8. Sự kiện ngẫu nhiên -->
+    <div style="background:linear-gradient(135deg,rgba(243,156,18,0.2),rgba(230,126,34,0.15));border:2px solid #e67e22;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#f39c12;margin-bottom:10px;">🎲 SỰ KIỆN NGẪU NHIÊN</div>
+      <p style="font-size:0.83rem;color:#ddd;margin-bottom:8px;line-height:1.6;">Mỗi mùa có <strong style="color:#f39c12;">50% khả năng xảy ra 1 sự kiện ngẫu nhiên</strong>. Có thể là tốt (trúng thưởng, thăng chức) hoặc xấu (tai nạn, mất tiền, ốm).</p>
+      <div style="font-size:0.82rem;color:#ccc;background:rgba(0,0,0,0.3);border-radius:8px;padding:10px;">
+        ✅ <strong style="color:#2ecc71;">Tốt:</strong> Thưởng tiền, tăng chỉ số, gặp may mắn<br>
+        ❌ <strong style="color:#e74c3c;">Xấu:</strong> Mất tiền, giảm HP, tai nạn, bệnh tật<br>
+        🌟 <strong style="color:#f0a500;">Đặc biệt:</strong> Sự kiện theo từng mùa – Xuân/Hè/Thu/Đông
+      </div>
+    </div>
+
+    <!-- 9. Hộ khẩu & CCCD -->
+    <div style="background:linear-gradient(135deg,rgba(52,73,94,0.4),rgba(44,62,80,0.3));border:2px solid #7f8c8d;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#bdc3c7;margin-bottom:10px;">🪪 CCCD & 📋 HỘ KHẨU</div>
+      <p style="font-size:0.83rem;color:#ddd;margin-bottom:8px;line-height:1.6;"><strong style="color:#bdc3c7;">CCCD:</strong> Xem thông tin cá nhân, ảnh đại diện của nhân vật. Có thể upload ảnh tùy chỉnh!</p>
+      <p style="font-size:0.83rem;color:#ddd;line-height:1.6;"><strong style="color:#bdc3c7;">Hộ Khẩu:</strong> Xem toàn bộ lịch sử cuộc đời – công việc, học vấn, gia đình, tài sản. Tổng kết một cuộc đời!</p>
+    </div>
+
+    <!-- 10. Mẹo sinh tồn -->
+    <div style="background:linear-gradient(135deg,rgba(39,174,96,0.25),rgba(26,188,156,0.15));border:2px solid #1abc9c;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-size:1.05rem;font-weight:800;color:#1abc9c;margin-bottom:10px;">💡 MẸO SINH TỒN – SỐNG LÂU & GIÀU</div>
+      <div style="font-size:0.83rem;color:#ddd;line-height:1.9;">
+        🏆 <strong style="color:#f0a500;">Ưu tiên học Đại Học</strong> sớm để mở khóa nghề lương cao<br>
+        🏠 <strong style="color:#2ecc71;">Mua nhà</strong> ngay khi đủ tiền – HP tái sinh cao hơn<br>
+        🐄 <strong style="color:#2ecc71;">Nuôi Bò</strong> là nguồn thu nhập nông nghiệp cao nhất<br>
+        📈 <strong style="color:#3498db;">Đầu tư CK</strong> khi đủ tuổi – tiền đẻ ra tiền<br>
+        💍 <strong style="color:#ff6b6b;">Kết hôn sớm</strong> để có thêm +Hạnh Phúc mỗi mùa<br>
+        💊 <strong style="color:#e74c3c;">Giữ HP trên 50</strong> – đừng để chết vì sự kiện bất ngờ<br>
+        💰 <strong style="color:#f0a500;">Không vay quá nhiều</strong> – nợ lớn = stress cao = HP giảm dần<br>
+        🎲 <strong style="color:#f39c12;">Theo dõi log sự kiện</strong> để hiểu điều gì đang ảnh hưởng đến nhân vật
+      </div>
+    </div>
+
+    <button onclick="closeHelp()" style="width:100%;padding:14px;font-size:1rem;font-weight:800;background:linear-gradient(135deg,#1a4a8a,#2471a3);color:white;border:2px solid #3498db;border-radius:12px;cursor:pointer;font-family:'Baloo 2',cursive;">✕ Đóng Hướng Dẫn</button>
   </div>
 </div>
 
@@ -678,6 +815,8 @@ function updateLoginUserBar(){
 
 function saveGameState(){if(G.name)LS.set('vl_savestate',G);}
 function clearSaveState(){LS.del('vl_savestate');}
+function showHelp(){document.getElementById('help-modal').style.display='block';document.body.style.overflow='hidden';}
+function closeHelp(){document.getElementById('help-modal').style.display='none';document.body.style.overflow='';}
 window.addEventListener('beforeunload',saveGameState);
 setInterval(saveGameState,10000);
 
@@ -2560,3 +2699,4 @@ function chatRegisterUser(accountName){
 
 </body>
 </html>
+
