@@ -9,6 +9,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <style>
 :root{--red:#c0392b;--gold:#f0a500;--gold2:#ffd700;--dark:#0d0600;--brown:#3d1f00;--cream:#fdf3e3;--green:#1a6b2e;--lgreen:#2ecc71;--blue:#1a4a8a;--purple:#6a1b9a;--shadow:rgba(0,0,0,0.5);}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -45,9 +46,22 @@ select option{background:var(--brown);}
 .fill-eq{background:linear-gradient(90deg,#e67e22,#f1c40f);}
 .fill-happiness{background:linear-gradient(90deg,#e74c3c,#f39c12,#2ecc71);}
 .fill-stress{background:linear-gradient(90deg,#27ae60,#e74c3c);}
-.btn-google{background:#fff;color:#333;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;gap:10px;font-size:1rem;padding:12px 24px;}
-.btn-google:hover{background:#f5f5f5;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
-.btn-google svg{width:22px;height:22px;}
+.btn-google{background:#fff;color:#333;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;gap:10px;font-size:1rem;padding:12px 24px;width:100%;border-radius:10px;cursor:pointer;font-family:'Baloo 2',cursive;font-weight:700;transition:all 0.2s;}
+.btn-google:hover{background:#f5f5f5;box-shadow:0 4px 15px rgba(0,0,0,0.25);transform:translateY(-1px);}
+.btn-google svg{width:24px;height:24px;flex-shrink:0;}
+.google-user-info{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:8px 12px;margin-bottom:12px;}
+.google-user-avatar{width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);}
+.google-user-text{font-size:0.82rem;}.google-user-text b{color:var(--gold);}
+/* LOTTERY */
+.scratch-card{position:relative;width:100%;background:linear-gradient(135deg,#1a4a8a,#6a1b9a);border:3px solid var(--gold);border-radius:16px;padding:20px;text-align:center;overflow:hidden;}
+.scratch-ticket{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0;}
+.scratch-cell{background:linear-gradient(135deg,#888,#aaa);border-radius:10px;height:70px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;cursor:pointer;border:2px solid rgba(255,255,255,0.3);transition:all 0.4s;position:relative;overflow:hidden;}
+.scratch-cell.revealed{background:linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0.05));border-color:var(--gold);transform:scale(1.05);}
+.scratch-cell::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(0,0,0,0.1),rgba(0,0,0,0.1) 2px,transparent 2px,transparent 8px);pointer-events:none;}
+.lottery-result{padding:14px;border-radius:12px;margin-top:10px;font-weight:800;font-size:1.1rem;}
+.lot-win{background:linear-gradient(135deg,rgba(46,204,113,0.3),rgba(39,174,96,0.2));border:2px solid #2ecc71;color:#2ecc71;}
+.lot-lose{background:rgba(0,0,0,0.3);border:1px solid #555;color:#888;}
+@keyframes lotteryReveal{0%{transform:scale(0.5) rotate(-10deg);opacity:0;}60%{transform:scale(1.2) rotate(5deg);}100%{transform:scale(1.05) rotate(0deg);opacity:1;}}
 .talent-badge{display:inline-block;padding:5px 16px;border-radius:20px;font-weight:800;font-size:0.95rem;margin:6px 0;}
 .talent-genius{background:linear-gradient(135deg,#6a1b9a,#ab47bc);color:#fff;box-shadow:0 0 12px rgba(171,71,188,0.6);}
 .talent-smart{background:linear-gradient(135deg,#1565c0,#42a5f5);color:#fff;}
@@ -302,17 +316,16 @@ select option{background:var(--brown);}
   </div>
   <div class="card login-card">
     <div class="login-logo">🌟</div>
-    <h2 style="margin-bottom:6px;">Tạo Hồ Sơ Người Chơi</h2>
-    <p style="font-size:0.82rem;color:#aaa;margin-bottom:18px;">Nhập tên và giới tính để lưu vào bảng xếp hạng</p>
-    <label style="font-size:0.8rem;color:#aaa;display:block;margin-bottom:4px;text-align:left;">👤 Tên hiển thị:</label>
-    <input type="text" id="profile-name" placeholder="Nhập tên của bạn..." maxlength="20" style="margin-bottom:10px;">
-    <label style="font-size:0.8rem;color:#aaa;display:block;margin-bottom:6px;text-align:left;">⚧ Giới tính:</label>
-    <div class="gender-btns" style="margin-bottom:14px;">
-      <button class="gender-btn selected" id="profile-btn-male" onclick="selectProfileGender('Nam')">👦 <span>Nam</span></button>
-      <button class="gender-btn" id="profile-btn-female" onclick="selectProfileGender('Nữ')">👧 <span>Nữ</span></button>
+    <h2 style="margin-bottom:6px;">Đăng Nhập Để Chơi</h2>
+    <p style="font-size:0.82rem;color:#aaa;margin-bottom:20px;">Dùng tài khoản Google để lưu điểm & kết bạn</p>
+    <button class="btn-google" onclick="signInWithGoogle()">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Đăng nhập với Google
+    </button>
+    <div id="login-status" style="margin-top:14px;font-size:0.82rem;color:#aaa;min-height:20px;text-align:center;"></div>
+    <div style="margin-top:12px;font-size:0.72rem;color:#666;border-top:1px dashed rgba(255,255,255,0.1);padding-top:10px;">
+      🔒 Chỉ dùng để hiển thị tên & kết bạn. Không lưu mật khẩu.
     </div>
-    <button class="btn btn-gold btn-full" onclick="saveProfile()">✅ Lưu & Bắt Đầu</button>
-    <div id="login-status" style="margin-top:10px;font-size:0.78rem;color:#aaa;"></div>
   </div>
 </div>
 
@@ -321,7 +334,7 @@ select option{background:var(--brown);}
   <div class="card">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
       <div id="login-user-bar"></div>
-      <button class="btn btn-gray btn-sm" onclick="showScreen('login')" title="Đổi hồ sơ">✏️ Đổi tên</button>
+      <button class="btn btn-gray btn-sm" onclick="signOutGoogle()" title="Đổi tài khoản">🚪 Đăng xuất</button>
     </div>
     <h2>🌟 Bắt Đầu Hành Trình</h2>
     <label style="font-size:0.8rem;color:#aaa;display:block;margin-bottom:3px;">Tên nhân vật:</label>
@@ -378,6 +391,7 @@ select option{background:var(--brown);}
     <button onclick="showSection('marriage')" id="nav-marriage">💑 Hôn Nhân</button>
     <button onclick="showSection('hokhau')" id="nav-hokhau">📋 Hộ Khẩu</button>
     <button onclick="showSection('stock')" id="nav-stock">📈 CK</button>
+    <button onclick="showSection('lottery')" id="nav-lottery">🎫 Xổ Số</button>
     <button onclick="showSection('lb')" id="nav-lb">🏆 BXH</button>
   </div>
 
@@ -520,6 +534,42 @@ select option{background:var(--brown);}
         </div>
         <button class="btn btn-blue btn-full" style="margin-top:8px;" onclick="updateStockPrices()">🔄 Cập Nhật Giá</button>
       </div>
+    </div>
+  </div>
+
+  <!-- LOTTERY -->
+  <div id="section-lottery" class="section">
+    <div class="card">
+      <h2>🎫 Xổ Số Cào May Mắn</h2>
+      <div style="text-align:center;font-size:0.8rem;color:#f0a500;margin-bottom:10px;">💡 Mỗi vé 100.000 VNĐ – Cào 3 ô để xem kết quả!</div>
+      <div style="text-align:center;margin-bottom:10px;">
+        <span style="font-size:0.85rem;">💰 Tiền hiện có: </span>
+        <span id="lottery-money" style="color:var(--gold2);font-weight:800;font-size:1rem;"></span>
+      </div>
+      <!-- Ticket area -->
+      <div class="scratch-card" id="lottery-card">
+        <div style="font-size:0.95rem;font-weight:800;color:rgba(255,255,255,0.9);letter-spacing:1px;">✨ VÉ SỐ MAY MẮN ✨</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.6);margin-top:2px;">Nhấn từng ô để cào</div>
+        <div class="scratch-ticket" id="scratch-cells"></div>
+        <div id="lottery-result" style="display:none;"></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button class="btn btn-gold btn-full" onclick="buyLotteryTicket()" id="lottery-buy-btn">🎫 Mua Vé (100.000 VNĐ)</button>
+        <button class="btn btn-gray btn-sm" onclick="resetLotteryCard()" style="min-width:80px;" id="lottery-reset-btn" disabled>🔄 Vé Mới</button>
+      </div>
+      <hr class="divider">
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px;font-size:0.8rem;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">🏆 Bảng Giải Thưởng</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;color:#ccc;">
+          <div>🌟🌟🌟 Ba sao = <span style="color:#ffd700;font-weight:700;">50.000.000 VNĐ</span></div>
+          <div>💎💎💎 Ba kim cương = <span style="color:#3498db;font-weight:700;">20.000.000 VNĐ</span></div>
+          <div>7️⃣7️⃣7️⃣ Ba số 7 = <span style="color:#e74c3c;font-weight:700;">10.000.000 VNĐ</span></div>
+          <div>🍀🍀🍀 Ba lá = <span style="color:#2ecc71;font-weight:700;">5.000.000 VNĐ</span></div>
+          <div>🎯🎯🎯 Ba hồng = <span style="color:#e67e22;font-weight:700;">2.000.000 VNĐ</span></div>
+          <div>Bất kỳ 2 giống = <span style="color:#f39c12;font-weight:700;">300.000 VNĐ</span></div>
+        </div>
+      </div>
+      <div style="font-size:0.72rem;color:#666;text-align:center;margin-top:8px;">Lịch sử: <span id="lottery-stats">Chưa mua vé nào</span></div>
     </div>
   </div>
 
@@ -751,9 +801,69 @@ const firebaseConfig={
   appId:"1:134954120781:web:d7f762adb80bfce3140e04",
   measurementId:"G-39VPPE1F9T"
 };
-// ===================== FIREBASE + PROFILE =====================
-let fbDB=null,playerProfile={name:'',gender:'Nam'};
-try{firebase.initializeApp(firebaseConfig);fbDB=firebase.database();firebase.analytics();}catch(e){console.warn('Firebase:',e);}
+// ===================== FIREBASE + GOOGLE AUTH =====================
+let fbDB=null, fbAuth=null, fbStorage=null;
+let playerProfile={name:'',gender:'Nam',email:'',photoURL:''};
+let googleUser=null;
+
+try{
+  firebase.initializeApp(firebaseConfig);
+  fbDB=firebase.database();
+  fbAuth=firebase.auth();
+  firebase.analytics();
+}catch(e){console.warn('Firebase:',e);}
+
+// Sanitize email for Firebase key (no dots, @, etc)
+function emailToKey(email){ return email.replace(/\./g,'_').replace(/@/g,'__at__').replace(/[#$\[\]\/]/g,'_'); }
+
+// Google Sign-In
+function signInWithGoogle(){
+  if(!fbAuth){ alert('Lỗi kết nối Firebase!'); return; }
+  const statusEl = document.getElementById('login-status');
+  if(statusEl){ statusEl.textContent='⏳ Đang kết nối...'; statusEl.style.color='#f0a500'; }
+  const provider = new firebase.auth.GoogleAuthProvider();
+  fbAuth.signInWithPopup(provider).then(result=>{
+    const user = result.user;
+    onGoogleLoginSuccess(user);
+  }).catch(err=>{
+    console.warn('Google login error:',err);
+    if(statusEl){ statusEl.textContent='❌ Lỗi đăng nhập: '+err.message; statusEl.style.color='#e74c3c'; }
+  });
+}
+
+function signOutGoogle(){
+  if(fbAuth) fbAuth.signOut();
+  googleUser=null;
+  playerProfile={name:'',gender:'Nam',email:'',photoURL:''};
+  LS.del('vl_profile');
+  showScreen('login');
+}
+
+function onGoogleLoginSuccess(user){
+  googleUser=user;
+  playerProfile.name = user.displayName || user.email;
+  playerProfile.email = user.email;
+  playerProfile.photoURL = user.photoURL || '';
+  playerProfile.accountName = emailToKey(user.email);
+  LS.set('vl_profile', playerProfile);
+  // Register in Firebase
+  if(fbDB) fbDB.ref('users/'+playerProfile.accountName).set({
+    name: playerProfile.name,
+    email: user.email,
+    ts: Date.now()
+  });
+  chatRegisterUser(playerProfile.accountName);
+  checkAndResume();
+}
+
+// Listen for auth state on load
+if(fbAuth){
+  fbAuth.onAuthStateChanged(user=>{
+    if(user && document.getElementById('screen-login')?.classList.contains('active')){
+      onGoogleLoginSuccess(user);
+    }
+  });
+}
 
 // Device ID duy nhất để tránh trùng key BXH khi 2 người đặt tên giống nhau
 function getDeviceId(){
@@ -771,18 +881,8 @@ const LS={
 
 function selectProfileGender(g){
   playerProfile.gender=g;
-  document.getElementById('profile-btn-male').classList.toggle('selected',g==='Nam');
-  document.getElementById('profile-btn-female').classList.toggle('selected',g==='Nữ');
-}
-
-function saveProfile(){
-  const n=(document.getElementById('profile-name')?.value||'').trim();
-  if(!n){const s=document.getElementById('login-status');if(s){s.style.color='#e74c3c';s.textContent='⚠️ Hãy nhập tên!';} return;}
-  playerProfile.name=n;
-  playerProfile.accountName=n;
-  LS.set('vl_profile',playerProfile);
-  chatRegisterUser(n);
-  checkAndResume();
+  document.getElementById('profile-btn-male')?.classList.toggle('selected',g==='Nam');
+  document.getElementById('profile-btn-female')?.classList.toggle('selected',g==='Nữ');
 }
 
 function checkAndResume(){
@@ -797,7 +897,6 @@ function checkAndResume(){
 }
 
 function loadSavedGame(sg){
-  // Deep clone từ JSON để tránh reference bị lẫn lộn
   const clean=JSON.parse(JSON.stringify(sg));
   Object.assign(G,clean);
   showScreen('game'); showSection('main'); renderGame(); chatInit();
@@ -808,9 +907,12 @@ function updateLoginUserBar(){
   const bar=document.getElementById('login-user-bar');
   if(!bar)return;
   const p=LS.get('vl_profile');
-  bar.innerHTML=p?.name
-    ?`<span style="font-size:0.82rem;">${p.gender==='Nam'?'👦':'👧'} Người chơi: <strong style="color:var(--gold)">${p.name}</strong></span>`
-    :`<span style="font-size:0.78rem;color:#888;">👤 Chưa có hồ sơ</span>`;
+  if(p?.name){
+    const avatar = p.photoURL ? `<img src="${p.photoURL}" class="user-avatar" style="width:32px;height:32px;margin-right:6px;vertical-align:middle;">` : '';
+    bar.innerHTML=`<span style="font-size:0.82rem;">${avatar}Xin chào: <strong style="color:var(--gold)">${p.name}</strong></span>`;
+  } else {
+    bar.innerHTML=`<span style="font-size:0.78rem;color:#888;">👤 Chưa đăng nhập</span>`;
+  }
 }
 
 function saveGameState(){if(G.name)LS.set('vl_savestate',G);}
@@ -1154,6 +1256,7 @@ function showSection(id){
   if(id==='farm')renderFarm();
   if(id==='shop')renderShop();
   if(id==='lb')showLbTab('age');
+  if(id==='lottery'){renderLotterySection();resetLotteryCard();}
   if(id==='marriage')renderMarriage();
   if(id==='hokhau')renderHoKhau();
   if(id==='edu')renderEdu();
@@ -1746,7 +1849,8 @@ async function saveToleaderboard(){
   clearSaveState();
   if(!fbDB)return;
   const prof=LS.get('vl_profile',{});
-  const playerKey=getDeviceId(); // Key duy nhất theo thiết bị, không bị trùng dù đặt tên giống nhau
+  // Dùng Google account key nếu có, fallback về deviceId
+  const playerKey=prof.accountName||getDeviceId();
   const e={
     name:prof.name||'Vô danh',
     gender:prof.gender||'Nam',
@@ -1756,17 +1860,16 @@ async function saveToleaderboard(){
     family:G.family?.name||'',
     edu:getEduLevelName(),
     talent:G.talent?.name||'',
-    did:playerKey, // deviceId để BXH nhận ra "mình"
+    did:playerKey,
     ts:Date.now()
   };
   try{
-    // Dùng playerKey làm ID → mỗi người chỉ có 1 dòng, chỉ cập nhật nếu tốt hơn
     await fbDB.ref('leaderboard/age/'+playerKey).transaction(cur=>{
-      if(!cur||e.age>cur.age)return e; // cập nhật nếu tuổi cao hơn
-      return; // giữ nguyên nếu cũ tốt hơn
+      if(!cur||e.age>cur.age)return e;
+      return;
     });
     await fbDB.ref('leaderboard/money/'+playerKey).transaction(cur=>{
-      if(!cur||e.money>cur.money)return e; // cập nhật nếu tiền nhiều hơn
+      if(!cur||e.money>cur.money)return e;
       return;
     });
     showNotif('🏆 Đã cập nhật bảng xếp hạng!','#f0a500');
@@ -2399,7 +2502,6 @@ document.addEventListener('DOMContentLoaded',function(){
 
 
 // ===================== FRIEND CHAT SYSTEM =====================
-let fbStorage = null;
 let chatFriends = {}; // {accountName: {status, lastSeen}}
 let chatActiveTab = null; // accountName or 'friends'
 let chatListeners = {}; // active message listeners
@@ -2409,8 +2511,13 @@ let myAccount = null;
 function chatInit(){
   if(!fbDB) return;
   try { fbStorage = firebase.storage(); } catch(e){}
-  myAccount = (playerProfile?.accountName) || LS.get('vl_profile',{}).name || getDeviceId();
-  if(myAccount) fbDB.ref('users/'+myAccount).set({name:myAccount,ts:Date.now()}); // luôn re-register
+  // Dùng accountName (sanitized email) làm định danh
+  myAccount = playerProfile?.accountName || LS.get('vl_profile',{}).accountName || getDeviceId();
+  if(myAccount) fbDB.ref('users/'+myAccount).set({
+    name: playerProfile?.name || myAccount,
+    email: playerProfile?.email || '',
+    ts: Date.now()
+  });
   chatRenderFriendList();
   chatListenFriendRequests();
   chatShowFriendsView();
@@ -2442,8 +2549,10 @@ function chatSendFriendReq(){
   if(!fbDB){ alert('Cần bật Firebase!'); return; }
   if(!myAccount) chatInit();
   const inp = document.getElementById('chat-friend-input');
-  const target = inp.value.trim();
-  if(!target){ showNotif('⚠️ Nhập tên tài khoản!','#e74c3c'); return; }
+  const rawTarget = inp.value.trim();
+  if(!rawTarget){ showNotif('⚠️ Nhập Gmail của bạn bè!','#e74c3c'); return; }
+  // Sanitize Gmail thành key
+  const target = rawTarget.includes('@') ? emailToKey(rawTarget) : rawTarget;
   if(target === myAccount){ showNotif('⚠️ Không thể kết bạn với chính mình!','#e74c3c'); return; }
   // Kiểm tra đã kết bạn chưa
   fbDB.ref('friends/'+myAccount+'/'+target).once('value', fs => {
@@ -2452,11 +2561,11 @@ function chatSendFriendReq(){
     fbDB.ref('friendRequests/'+target+'/'+myAccount).once('value', fr => {
       if(fr.exists()){ showNotif('📨 Đã gửi lời mời rồi!','#f39c12'); return; }
       fbDB.ref('friendRequests/'+target+'/'+myAccount).set({
-        from: myAccount, ts: Date.now(), status:'pending'
+        from: myAccount, fromName: playerProfile?.name || myAccount, ts: Date.now(), status:'pending'
       }).then(()=>{
         inp.value='';
-        showNotif('✅ Đã gửi lời mời kết bạn tới "'+target+'"!','#27ae60');
-      }).catch(()=>showNotif('❌ Lỗi gửi lời mời – kiểm tra Firebase Rules!','#e74c3c'));
+        showNotif('✅ Đã gửi lời mời tới "'+rawTarget+'"!','#27ae60');
+      }).catch(()=>showNotif('❌ Lỗi gửi lời mời – kiểm tra Gmail đúng chưa!','#e74c3c'));
     });
   });
 }
@@ -2469,8 +2578,8 @@ function chatListenFriendRequests(){
     const notifEl = document.getElementById('chat-req-notif');
     if(pending.length){
       notifEl.style.display='block';
-      notifEl.innerHTML = pending.map(([from])=>
-        `<span style="color:var(--gold);">📨 ${from}</span>
+      notifEl.innerHTML = pending.map(([from,data])=>
+        `<span style="color:var(--gold);">📨 ${data.fromName||from}</span>
          <button onclick="chatAcceptReq('${from}')" style="margin:0 3px;padding:2px 6px;background:#27ae60;border:none;border-radius:4px;color:white;cursor:pointer;font-size:0.65rem;">✔</button>
          <button onclick="chatDeclineReq('${from}')" style="padding:2px 6px;background:#c0392b;border:none;border-radius:4px;color:white;cursor:pointer;font-size:0.65rem;">✗</button><br>`
       ).join('');
@@ -2495,23 +2604,42 @@ function chatRenderFriendList(){
   fbDB.ref('friends/'+myAccount).on('value', snap=>{
     chatFriends = {};
     const val = snap.val()||{};
-    Object.keys(val).forEach(k=>{ chatFriends[k]={since:val[k].since}; });
-    const el = document.getElementById('chat-fr-list');
-    if(!el) return;
-    if(!Object.keys(chatFriends).length){
-      el.innerHTML='<div id="chat-empty">Chưa có bạn bè.<br>Nhập tên tài khoản để kết bạn!</div>';
+    const keys = Object.keys(val);
+    if(!keys.length){
+      const el = document.getElementById('chat-fr-list');
+      if(el) el.innerHTML='<div id="chat-empty">Chưa có bạn bè.<br>Nhập Gmail để kết bạn!</div>';
       return;
     }
-    el.innerHTML = Object.keys(chatFriends).map(name=>{
-      const unread = chatUnread[name]||0;
-      return `<div class="chat-fr-item" onclick="chatOpenConvo('${name}')">
-        <div><span class="online-dot"></span><span class="chat-fr-name">${name}</span></div>
-        ${unread?`<span class="unread-dot"></span>`:''}
-      </div>`;
-    }).join('');
-    // Listen for unread
-    Object.keys(chatFriends).forEach(name=>chatListenMessages(name));
+    // Fetch display names from users node
+    let loaded=0;
+    keys.forEach(k=>{
+      chatFriends[k]={since:val[k].since,displayName:k};
+      fbDB.ref('users/'+k+'/name').once('value',ns=>{
+        chatFriends[k].displayName = ns.val()||k;
+        loaded++;
+        if(loaded===keys.length) chatRenderFriendListUI();
+      });
+    });
   });
+}
+
+function chatRenderFriendListUI(){
+  const el = document.getElementById('chat-fr-list');
+  if(!el) return;
+  if(!Object.keys(chatFriends).length){
+    el.innerHTML='<div id="chat-empty">Chưa có bạn bè.<br>Nhập Gmail để kết bạn!</div>';
+    return;
+  }
+  el.innerHTML = Object.keys(chatFriends).map(accountKey=>{
+    const unread = chatUnread[accountKey]||0;
+    const displayName = chatFriends[accountKey].displayName || accountKey;
+    return `<div class="chat-fr-item" onclick="chatOpenConvo('${accountKey}')">
+      <div><span class="online-dot"></span><span class="chat-fr-name">${displayName}</span></div>
+      ${unread?`<span class="unread-dot"></span>`:''}
+    </div>`;
+  }).join('');
+  // Listen for unread
+  Object.keys(chatFriends).forEach(k=>chatListenMessages(k));
 }
 
 function chatListenMessages(friend){
@@ -2655,11 +2783,150 @@ function showLightbox(url){
   lb.style.display='flex';
 }
 
-// Register/update user in Firebase
-function chatRegisterUser(accountName){
+// ===================== XỔ SỐ CÀO =====================
+const LOTTERY_SYMBOLS=['🌟','💎','7️⃣','🍀','🎯','🔥','🎪','🌈','⭐','🏆'];
+const LOTTERY_PRIZES=[
+  {match:'🌟🌟🌟',prize:50000000,msg:'🎉 JACKPOT! Ba Sao – 50 Triệu!'},
+  {match:'💎💎💎',prize:20000000,msg:'💎 Ba Kim Cương – 20 Triệu!'},
+  {match:'7️⃣7️⃣7️⃣',prize:10000000,msg:'7️⃣ Ba Số 7 – 10 Triệu!'},
+  {match:'🍀🍀🍀',prize:5000000,msg:'🍀 Ba Lá May – 5 Triệu!'},
+  {match:'🎯🎯🎯',prize:2000000,msg:'🎯 Ba Hồng – 2 Triệu!'},
+];
+let lotteryTicket = null; // current ticket symbols
+let lotteryRevealed = [false,false,false];
+let lotteryUsed = false;
+let lotteryStats = {bought:0, won:0, totalWon:0};
+
+function renderLotterySection(){
+  const el = document.getElementById('lottery-money');
+  if(el) el.textContent = fmt(G.money||0);
+  const statsEl = document.getElementById('lottery-stats');
+  if(statsEl && lotteryStats.bought>0){
+    statsEl.textContent=`Đã mua ${lotteryStats.bought} vé · Thắng ${lotteryStats.won} lần · Tổng thưởng: ${fmt(lotteryStats.totalWon)} VNĐ`;
+  }
+}
+
+function buyLotteryTicket(){
+  if(!G || !G.alive){ showNotif('⚠️ Không thể mua vé!','#e74c3c'); return; }
+  if(G.money < 100000){ showNotif('💸 Cần ít nhất 100.000 VNĐ!','#e74c3c'); return; }
+  if(lotteryTicket && !lotteryUsed){ showNotif('⚠️ Hãy cào hết vé hiện tại trước!','#f39c12'); return; }
+  G.money -= 100000;
+  lotteryStats.bought++;
+  lotteryUsed = false;
+  lotteryRevealed = [false,false,false];
+  // Generate ticket - with weighted prizes
+  const roll = Math.random();
+  if(roll < 0.001) lotteryTicket = ['🌟','🌟','🌟']; // 0.1% jackpot
+  else if(roll < 0.003) lotteryTicket = ['💎','💎','💎'];
+  else if(roll < 0.006) lotteryTicket = ['7️⃣','7️⃣','7️⃣'];
+  else if(roll < 0.012) lotteryTicket = ['🍀','🍀','🍀'];
+  else if(roll < 0.025) lotteryTicket = ['🎯','🎯','🎯'];
+  else if(roll < 0.15){ // ~12.5% chance 2 match
+    const sym = LOTTERY_SYMBOLS[Math.floor(Math.random()*5)];
+    const pos = Math.floor(Math.random()*3);
+    let arr = [sym,sym,sym];
+    arr[pos] = LOTTERY_SYMBOLS[5+Math.floor(Math.random()*5)];
+    lotteryTicket = arr;
+  }
+  else { // Random no match
+    let arr = [], prev = new Set();
+    while(arr.length < 3){
+      const s = LOTTERY_SYMBOLS[Math.floor(Math.random()*LOTTERY_SYMBOLS.length)];
+      arr.push(s); // allow some accidental matches to keep it fair
+    }
+    // Make sure it's not accidentally a 3-match
+    if(arr[0]===arr[1]&&arr[1]===arr[2]) arr[2]=LOTTERY_SYMBOLS[(LOTTERY_SYMBOLS.indexOf(arr[2])+1)%LOTTERY_SYMBOLS.length];
+    lotteryTicket = arr;
+  }
+  document.getElementById('lottery-result').style.display='none';
+  document.getElementById('lottery-buy-btn').disabled=true;
+  document.getElementById('lottery-reset-btn').disabled=true;
+  renderScratchCells();
+  renderLotterySection();
+  renderGame();
+  showNotif('🎫 Đã mua vé! Nhấn các ô để cào!','#f0a500');
+}
+
+function renderScratchCells(){
+  const el = document.getElementById('scratch-cells');
+  if(!el) return;
+  el.innerHTML = lotteryTicket.map((sym,i)=>`
+    <div class="scratch-cell ${lotteryRevealed[i]?'revealed':''}" id="scratch-cell-${i}" onclick="scratchCell(${i})">
+      ${lotteryRevealed[i] ? sym : '<span style="font-size:1.2rem;color:#666;">❓</span>'}
+    </div>
+  `).join('');
+}
+
+function scratchCell(i){
+  if(!lotteryTicket||lotteryRevealed[i]) return;
+  lotteryRevealed[i]=true;
+  const cellEl = document.getElementById('scratch-cell-'+i);
+  if(cellEl){
+    cellEl.classList.add('revealed');
+    cellEl.innerHTML=lotteryTicket[i];
+    cellEl.style.animation='lotteryReveal 0.4s ease';
+  }
+  // Check if all revealed
+  if(lotteryRevealed.every(r=>r)){
+    checkLotteryResult();
+  }
+}
+
+function checkLotteryResult(){
+  lotteryUsed = true;
+  const sym = lotteryTicket;
+  const resultEl = document.getElementById('lottery-result');
+  // Check prizes
+  let prizeAmount = 0, msg = '';
+  const prizeMatch = LOTTERY_PRIZES.find(p=>p.match===sym.join(''));
+  if(prizeMatch){
+    prizeAmount = prizeMatch.prize;
+    msg = prizeMatch.msg;
+    lotteryStats.won++;
+    lotteryStats.totalWon += prizeAmount;
+    G.money += prizeAmount;
+    addLog(G.age||0, `🎫 Trúng xổ số! +${fmt(prizeAmount)} VNĐ`, 'good');
+    renderGame();
+  } else if(sym[0]===sym[1]||sym[1]===sym[2]||sym[0]===sym[2]){
+    prizeAmount = 300000;
+    msg = '🎊 2 Giống Nhau – 300.000 VNĐ!';
+    lotteryStats.won++;
+    lotteryStats.totalWon += prizeAmount;
+    G.money += prizeAmount;
+    addLog(G.age||0, `🎫 Trúng xổ số nhỏ! +300k`, 'good');
+    renderGame();
+  } else {
+    msg = '😔 Không trúng lần này. Chúc bạn may mắn lần sau!';
+  }
+  if(resultEl){
+    resultEl.style.display='block';
+    resultEl.className = 'lottery-result '+(prizeAmount>0?'lot-win':'lot-lose');
+    resultEl.innerHTML = msg + (prizeAmount>0?`<br><small style="font-size:0.8rem;opacity:0.85;">+${fmt(prizeAmount)} VNĐ đã được cộng vào tài khoản!</small>`:'');
+  }
+  document.getElementById('lottery-reset-btn').disabled=false;
+  document.getElementById('lottery-buy-btn').disabled=false;
+  renderLotterySection();
+  if(prizeAmount>0) showNotif(msg.split('–')[0].trim(),'#f0a500');
+}
+
+function resetLotteryCard(){
+  lotteryTicket = null;
+  lotteryRevealed = [false,false,false];
+  lotteryUsed = false;
+  document.getElementById('scratch-cells').innerHTML='<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:20px 0;font-size:0.9rem;">Mua vé để cào! 🎫</div>';
+  document.getElementById('lottery-result').style.display='none';
+  document.getElementById('lottery-reset-btn').disabled=true;
+  document.getElementById('lottery-buy-btn').disabled=false;
+}
+
+
   if(!fbDB||!accountName) return;
   myAccount = accountName;
-  fbDB.ref('users/'+accountName).set({name:accountName,ts:Date.now()});
+  fbDB.ref('users/'+accountName).set({
+    name: playerProfile?.name || accountName,
+    email: playerProfile?.email || '',
+    ts: Date.now()
+  });
 }
 
 </script>
@@ -2673,7 +2940,7 @@ function chatRegisterUser(accountName){
   <div id="chat-header">
     <h3>👥 Bạn Bè & Chat</h3>
     <div id="chat-add-friend">
-      <input type="text" id="chat-friend-input" placeholder="Nhập tên tài khoản..." maxlength="30">
+      <input type="text" id="chat-friend-input" placeholder="Nhập Gmail của bạn bè..." maxlength="60">
       <button onclick="chatSendFriendReq()">➕ KB</button>
     </div>
     <div id="chat-req-notif" style="font-size:0.65rem;color:#aaa;display:none;padding:2px 0;"></div>
@@ -2699,4 +2966,5 @@ function chatRegisterUser(accountName){
 
 </body>
 </html>
+
 
