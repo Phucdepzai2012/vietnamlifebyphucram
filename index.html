@@ -609,6 +609,7 @@ select option{background:var(--brown);}
       <div class="tabs">
         <button class="tab-btn active" id="lb-tab-age" onclick="showLbTab('age')">⏳ Sống Thọ</button>
         <button class="tab-btn" id="lb-tab-money" onclick="showLbTab('money')">💰 Giàu Nhất</button>
+        <button class="tab-btn" style="margin-left:auto;background:rgba(231,76,60,0.15);color:#e74c3c;border-color:rgba(231,76,60,0.4);font-size:0.72rem;padding:4px 10px;" onclick="resetLeaderboard()">🗑️ Xóa BXH</button>
       </div>
       <div style="font-size:0.72rem;color:#f39c12;background:rgba(243,156,18,0.1);border:1px solid rgba(243,156,18,0.3);border-radius:7px;padding:6px 10px;margin-bottom:7px;text-align:center;">
         ⚠️ Thông tin chỉ được cập nhật khi nhân vật của bạn qua đời. Chỉ lưu kết quả tốt nhất!
@@ -956,13 +957,34 @@ function selectProfileGender(g){
   document.getElementById('profile-btn-female')?.classList.toggle('selected',g==='Nữ');
 }
 
-function checkAndResume(){
-  const sg=LS.get('vl_savestate',null);
-  if(sg?.alive&&sg.name&&sg.age>=0){
+async function checkAndResume(){
+  // Ưu tiên lấy save từ Firebase (đồng bộ giữa các trình duyệt)
+  const acc = playerProfile?.accountName;
+  let fbSave = null;
+  if(fbDB && acc){
+    try{
+      const snap = await fbDB.ref('users/'+acc+'/savestate').once('value');
+      fbSave = snap.val();
+    }catch(e){}
+  }
+  const localSave = LS.get('vl_savestate', null);
+  // Chọn save mới hơn giữa Firebase và localStorage
+  let sg = null;
+  if(fbSave?.alive && fbSave.name && fbSave.age>=0){
+    if(localSave?.alive && localSave._ts && fbSave._ts && localSave._ts > fbSave._ts){
+      sg = localSave;
+    } else {
+      sg = fbSave;
+    }
+  } else if(localSave?.alive && localSave.name && localSave.age>=0){
+    sg = localSave;
+  }
+  if(sg){
     if(confirm(`🎮 Tiếp tục game dở?\n👤 ${sg.name} | ${sg.age} tuổi | 💰 ${(sg.money||0).toLocaleString()} VNĐ`)){
       loadSavedGame(sg); return;
     }
     LS.del('vl_savestate');
+    if(fbDB && acc) fbDB.ref('users/'+acc+'/savestate').remove().catch(()=>{});
   }
   showScreen('intro'); updateLoginUserBar();
 }
@@ -1000,8 +1022,20 @@ function initProfile(){
   // else stay on login screen
 }
 
-function saveGameState(){if(G.name)LS.set('vl_savestate',G);}
-function clearSaveState(){LS.del('vl_savestate');}
+function saveGameState(){
+  if(!G.name) return;
+  LS.set('vl_savestate',G);
+  // Đồng bộ lên Firebase để chơi tiếp trên trình duyệt khác
+  const acc = playerProfile?.accountName;
+  if(fbDB && acc){
+    fbDB.ref('users/'+acc+'/savestate').set({...G, _ts: Date.now()}).catch(()=>{});
+  }
+}
+function clearSaveState(){
+  LS.del('vl_savestate');
+  const acc = playerProfile?.accountName;
+  if(fbDB && acc) fbDB.ref('users/'+acc+'/savestate').remove().catch(()=>{});
+}
 function showHelp(){document.getElementById('help-modal').style.display='block';document.body.style.overflow='hidden';}
 function closeHelp(){document.getElementById('help-modal').style.display='none';document.body.style.overflow='';}
 window.addEventListener('beforeunload',saveGameState);
@@ -1931,12 +1965,13 @@ function showDeath(cause){
 async function saveToleaderboard(){
   clearSaveState();
   if(!fbDB)return;
-  const prof=LS.get('vl_profile',{});
+  // Ưu tiên dùng playerProfile đang hoạt động, fallback về localStorage
+  const prof = (playerProfile?.accountName ? playerProfile : null) || LS.get('vl_profile',{});
   // Dùng Google account key nếu có, fallback về deviceId
   const playerKey=prof.accountName||getDeviceId();
   const e={
-    name:prof.name||'Vô danh',
-    gender:prof.gender||'Nam',
+    name:prof.name||playerProfile?.name||'Vô danh',
+    gender:prof.gender||playerProfile?.gender||'Nam',
     charName:G.name,
     age:G.age,
     money:G.totalMoney,
@@ -2366,6 +2401,23 @@ function loadLb(tab){
   },err=>{el.innerHTML='<div style="color:#e74c3c;text-align:center;">❌ '+err.message+'</div>';});
 }
 
+
+// ===================== RESET LEADERBOARD =====================
+async function resetLeaderboard(){
+  if(!fbDB){showNotif("⚠️ Không có kết nối Firebase!","#e74c3c");return;}
+  const confirmed = confirm("⚠️ Xóa TOÀN BỘ bảng xếp hạng?\nHành động này không thể hoàn tác!");
+  if(!confirmed) return;
+  const confirmed2 = confirm("❗ Xác nhận lần 2: Xóa hết dữ liệu bảng xếp hạng?");
+  if(!confirmed2) return;
+  try{
+    await fbDB.ref("leaderboard/age").remove();
+    await fbDB.ref("leaderboard/money").remove();
+    showNotif("✅ Đã xóa toàn bộ bảng xếp hạng!","#2ecc71");
+    loadLb(lbTab);
+  }catch(e){
+    showNotif("❌ Lỗi: "+e.message,"#e74c3c");
+  }
+}
 
 // ===================== DONATE =====================
 function openDonate(){document.getElementById('donate-modal').style.display='flex';}
