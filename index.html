@@ -836,6 +836,15 @@ try{
   fbDB=firebase.database();
   fbAuth=firebase.auth();
   firebase.analytics();
+  // Migration v20: xóa BXH cũ 1 lần, từ giờ dùng tên Gmail
+  fbDB.ref('meta/lbResetV20').once('value').then(snap=>{
+    if(!snap.val()){
+      fbDB.ref('leaderboard/age').remove();
+      fbDB.ref('leaderboard/money').remove();
+      fbDB.ref('meta/lbResetV20').set(true);
+      console.log('[v20] BXH đã được reset, dùng tên Gmail từ bây giờ.');
+    }
+  }).catch(()=>{});
 }catch(e){console.warn('Firebase init error:',e);}
 
 function emailToKey(email){
