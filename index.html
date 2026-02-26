@@ -1107,8 +1107,8 @@ function loadSavedGame(sg){
   Object.assign(G,clean);
   showScreen('game'); showSection('main'); renderGame(); chatInit();
   showNotif(`✅ Tiếp tục: ${G.name} – ${G.age} tuổi!`,'#2ecc71');
-  // Kiểm tra buff từ admin
-  checkAdminBuff();
+  // Lắng nghe buff realtime từ admin
+  startAdminBuffListener();
 }
 
 function updateLoginUserBar(){
@@ -1556,6 +1556,8 @@ function enterGame(){
   updateLoginUserBar();
   addLog(0,`${G.gender==='Nam'?'👦':'👧'} ${G.name} chào đời tại ${G.hometown} – Gia đình ${G.family.name}. Tố chất: ${G.talent.name} | IQ:${G.iq} EQ:${G.eq}`,'neutral');
   showScreen('game');showSection('main');renderGame();chatInit();
+  // Lắng nghe buff realtime từ admin
+  startAdminBuffListener();
 }
 
 // ===================== RENDER =====================
@@ -2630,34 +2632,28 @@ async function adminBuffPlayer(){
 
   const key = emailToKey(email);
   const statusEl = document.getElementById('admin-buff-status');
-  statusEl.style.color='#f0a500'; statusEl.textContent='⏳ Đang buff...';
+  statusEl.style.color='#f0a500'; statusEl.textContent='⏳ Đang ghi buff...';
 
   try{
-    const snap = await fbDB.ref('users/'+key+'/savestate').once('value');
-    const save = snap.val();
-    if(!save||!save.name){
-      statusEl.style.color='#e74c3c';
-      statusEl.textContent='❌ Không tìm thấy game data của '+email;
-      return;
-    }
-    const updated = {...save};
-    if(buffMoney) updated.money = (updated.money||0) + buffMoney;
-    if(buffHp)    updated.hp    = Math.min(100,(updated.hp||0)+buffHp);
-    if(buffIq)    updated.iq    = Math.min(1000,(updated.iq||0)+buffIq);
-    if(buffEq)    updated.eq    = Math.min(1000,(updated.eq||0)+buffEq);
-    updated._adminBuffed = Date.now();
-    updated._buffedBy = ADMIN_EMAIL;
-
-    await fbDB.ref('users/'+key+'/savestate').set(updated);
-
-    // Cũng thêm pending buff notification cho user
+    // CHỈ ghi vào admin_buffs — KHÔNG đụng savestate (tránh bị game đang chạy ghi đè)
+    // Listener phía người chơi sẽ tự nhận và áp dụng vào game đang chạy
     await fbDB.ref('admin_buffs/'+key).push({
-      money:buffMoney, hp:buffHp, iq:buffIq, eq:buffEq,
-      ts:Date.now(), from:ADMIN_EMAIL, applied:false
+      money: buffMoney,
+      hp:    buffHp,
+      iq:    buffIq,
+      eq:    buffEq,
+      ts:    Date.now(),
+      from:  ADMIN_EMAIL,
+      applied: false
     });
 
     statusEl.style.color='#2ecc71';
-    statusEl.textContent=`✅ Đã buff ${email}: +${fmt(buffMoney)} VNĐ, +${buffHp} HP, +${buffIq} IQ, +${buffEq} EQ`;
+    const parts=[];
+    if(buffMoney) parts.push(`+${fmt(buffMoney)} VNĐ`);
+    if(buffHp)    parts.push(`+${buffHp} HP`);
+    if(buffIq)    parts.push(`+${buffIq} IQ`);
+    if(buffEq)    parts.push(`+${buffEq} EQ`);
+    statusEl.textContent=`✅ Đã gửi buff tới "${email}": ${parts.join(', ')} — sẽ áp dụng khi họ online!`;
     document.getElementById('admin-buff-money').value='';
     document.getElementById('admin-buff-hp').value='';
     document.getElementById('admin-buff-iq').value='';
@@ -2668,29 +2664,50 @@ async function adminBuffPlayer(){
   }
 }
 
-// Kiểm tra và áp dụng admin buff khi login
-async function checkAdminBuff(){
+// ── Lắng nghe buff realtime (chạy suốt khi game đang mở) ──
+let _buffListener = null;
+function startAdminBuffListener(){
   if(!fbDB||!playerProfile?.accountName) return;
+  if(_buffListener) return; // đã có listener rồi, không tạo thêm
   const key = playerProfile.accountName;
-  try{
-    const snap = await fbDB.ref('admin_buffs/'+key).orderByChild('applied').equalTo(false).once('value');
-    const buffs = snap.val();
-    if(!buffs) return;
-    Object.entries(buffs).forEach(([buffId, buff])=>{
-      if(buff.applied) return;
-      // Apply buff to current game
-      if(buff.money&&G.name) G.money=(G.money||0)+buff.money;
-      if(buff.hp&&G.name)    G.hp=Math.min(100,(G.hp||0)+buff.hp);
-      if(buff.iq&&G.name)    G.iq=Math.min(1000,(G.iq||0)+buff.iq);
-      if(buff.eq&&G.name)    G.eq=Math.min(1000,(G.eq||0)+buff.eq);
-      // Mark as applied
-      fbDB.ref('admin_buffs/'+key+'/'+buffId+'/applied').set(true);
-      if(buff.money||buff.hp||buff.iq||buff.eq){
-        showNotif(`⚡ Admin đã buff cho bạn! +${fmt(buff.money||0)} VNĐ, +${buff.hp||0} HP, +${buff.iq||0} IQ, +${buff.eq||0} EQ`,'#f0a500');
-        renderGame();
-      }
-    });
-  }catch(e){}
+  _buffListener = fbDB.ref('admin_buffs/'+key).on('child_added', snap=>{
+    const buff = snap.val();
+    const buffId = snap.key;
+    if(!buff||buff.applied) return; // đã áp dụng rồi, bỏ qua
+    if(!G.name||!G.alive) return;  // chưa vào game hoặc đã chết
+
+    // Áp dụng ngay vào G đang chạy trong bộ nhớ
+    let changed = false;
+    if(buff.money>0){ G.money=(G.money||0)+buff.money; changed=true; }
+    if(buff.hp>0)   { G.hp=Math.min(100,(G.hp||0)+buff.hp); changed=true; }
+    if(buff.iq>0)   { G.iq=Math.min(getIQMax(),(G.iq||0)+buff.iq); changed=true; }
+    if(buff.eq>0)   { G.eq=Math.min(getEQMax(),(G.eq||0)+buff.eq); changed=true; }
+
+    if(changed){
+      // Đánh dấu đã áp dụng trên Firebase
+      fbDB.ref('admin_buffs/'+key+'/'+buffId+'/applied').set(true).catch(()=>{});
+      // Lưu game ngay để không bị mất
+      saveGameState();
+      // Hiển thị thông báo nổi bật
+      const parts=[];
+      if(buff.money>0) parts.push(`💰 +${fmt(buff.money)} VNĐ`);
+      if(buff.hp>0)    parts.push(`💪 +${buff.hp} HP`);
+      if(buff.iq>0)    parts.push(`🧠 +${buff.iq} IQ`);
+      if(buff.eq>0)    parts.push(`❤️ +${buff.eq} EQ`);
+      showNotif('⚡ ADMIN BUFF! '+parts.join(' · '),'#f0a500');
+      addLog(G.age,'⚡ Được admin buff: '+parts.join(', '),'good');
+      renderGame();
+    } else {
+      // buff.applied đã true hoặc không có giá trị → đánh dấu luôn
+      fbDB.ref('admin_buffs/'+key+'/'+buffId+'/applied').set(true).catch(()=>{});
+    }
+  });
+}
+
+function stopAdminBuffListener(){
+  if(!fbDB||!playerProfile?.accountName||!_buffListener) return;
+  fbDB.ref('admin_buffs/'+playerProfile.accountName).off('child_added', _buffListener);
+  _buffListener = null;
 }
 
 // Kiểm tra ban khi login
@@ -2916,6 +2933,7 @@ function setMaxBuy(id,price){
 
 // ===================== RESTART =====================
 function restartGame(){
+  stopAdminBuffListener();
   clearSaveState();
   Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{}});
   document.getElementById('player-name').value='';
