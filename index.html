@@ -175,7 +175,42 @@ select option{background:var(--brown);}
 .season-dot.filled-autumn{background:#f39c12;}
 .season-dot.filled-winter{background:#3498db;}
 
-/* ===== FRIEND CHAT PANEL ===== */
+/* ===== MOBILE OPTIMIZATIONS ===== */
+@media(max-width:480px){
+  #app{padding:4px;}
+  .card{padding:10px;}
+  #top-nav{gap:1px;padding:4px;}
+  #top-nav button{min-width:38px;padding:4px 1px;font-size:0.6rem;}
+  .age-display{font-size:2.8rem;}
+  .money-display{font-size:0.88rem;}
+  .next-btn{padding:14px;font-size:1rem;letter-spacing:0.5px;}
+  .btn-google{padding:14px 16px;font-size:0.95rem;}
+  input[type=text],input[type=number],select{padding:10px 12px;font-size:1rem;}
+  .farm-grid{grid-template-columns:repeat(2,1fr);}
+  .shop-grid{grid-template-columns:repeat(2,1fr);}
+  .stat-label{min-width:80px;font-size:0.72rem;}
+  .scratch-cell{height:60px;font-size:1.5rem;}
+  .lb-table{font-size:0.68rem;}
+  .lb-table th,.lb-table td{padding:4px 3px;}
+  #chat-panel{width:100%;border-radius:0;}
+  #chat-panel.collapsed{transform:translateX(calc(100% - 34px));}
+  .modal-box{padding:14px;margin:4px;}
+}
+@media(max-width:360px){
+  #top-nav button{min-width:32px;font-size:0.55rem;}
+  .born-stats{grid-template-columns:repeat(3,1fr);gap:4px;}
+}
+/* Touch targets */
+@media(pointer:coarse){
+  .btn{min-height:40px;}
+  .btn-sm{min-height:34px;}
+  .tab-btn{min-height:34px;}
+  .job-btn{min-height:44px;padding:10px 11px;}
+  .farm-item button,.shop-item{min-height:48px;}
+}
+/* Login screen mobile */
+.btn-google-wrap{width:100%;max-width:400px;margin:0 auto;}
+
 #chat-panel{position:fixed;right:0;top:0;height:100vh;width:300px;background:linear-gradient(180deg,#1a0e00,#0d0600);border-left:2px solid var(--gold);z-index:999;display:flex;flex-direction:column;transition:transform 0.3s;box-shadow:-4px 0 20px rgba(0,0,0,0.7);}
 #chat-panel.collapsed{transform:translateX(284px);}
 #chat-toggle{position:absolute;left:-34px;top:50%;transform:translateY(-50%);background:var(--gold);color:var(--dark);border:none;width:34px;height:60px;cursor:pointer;font-size:1.1rem;border-radius:8px 0 0 8px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:-3px 0 10px rgba(0,0,0,0.4);}
@@ -609,12 +644,69 @@ select option{background:var(--brown);}
       <div class="tabs">
         <button class="tab-btn active" id="lb-tab-age" onclick="showLbTab('age')">⏳ Sống Thọ</button>
         <button class="tab-btn" id="lb-tab-money" onclick="showLbTab('money')">💰 Giàu Nhất</button>
-        <button class="tab-btn" style="margin-left:auto;background:rgba(231,76,60,0.15);color:#e74c3c;border-color:rgba(231,76,60,0.4);font-size:0.72rem;padding:4px 10px;" onclick="resetLeaderboard()">🗑️ Xóa BXH</button>
       </div>
       <div style="font-size:0.72rem;color:#f39c12;background:rgba(243,156,18,0.1);border:1px solid rgba(243,156,18,0.3);border-radius:7px;padding:6px 10px;margin-bottom:7px;text-align:center;">
         ⚠️ Thông tin chỉ được cập nhật khi nhân vật của bạn qua đời. Chỉ lưu kết quả tốt nhất!
       </div>
       <div id="lb-content"></div>
+    </div>
+
+    <!-- ADMIN PANEL (chỉ hiện với nguyenphuc10092012@gmail.com) -->
+    <div id="admin-panel" style="display:none;margin-top:10px;">
+      <div class="card" style="border-color:#e74c3c;background:linear-gradient(145deg,rgba(192,57,43,0.15),rgba(13,6,0,0.95));">
+        <h2 style="color:#e74c3c;">👑 BẢNG ĐIỀU KHIỂN ADMIN</h2>
+        <div style="font-size:0.72rem;color:#e74c3c;text-align:center;margin-bottom:10px;padding:6px;background:rgba(192,57,43,0.15);border-radius:6px;">
+          🔐 Khu vực quản trị • nguyenphuc10092012@gmail.com
+        </div>
+
+        <!-- Xóa BXH -->
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-weight:700;color:#e74c3c;margin-bottom:8px;">🗑️ Quản Lý Bảng Xếp Hạng</div>
+          <button onclick="adminResetLb('age')" class="btn btn-red btn-sm" style="margin-right:5px;margin-bottom:5px;">🗑️ Xóa BXH Tuổi Thọ</button>
+          <button onclick="adminResetLb('money')" class="btn btn-red btn-sm" style="margin-bottom:5px;">🗑️ Xóa BXH Tài Sản</button>
+          <button onclick="adminResetAllLb()" class="btn btn-red" style="width:100%;margin-top:3px;">⚠️ Xóa TOÀN BỘ Bảng Xếp Hạng</button>
+        </div>
+
+        <!-- Ban acc -->
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px;margin-bottom:8px;">
+          <div style="font-weight:700;color:#e74c3c;margin-bottom:8px;">🚫 Quản Lý Tài Khoản</div>
+          <input type="text" id="admin-ban-email" placeholder="Gmail cần ban (vd: user@gmail.com)" style="margin-bottom:6px;">
+          <div style="display:flex;gap:6px;">
+            <button onclick="adminBanUser()" class="btn btn-red" style="flex:1;">🚫 Ban Tài Khoản</button>
+            <button onclick="adminUnbanUser()" class="btn btn-gray" style="flex:1;">✅ Gỡ Ban</button>
+          </div>
+          <div style="margin-top:8px;">
+            <div style="font-size:0.72rem;color:#aaa;margin-bottom:4px;">Danh sách bị ban:</div>
+            <div id="admin-banned-list" style="font-size:0.72rem;color:#e74c3c;max-height:80px;overflow-y:auto;"></div>
+          </div>
+        </div>
+
+        <!-- Buff player -->
+        <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px;">
+          <div style="font-weight:700;color:#f0a500;margin-bottom:8px;">⚡ Buff Người Chơi</div>
+          <input type="text" id="admin-buff-email" placeholder="Gmail cần buff (vd: user@gmail.com)" style="margin-bottom:6px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:6px;">
+            <div>
+              <label style="font-size:0.72rem;color:#aaa;">💰 Tiền (VNĐ)</label>
+              <input type="number" id="admin-buff-money" placeholder="500000000" style="margin-bottom:0;">
+            </div>
+            <div>
+              <label style="font-size:0.72rem;color:#aaa;">💪 HP (0-100)</label>
+              <input type="number" id="admin-buff-hp" placeholder="100" min="0" max="100" style="margin-bottom:0;">
+            </div>
+            <div>
+              <label style="font-size:0.72rem;color:#aaa;">🧠 IQ</label>
+              <input type="number" id="admin-buff-iq" placeholder="500" style="margin-bottom:0;">
+            </div>
+            <div>
+              <label style="font-size:0.72rem;color:#aaa;">❤️ EQ</label>
+              <input type="number" id="admin-buff-eq" placeholder="300" style="margin-bottom:0;">
+            </div>
+          </div>
+          <button onclick="adminBuffPlayer()" class="btn btn-gold" style="width:100%;">⚡ Áp Dụng Buff</button>
+          <div id="admin-buff-status" style="font-size:0.75rem;margin-top:6px;text-align:center;"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -793,6 +885,7 @@ const G={
   cccdId:'',hometown:'',
   yearBorn:2000,
   usedSpouseNames:[],
+  stockTotalBought:{}, // lifetime total bought per stock (limit 1000/stock)
 };
 
 // ===================== CONSTANTS =====================
@@ -836,15 +929,6 @@ try{
   fbDB=firebase.database();
   fbAuth=firebase.auth();
   firebase.analytics();
-  // Migration v20: xóa BXH cũ 1 lần, từ giờ dùng tên Gmail
-  fbDB.ref('meta/lbResetV20').once('value').then(snap=>{
-    if(!snap.val()){
-      fbDB.ref('leaderboard/age').remove();
-      fbDB.ref('leaderboard/money').remove();
-      fbDB.ref('meta/lbResetV20').set(true);
-      console.log('[v20] BXH đã được reset, dùng tên Gmail từ bây giờ.');
-    }
-  }).catch(()=>{});
 }catch(e){console.warn('Firebase init error:',e);}
 
 function emailToKey(email){
@@ -853,31 +937,44 @@ function emailToKey(email){
     .replace(/[#$\[\]\/]/g,'_');
 }
 
+// ── Mobile Detection ──
+function isMobile(){
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || (navigator.maxTouchPoints > 1 && window.innerWidth <= 900);
+}
+
 // ── Google Sign-In ──
 function signInWithGoogle(){
   if(!fbAuth){ showLoginError('Lỗi kết nối Firebase. Thử tải lại trang!'); return; }
   setLoginLoading(true);
   const provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({prompt:'select_account'}); // luôn hiện chọn tài khoản
+  provider.setCustomParameters({prompt:'select_account'});
+
+  // Mobile: dùng redirect thay popup để tránh bị trình duyệt chặn
+  if(isMobile()){
+    fbAuth.signInWithRedirect(provider).catch(err=>{
+      setLoginLoading(false);
+      showLoginError('Lỗi đăng nhập: '+(err.message||err.code));
+    });
+    return;
+  }
+
   fbAuth.signInWithPopup(provider)
     .then(result => onAuthSuccess(result.user))
     .catch(err => {
       console.warn('Popup error:', err.code, err.message);
-      // Nếu popup bị chặn → thử redirect
-      if(err.code==='auth/popup-blocked'||err.code==='auth/popup-closed-by-user'){
+      if(err.code==='auth/popup-blocked'){
+        showLoginError('Popup bị chặn! Đang chuyển hướng...');
+        setTimeout(()=> fbAuth.signInWithRedirect(provider), 800);
+      } else if(err.code==='auth/popup-closed-by-user'){
         setLoginLoading(false);
-        if(err.code==='auth/popup-blocked'){
-          showLoginError('Popup bị trình duyệt chặn! Đang chuyển hướng...');
-          setTimeout(()=> fbAuth.signInWithRedirect(provider), 1200);
-        } else {
-          showLoginError('Bạn đã đóng cửa sổ đăng nhập. Thử lại nhé!');
-        }
+        showLoginError('Bạn đã đóng cửa sổ đăng nhập. Thử lại nhé!');
       } else if(err.code==='auth/operation-not-allowed'){
         setLoginLoading(false);
-        showLoginError('⚙️ Chưa bật Google Sign-in trong Firebase Console!\nVào: Authentication → Sign-in method → Google → Bật lên');
+        showLoginError('⚙️ Chưa bật Google Sign-in trong Firebase Console!');
       } else if(err.code==='auth/unauthorized-domain'){
         setLoginLoading(false);
-        showLoginError('⚙️ Domain chưa được cấp phép!\nVào Firebase Console → Authentication → Settings → Authorized domains → thêm domain này vào.');
+        showLoginError('⚙️ Domain chưa được cấp phép trong Firebase Console!');
       } else {
         setLoginLoading(false);
         showLoginError('Lỗi: '+(err.message||err.code));
@@ -900,13 +997,20 @@ function showLoginError(msg){
   el.textContent = '⚠️ '+msg;
 }
 
-function onAuthSuccess(user){
+async function onAuthSuccess(user){
   setLoginLoading(false);
+  // Kiểm tra bị ban
+  const banned = await checkIfBanned(user.email);
+  if(banned){
+    showLoginError('🚫 Tài khoản của bạn đã bị cấm khỏi Vietnam Life!\nLiên hệ admin nếu có nhầm lẫn.');
+    if(fbAuth) fbAuth.signOut().catch(()=>{});
+    return;
+  }
   playerProfile.name = user.displayName || user.email;
   playerProfile.email = user.email;
   playerProfile.accountName = emailToKey(user.email);
   playerProfile.photoURL = user.photoURL||'';
-  playerProfile.gender = playerProfile.gender||'Nam'; // giữ gender cũ nếu có
+  playerProfile.gender = playerProfile.gender||'Nam';
   LS.set('vl_profile', playerProfile);
   if(fbDB) fbDB.ref('users/'+playerProfile.accountName).set({
     name: playerProfile.name, email: user.email,
@@ -1003,6 +1107,8 @@ function loadSavedGame(sg){
   Object.assign(G,clean);
   showScreen('game'); showSection('main'); renderGame(); chatInit();
   showNotif(`✅ Tiếp tục: ${G.name} – ${G.age} tuổi!`,'#2ecc71');
+  // Kiểm tra buff từ admin
+  checkAdminBuff();
 }
 
 function updateLoginUserBar(){
@@ -1381,7 +1487,7 @@ function showSection(id){
   if(id==='job')renderJobs();
   if(id==='farm')renderFarm();
   if(id==='shop')renderShop();
-  if(id==='lb')showLbTab('age');
+  if(id==='lb'){showLbTab('age');showAdminPanel();}
   if(id==='lottery'){renderLotterySection();resetLotteryCard();}
   if(id==='marriage')renderMarriage();
   if(id==='hokhau')renderHoKhau();
@@ -2411,21 +2517,190 @@ function loadLb(tab){
 }
 
 
-// ===================== RESET LEADERBOARD =====================
+// ===================== RESET LEADERBOARD (legacy, kept for reference) =====================
 async function resetLeaderboard(){
-  if(!fbDB){showNotif("⚠️ Không có kết nối Firebase!","#e74c3c");return;}
-  const confirmed = confirm("⚠️ Xóa TOÀN BỘ bảng xếp hạng?\nHành động này không thể hoàn tác!");
-  if(!confirmed) return;
-  const confirmed2 = confirm("❗ Xác nhận lần 2: Xóa hết dữ liệu bảng xếp hạng?");
-  if(!confirmed2) return;
-  try{
-    await fbDB.ref("leaderboard/age").remove();
-    await fbDB.ref("leaderboard/money").remove();
-    showNotif("✅ Đã xóa toàn bộ bảng xếp hạng!","#2ecc71");
-    loadLb(lbTab);
-  }catch(e){
-    showNotif("❌ Lỗi: "+e.message,"#e74c3c");
+  if(!isAdmin()){showNotif('🚫 Chỉ admin mới có quyền này!','#e74c3c');return;}
+  adminResetAllLb();
+}
+
+// ===================== ADMIN SYSTEM =====================
+const ADMIN_EMAIL = 'nguyenphuc10092012@gmail.com';
+
+function isAdmin(){
+  return playerProfile?.email === ADMIN_EMAIL;
+}
+
+function showAdminPanel(){
+  const panel = document.getElementById('admin-panel');
+  if(!panel) return;
+  if(isAdmin()){
+    panel.style.display='block';
+    adminLoadBannedList();
+  } else {
+    panel.style.display='none';
   }
+}
+
+async function adminResetLb(tab){
+  if(!isAdmin()){showNotif('🚫 Chỉ admin mới có quyền!','#e74c3c');return;}
+  if(!fbDB){showNotif('⚠️ Không có Firebase!','#e74c3c');return;}
+  if(!confirm(`⚠️ Xóa BXH "${tab==='age'?'Tuổi Thọ':'Tài Sản'}"? Không thể hoàn tác!`)) return;
+  try{
+    await fbDB.ref('leaderboard/'+tab).remove();
+    showNotif(`✅ Đã xóa BXH ${tab}!`,'#2ecc71');
+    loadLb(lbTab);
+  }catch(e){ showNotif('❌ Lỗi: '+e.message,'#e74c3c'); }
+}
+
+async function adminResetAllLb(){
+  if(!isAdmin()){showNotif('🚫 Chỉ admin mới có quyền!','#e74c3c');return;}
+  if(!fbDB){showNotif('⚠️ Không có Firebase!','#e74c3c');return;}
+  if(!confirm('⚠️ Xóa TOÀN BỘ bảng xếp hạng (cả Tuổi Thọ & Tài Sản)?\nHành động này KHÔNG thể hoàn tác!')) return;
+  if(!confirm('❗ Xác nhận lần 2: XÓA HẾT bảng xếp hạng?')) return;
+  try{
+    await fbDB.ref('leaderboard/age').remove();
+    await fbDB.ref('leaderboard/money').remove();
+    showNotif('✅ Đã xóa toàn bộ bảng xếp hạng!','#2ecc71');
+    loadLb(lbTab);
+  }catch(e){ showNotif('❌ Lỗi: '+e.message,'#e74c3c'); }
+}
+
+async function adminBanUser(){
+  if(!isAdmin()){showNotif('🚫 Chỉ admin!','#e74c3c');return;}
+  if(!fbDB){showNotif('⚠️ Không có Firebase!','#e74c3c');return;}
+  const email = document.getElementById('admin-ban-email')?.value?.trim();
+  if(!email){showNotif('⚠️ Nhập Gmail cần ban!','#e74c3c');return;}
+  const key = emailToKey(email);
+  if(!confirm(`Ban tài khoản "${email}"?\nTài khoản này sẽ không đăng nhập được.`)) return;
+  try{
+    await fbDB.ref('banned/'+key).set({email, bannedAt:Date.now(), bannedBy:ADMIN_EMAIL});
+    // Xóa save state của user đó
+    await fbDB.ref('users/'+key+'/savestate').remove();
+    document.getElementById('admin-ban-email').value='';
+    showNotif(`✅ Đã ban "${email}"!`,'#2ecc71');
+    adminLoadBannedList();
+  }catch(e){ showNotif('❌ Lỗi: '+e.message,'#e74c3c'); }
+}
+
+async function adminUnbanUser(){
+  if(!isAdmin()){showNotif('🚫 Chỉ admin!','#e74c3c');return;}
+  if(!fbDB) return;
+  const email = document.getElementById('admin-ban-email')?.value?.trim();
+  if(!email){showNotif('⚠️ Nhập Gmail cần gỡ ban!','#e74c3c');return;}
+  const key = emailToKey(email);
+  try{
+    await fbDB.ref('banned/'+key).remove();
+    document.getElementById('admin-ban-email').value='';
+    showNotif(`✅ Đã gỡ ban "${email}"!`,'#2ecc71');
+    adminLoadBannedList();
+  }catch(e){ showNotif('❌ Lỗi: '+e.message,'#e74c3c'); }
+}
+
+function adminLoadBannedList(){
+  if(!fbDB||!isAdmin()) return;
+  fbDB.ref('banned').once('value', snap=>{
+    const el = document.getElementById('admin-banned-list');
+    if(!el) return;
+    const val = snap.val()||{};
+    const entries = Object.values(val);
+    if(!entries.length){ el.innerHTML='<span style="color:#666;">Không có ai bị ban</span>'; return; }
+    el.innerHTML = entries.map(b=>`
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+        <span>🚫 ${b.email}</span>
+        <button onclick="document.getElementById('admin-ban-email').value='${b.email}';adminUnbanUser();" 
+          style="background:#27ae60;border:none;color:white;border-radius:4px;padding:1px 6px;font-size:0.65rem;cursor:pointer;">Gỡ</button>
+      </div>`).join('');
+  });
+}
+
+async function adminBuffPlayer(){
+  if(!isAdmin()){showNotif('🚫 Chỉ admin!','#e74c3c');return;}
+  if(!fbDB){showNotif('⚠️ Không có Firebase!','#e74c3c');return;}
+  const email = document.getElementById('admin-buff-email')?.value?.trim();
+  if(!email){showNotif('⚠️ Nhập Gmail cần buff!','#e74c3c');return;}
+
+  const buffMoney = parseInt(document.getElementById('admin-buff-money')?.value)||0;
+  const buffHp    = parseInt(document.getElementById('admin-buff-hp')?.value)||0;
+  const buffIq    = parseInt(document.getElementById('admin-buff-iq')?.value)||0;
+  const buffEq    = parseInt(document.getElementById('admin-buff-eq')?.value)||0;
+
+  if(!buffMoney&&!buffHp&&!buffIq&&!buffEq){
+    showNotif('⚠️ Nhập ít nhất 1 giá trị buff!','#e74c3c'); return;
+  }
+
+  const key = emailToKey(email);
+  const statusEl = document.getElementById('admin-buff-status');
+  statusEl.style.color='#f0a500'; statusEl.textContent='⏳ Đang buff...';
+
+  try{
+    const snap = await fbDB.ref('users/'+key+'/savestate').once('value');
+    const save = snap.val();
+    if(!save||!save.name){
+      statusEl.style.color='#e74c3c';
+      statusEl.textContent='❌ Không tìm thấy game data của '+email;
+      return;
+    }
+    const updated = {...save};
+    if(buffMoney) updated.money = (updated.money||0) + buffMoney;
+    if(buffHp)    updated.hp    = Math.min(100,(updated.hp||0)+buffHp);
+    if(buffIq)    updated.iq    = Math.min(1000,(updated.iq||0)+buffIq);
+    if(buffEq)    updated.eq    = Math.min(1000,(updated.eq||0)+buffEq);
+    updated._adminBuffed = Date.now();
+    updated._buffedBy = ADMIN_EMAIL;
+
+    await fbDB.ref('users/'+key+'/savestate').set(updated);
+
+    // Cũng thêm pending buff notification cho user
+    await fbDB.ref('admin_buffs/'+key).push({
+      money:buffMoney, hp:buffHp, iq:buffIq, eq:buffEq,
+      ts:Date.now(), from:ADMIN_EMAIL, applied:false
+    });
+
+    statusEl.style.color='#2ecc71';
+    statusEl.textContent=`✅ Đã buff ${email}: +${fmt(buffMoney)} VNĐ, +${buffHp} HP, +${buffIq} IQ, +${buffEq} EQ`;
+    document.getElementById('admin-buff-money').value='';
+    document.getElementById('admin-buff-hp').value='';
+    document.getElementById('admin-buff-iq').value='';
+    document.getElementById('admin-buff-eq').value='';
+  }catch(e){
+    statusEl.style.color='#e74c3c';
+    statusEl.textContent='❌ Lỗi: '+e.message;
+  }
+}
+
+// Kiểm tra và áp dụng admin buff khi login
+async function checkAdminBuff(){
+  if(!fbDB||!playerProfile?.accountName) return;
+  const key = playerProfile.accountName;
+  try{
+    const snap = await fbDB.ref('admin_buffs/'+key).orderByChild('applied').equalTo(false).once('value');
+    const buffs = snap.val();
+    if(!buffs) return;
+    Object.entries(buffs).forEach(([buffId, buff])=>{
+      if(buff.applied) return;
+      // Apply buff to current game
+      if(buff.money&&G.name) G.money=(G.money||0)+buff.money;
+      if(buff.hp&&G.name)    G.hp=Math.min(100,(G.hp||0)+buff.hp);
+      if(buff.iq&&G.name)    G.iq=Math.min(1000,(G.iq||0)+buff.iq);
+      if(buff.eq&&G.name)    G.eq=Math.min(1000,(G.eq||0)+buff.eq);
+      // Mark as applied
+      fbDB.ref('admin_buffs/'+key+'/'+buffId+'/applied').set(true);
+      if(buff.money||buff.hp||buff.iq||buff.eq){
+        showNotif(`⚡ Admin đã buff cho bạn! +${fmt(buff.money||0)} VNĐ, +${buff.hp||0} HP, +${buff.iq||0} IQ, +${buff.eq||0} EQ`,'#f0a500');
+        renderGame();
+      }
+    });
+  }catch(e){}
+}
+
+// Kiểm tra ban khi login
+async function checkIfBanned(email){
+  if(!fbDB||!email) return false;
+  const key = emailToKey(email);
+  try{
+    const snap = await fbDB.ref('banned/'+key).once('value');
+    return snap.exists();
+  }catch(e){ return false; }
 }
 
 // ===================== DONATE =====================
@@ -2496,7 +2771,6 @@ function renderStock(){
   const ticker=document.getElementById('stock-ticker');
   ticker.innerHTML=tickerItems+tickerItems;
 
-  // Stock list
   const listEl=document.getElementById('stock-list');
   listEl.innerHTML=STOCKS.map(s=>{
     const price=G.stockPrices[s.id];
@@ -2504,8 +2778,13 @@ function renderStock(){
     const change=((price-baseP)/baseP*100).toFixed(1);
     const col=parseFloat(change)>=0?'#2ecc71':'#e74c3c';
     const held=(G.stockHoldings||{})[s.id]||0;
-    const canBuy100=G.money>=price*100;
-    const canBuy1k=G.money>=price*1000;
+    if(!G.stockTotalBought) G.stockTotalBought={};
+    const totalBought = G.stockTotalBought[s.id]||0;
+    const lifeRemaining = 1000 - totalBought;
+    const limitReached = lifeRemaining <= 0;
+    const canBuy100=!limitReached&&G.money>=price*100&&lifeRemaining>=100;
+    const canBuy1k=!limitReached&&G.money>=price*1000&&lifeRemaining>=1000;
+    const lifeColor = lifeRemaining<=0?'#e74c3c':lifeRemaining<=200?'#f39c12':'#2ecc71';
     return `<div style="background:rgba(0,0,0,0.35);border:1px solid rgba(240,165,0,0.2);border-radius:10px;padding:9px;margin-bottom:6px;">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
         <div>
@@ -2517,7 +2796,8 @@ function renderStock(){
           <div style="font-size:0.7rem;color:${col};">${parseFloat(change)>=0?'▲':'▼'} ${Math.abs(change)}%</div>
         </div>
       </div>
-      <div style="font-size:0.72rem;color:#aaa;margin-bottom:5px;">Đang nắm: <strong style="color:var(--cream);">${held.toLocaleString()} CP</strong>${held>0?` = <span style="color:${held*(price-baseP)>=0?'#2ecc71':'#e74c3c'};">${fmt(held*price)}</span>`:''}</div>
+      <div style="font-size:0.72rem;color:#aaa;margin-bottom:4px;">Đang nắm: <strong style="color:var(--cream);">${held.toLocaleString()} CP</strong>${held>0?` = <span style="color:${held*(price-baseP)>=0?'#2ecc71':'#e74c3c'};">${fmt(held*price)}</span>`:''}</div>
+      <div style="font-size:0.68rem;margin-bottom:5px;">📊 Hạn mua trọn đời: <strong style="color:${lifeColor};">${lifeRemaining}/1000 CP còn lại</strong>${limitReached?' <span style="color:#e74c3c;">🚫 ĐÃ HẾT HẠN MUA</span>':''}</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;">
         <button class="btn btn-green btn-sm" onclick="buyStock('${s.id}',100)" ${!canBuy100?'disabled':''} title="Mua 100 CP">🟢 100</button>
         <button class="btn btn-blue btn-sm" onclick="buyStock('${s.id}',1000)" ${!canBuy1k?'disabled':''} title="Mua 1000 CP">🔵 1K</button>
@@ -2525,10 +2805,10 @@ function renderStock(){
         <button class="btn btn-gold btn-sm" onclick="sellAllStock('${s.id}')" ${held<=0?'disabled':''} title="Bán tất cả">💰 Tất Cả</button>
       </div>
       <div style="display:flex;gap:4px;margin-top:5px;align-items:center;">
-        <input type="number" id="qty-${s.id}" placeholder="Số CP..." min="1" style="flex:1;padding:4px 7px;font-size:0.75rem;margin:0;height:28px;background:rgba(0,0,0,0.5);border:1px solid rgba(240,165,0,0.4);color:var(--cream);border-radius:6px;font-family:'Baloo 2',cursive;">
-        <button class="btn btn-green btn-sm" onclick="buyStockCustom('${s.id}')" style="height:28px;padding:0 8px;">Mua</button>
+        <input type="number" id="qty-${s.id}" placeholder="Số CP..." min="1" max="${lifeRemaining}" style="flex:1;padding:4px 7px;font-size:0.75rem;margin:0;height:28px;background:rgba(0,0,0,0.5);border:1px solid rgba(240,165,0,0.4);color:var(--cream);border-radius:6px;font-family:'Baloo 2',cursive;" ${limitReached?'disabled':''}>
+        <button class="btn btn-green btn-sm" onclick="buyStockCustom('${s.id}')" style="height:28px;padding:0 8px;" ${limitReached?'disabled':''}>Mua</button>
         <button class="btn btn-red btn-sm" onclick="sellStockCustom('${s.id}')" style="height:28px;padding:0 8px;">Bán</button>
-        <button class="btn btn-purple btn-sm" onclick="setMaxBuy('${s.id}',${price})" style="height:28px;padding:0 8px;" title="Mua tối đa">Max</button>
+        <button class="btn btn-purple btn-sm" onclick="setMaxBuy('${s.id}',${price})" style="height:28px;padding:0 8px;" title="Mua tối đa" ${limitReached?'disabled':''}>Max</button>
       </div>
     </div>`;
   }).join('');
@@ -2560,17 +2840,27 @@ function renderStock(){
 
 function buyStock(id,qty){
   if(G.age<18){showNotif('🔞 Phải 18+ mới giao dịch được!','#e74c3c');return;}
+  if(!G.stockTotalBought) G.stockTotalBought={};
+  const alreadyBought = G.stockTotalBought[id]||0;
+  const remaining = 1000 - alreadyBought;
+  if(remaining<=0){showNotif(`🚫 ${id}: Đã đạt giới hạn 1.000 CP trọn đời!`,'#e74c3c');return;}
+  if(qty > remaining){
+    showNotif(`⚠️ ${id}: Chỉ còn được mua thêm ${remaining} CP trọn đời!`,'#f39c12');
+    qty = remaining;
+  }
   const price=G.stockPrices[id];
   const total=price*qty;
   if(G.money<total){showNotif(`💸 Cần ${fmt(total)} VNĐ, thiếu ${fmt(total-G.money)}!`,'#e74c3c');return;}
   G.money-=total;
   if(!G.stockHoldings)G.stockHoldings={};
   G.stockHoldings[id]=(G.stockHoldings[id]||0)+qty;
+  G.stockTotalBought[id] = alreadyBought + qty;
   const s=STOCKS.find(x=>x.id===id);
   G.stockHistory=G.stockHistory||[];
   G.stockHistory.push({text:`${qty.toLocaleString()} ${id} @ ${fmt(price)}/CP → -${fmt(total)}`,type:'buy'});
   addLog(G.age,`📈 Mua ${qty.toLocaleString()} CP ${s?.name}: -${fmt(total)} VNĐ`,'good');
-  showNotif(`📈 Mua ${qty.toLocaleString()} CP ${id}!`,'#3498db');
+  const leftAfter = 1000 - (G.stockTotalBought[id]||0);
+  showNotif(`📈 Mua ${qty.toLocaleString()} CP ${id}! Còn được mua: ${leftAfter}/1000`,'#3498db');
   renderStock();renderGame();
 }
 
@@ -2613,16 +2903,21 @@ function sellStockCustom(id){
 function setMaxBuy(id,price){
   const el=document.getElementById('qty-'+id);
   if(!el)return;
-  const maxQty=Math.floor(G.money/price);
-  if(maxQty<=0){showNotif('❌ Không đủ tiền!','#e74c3c');return;}
+  if(!G.stockTotalBought) G.stockTotalBought={};
+  const alreadyBought = G.stockTotalBought[id]||0;
+  const lifeRemaining = 1000 - alreadyBought;
+  if(lifeRemaining<=0){showNotif(`🚫 ${id}: Đã đạt giới hạn 1.000 CP trọn đời!`,'#e74c3c');return;}
+  const maxByMoney=Math.floor(G.money/price);
+  const maxQty=Math.min(maxByMoney,lifeRemaining);
+  if(maxQty<=0){showNotif('❌ Không đủ tiền hoặc đã hết hạn mua!','#e74c3c');return;}
   el.value=maxQty;
-  showNotif(`💡 Max ${maxQty.toLocaleString()} CP (~${fmt(maxQty*price)} VNĐ)`,'var(--gold)');
+  showNotif(`💡 Max ${maxQty.toLocaleString()} CP (~${fmt(maxQty*price)} VNĐ) | Còn trọn đời: ${lifeRemaining}`,'var(--gold)');
 }
 
 // ===================== RESTART =====================
 function restartGame(){
   clearSaveState();
-  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[]});
+  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{}});
   document.getElementById('player-name').value='';
   showScreen('intro'); updateLoginUserBar();
 }
