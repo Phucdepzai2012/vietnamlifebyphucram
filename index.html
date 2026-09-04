@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🇻🇳 Vietnam Life v7 – by PHUCRAM</title>
+<title>🇻🇳 Vietnam Life v9 – Real Vietnam Update – by PHUCRAM</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
@@ -175,6 +175,27 @@ select option{background:var(--brown);}
 .season-dot.filled-autumn{background:#f39c12;}
 .season-dot.filled-winter{background:#3498db;}
 
+
+/* ===== VIETNAM REAL LIFE UPDATE ===== */
+.city-hero{background:linear-gradient(135deg,rgba(26,107,46,.35),rgba(26,74,138,.25),rgba(240,165,0,.12));border:2px solid #2ecc71;border-radius:14px;padding:12px;margin-bottom:9px;position:relative;overflow:hidden;}
+.city-hero::after{content:'🇻🇳';position:absolute;right:10px;top:4px;font-size:4rem;opacity:.08;transform:rotate(-8deg);}
+.life-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:4px 8px;font-size:.7rem;margin:2px;}
+.city-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:8px 0;}
+.city-stat{background:rgba(0,0,0,.32);border-radius:9px;padding:7px;text-align:center;border:1px solid rgba(255,255,255,.05);}
+.city-stat .v{font-size:1.05rem;font-weight:800;color:var(--gold2);}
+.city-stat .l{font-size:.62rem;color:#aaa;}
+.activity-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;}
+.activity-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(0,0,0,.28));border:1px solid rgba(240,165,0,.22);border-radius:10px;padding:8px;cursor:pointer;transition:.15s;min-height:82px;}
+.activity-card:hover{border-color:var(--gold);transform:translateY(-1px);background:rgba(240,165,0,.08);}
+.activity-card.disabled{opacity:.38;cursor:not-allowed;transform:none;}
+.activity-card .ico{font-size:1.5rem}.activity-card .nm{font-size:.8rem;font-weight:800;color:var(--cream)}.activity-card .ds{font-size:.63rem;color:#999;line-height:1.35;margin-top:2px}.activity-card .fx{font-size:.68rem;color:var(--gold);margin-top:3px;}
+.activity-history{max-height:180px;overflow-y:auto;background:rgba(0,0,0,.25);border-radius:8px;padding:7px;font-size:.72rem;}
+.vietnam-event{border-left:3px solid #f0a500;padding:7px 9px;margin:4px 0;background:rgba(240,165,0,.06);border-radius:0 8px 8px 0;font-size:.75rem;}
+.badge-rep{background:rgba(52,152,219,.16);color:#5dade2;border:1px solid rgba(52,152,219,.35);padding:3px 8px;border-radius:20px;font-size:.68rem;font-weight:800;}
+.badge-energy{background:rgba(46,204,113,.14);color:#58d68d;border:1px solid rgba(46,204,113,.3);padding:3px 8px;border-radius:20px;font-size:.68rem;font-weight:800;}
+.bank-card{background:linear-gradient(135deg,rgba(26,74,138,.25),rgba(52,152,219,.08));border:1px solid rgba(52,152,219,.35);border-radius:10px;padding:9px;margin-top:7px;}
+@media(max-width:480px){.activity-grid{grid-template-columns:1fr 1fr}.city-stat-grid{grid-template-columns:repeat(3,1fr)}}
+
 /* ===== MOBILE OPTIMIZATIONS ===== */
 @media(max-width:480px){
   #app{padding:4px;}
@@ -316,7 +337,7 @@ select option{background:var(--brown);}
 <div id="app">
 <div class="game-logo">
   <h1>🇻🇳 VIETNAM LIFE</h1>
-  <p>by PHUCRAM • v3.0 – Mùa Vụ • CCCD • Cốt Truyện Thực Tế</p>
+  <p>by PHUCRAM • v9.0 – Real Vietnam Life • Thành Phố • Tài Chính • Hoạt Động</p>
 </div>
 <div id="notif"></div>
 
@@ -332,7 +353,7 @@ select option{background:var(--brown);}
   </div>
 </div>
 <!-- DONATE FLOATING BUTTON -->
-<button onclick="openDonate()" style="position:fixed;bottom:16px;right:16px;z-index:500;background:linear-gradient(135deg,#e74c3c,#c0392b);border:none;border-radius:50px;padding:10px 16px;color:white;font-family:'Baloo 2',cursive;font-weight:700;font-size:0.82rem;cursor:pointer;box-shadow:0 4px 15px rgba(192,57,43,0.6);animation:pulse 2s ease-in-out infinite;">❤️ Donate PHUCRAM</button>
+<button onclick="openDonate()" style="position:fixed;bottom:82px;right:16px;z-index:500;background:linear-gradient(135deg,#e74c3c,#c0392b);border:none;border-radius:50px;padding:10px 16px;color:white;font-family:'Baloo 2',cursive;font-weight:700;font-size:0.82rem;cursor:pointer;box-shadow:0 4px 15px rgba(192,57,43,0.6);animation:pulse 2s ease-in-out infinite;">❤️ Donate PHUCRAM</button>
 
 
 <!-- SCHOOL CHOICE MODAL -->
@@ -407,7 +428,7 @@ select option{background:var(--brown);}
     <button class="btn btn-gold btn-full" onclick="startGame()" style="margin-top:8px;">🎮 Bắt Đầu Cuộc Đời</button>
   </div>
   <div class="card" style="font-size:0.78rem;color:#aaa;">
-    <h2>📖 Hướng Dẫn v4.0</h2>
+    <h2>📖 Hướng Dẫn v9.0</h2>
     <p style="margin-bottom:4px;">• Mỗi lần bấm <strong style="color:var(--gold)">Sống Tiếp</strong> = 1 mùa trôi qua (4 mùa = 1 tuổi)</p>
     <p style="margin-bottom:4px;">• Đến tuổi đến trường → chọn trường cụ thể (tên thật)</p>
     <p style="margin-bottom:4px;">• 🧬 Tố Chất Bẩm Sinh: Thiên Tài / Học Giỏi / Bình Thường / Học Yếu</p>
@@ -446,6 +467,7 @@ select option{background:var(--brown);}
     <button onclick="showSection('edu')" id="nav-edu">🎓 Học</button>
     <button onclick="showSection('job')" id="nav-job">💼 Nghề</button>
     <button onclick="showSection('farm')" id="nav-farm">🌾 Nông</button>
+    <button onclick="showSection('city')" id="nav-city">🌆 Thành Phố</button>
     <button onclick="showSection('shop')" id="nav-shop">🛒 Mua</button>
     <button onclick="showSection('life')" id="nav-life">🏡 Đời</button>
     <button onclick="showSection('marriage')" id="nav-marriage">💑 Hôn Nhân</button>
@@ -531,6 +553,38 @@ select option{background:var(--brown);}
         <button class="btn btn-green btn-sm" style="flex:1;" onclick="buyPesticide()">🌿 Thuốc Sâu (1tr)</button>
       </div>
       <div style="font-size:0.78rem;color:#aaa;text-align:center;margin-top:5px;" id="farm-income-display"></div>
+    </div>
+  </div>
+
+
+  <!-- REAL VIETNAM CITY LIFE -->
+  <div id="section-city" class="section">
+    <div class="city-hero">
+      <div style="font-size:1.15rem;font-weight:800;color:#2ecc71;">🌆 NHỊP SỐNG VIỆT NAM</div>
+      <div id="city-weather" style="font-size:.76rem;color:#ddd;margin-top:2px;"></div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;">
+        <span class="badge-energy" id="city-energy"></span>
+        <span class="badge-rep" id="city-rep"></span>
+        <span class="life-chip">📍 <span id="city-hometown"></span></span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>🧭 Một Ngày Của Bạn</h2>
+      <div style="font-size:.74rem;color:#aaa;text-align:center;">Mỗi mùa có <b style="color:var(--gold);">3 năng lượng</b>. Chọn việc bạn muốn làm trước khi Sống Tiếp.</div>
+      <div id="city-stats" class="city-stat-grid"></div>
+      <div id="city-activities" class="activity-grid"></div>
+      <div class="bank-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-weight:800;color:#5dade2;">🏦 Tài Chính Cá Nhân</span>
+          <span style="font-size:.7rem;color:#aaa;">Ngân hàng an toàn hơn giữ tiền mặt</span>
+        </div>
+        <div id="city-bank"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>📰 Chuyện Xóm & Chuyện Phố</h2>
+      <div id="city-events"></div>
+      <div class="activity-history" id="city-history"></div>
     </div>
   </div>
 
@@ -886,6 +940,16 @@ const G={
   yearBorn:2000,
   usedSpouseNames:[],
   stockTotalBought:{}, // lifetime total bought per stock (limit 1000/stock)
+  birthDate:'',
+  energy:3,
+  reputation:0,
+  bank:0,
+  phoneLevel:0,
+  currentActivity:null,
+  activityHistory:[],
+  cityEvents:[],
+  weather:null,
+  lotteryState:{ticket:null,revealed:[false,false,false],used:false,stats:{bought:0,won:0,totalWon:0}},
 };
 
 // ===================== CONSTANTS =====================
@@ -1105,6 +1169,11 @@ async function checkAndResume(){
 function loadSavedGame(sg){
   const clean=JSON.parse(JSON.stringify(sg));
   Object.assign(G,clean);
+  G.energy=Number.isFinite(G.energy)?G.energy:3; G.reputation=Number.isFinite(G.reputation)?G.reputation:0; G.bank=Number.isFinite(G.bank)?G.bank:0;
+  G.activityHistory=Array.isArray(G.activityHistory)?G.activityHistory:[]; G.cityEvents=Array.isArray(G.cityEvents)?G.cityEvents:[]; G.weather=G.weather||VIETNAM_WEATHER[0];
+  if(G.lotteryState){
+    window.__savedLotteryState=JSON.parse(JSON.stringify(G.lotteryState));
+  }
   showScreen('game'); showSection('main'); renderGame(); chatInit();
   showNotif(`✅ Tiếp tục: ${G.name} – ${G.age} tuổi!`,'#2ecc71');
   // Lắng nghe buff realtime từ admin
@@ -1139,6 +1208,14 @@ function initProfile(){
 
 function saveGameState(){
   if(!G.name) return;
+  if(typeof lotteryTicket!=='undefined'){
+    G.lotteryState={
+      ticket:Array.isArray(lotteryTicket)?[...lotteryTicket]:null,
+      revealed:Array.isArray(lotteryRevealed)?[...lotteryRevealed]:[false,false,false],
+      used:!!lotteryUsed,
+      stats:{...(lotteryStats||{})}
+    };
+  }
   LS.set('vl_savestate',G);
   // Đồng bộ lên Firebase để chơi tiếp trên trình duyệt khác
   const acc = playerProfile?.accountName;
@@ -1488,12 +1565,13 @@ function showSection(id){
   if(id==='farm')renderFarm();
   if(id==='shop')renderShop();
   if(id==='lb'){showLbTab('age');showAdminPanel();}
-  if(id==='lottery'){renderLotterySection();resetLotteryCard();}
+  if(id==='lottery'){renderLotterySection(); if(lotteryTicket){renderScratchCells();} else {const sc=document.getElementById('scratch-cells');if(sc)sc.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:20px 0;font-size:0.9rem;">Mua vé để cào! 🎫</div>';}}
   if(id==='marriage')renderMarriage();
   if(id==='hokhau')renderHoKhau();
   if(id==='edu')renderEdu();
   if(id==='life')renderLife();
   if(id==='cccd')renderCCCD();
+  if(id==='city')renderCity();
   if(id==='stock'){G.stockPrices=G.stockPrices||{};G.stockHoldings=G.stockHoldings||{};G.stockHistory=G.stockHistory||[];if(!Object.keys(G.stockPrices).length){const STKS=['VNM','VIC','HPG','FPT','MBB','TCB','VHM','MSN','GVR','POW'];const BP=[62000,45000,28000,95000,22000,35000,52000,78000,17000,14000];STKS.forEach((id,i)=>{G.stockPrices[id]=BP[i];});}renderStock();}
 }
 function selectGender(g){
@@ -1538,6 +1616,10 @@ function startGame(){
   G.edu={school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null};
   G.married=false;G.spouse=null;G.children=0;G.house=null;G.car=null;G.debt=0;
   G.usedSpouseNames=[];
+  if(typeof lotteryTicket!=='undefined'){lotteryTicket=null;lotteryRevealed=[false,false,false];lotteryUsed=false;lotteryStats={bought:0,won:0,totalWon:0};}
+  G.birthDate=`${rand(1,28).toString().padStart(2,'0')}/${rand(1,12).toString().padStart(2,'0')}/${G.yearBorn}`;
+  G.energy=3;G.reputation=0;G.bank=0;G.phoneLevel=0;G.currentActivity=null;G.activityHistory=[];G.cityEvents=[];
+  G.weather=VIETNAM_WEATHER[rand(0,VIETNAM_WEATHER.length-1)];
   G.cccdId=genCCCDId();
   // Lưu game state ban đầu
   saveGameState();
@@ -1558,6 +1640,145 @@ function enterGame(){
   showScreen('game');showSection('main');renderGame();chatInit();
   // Lắng nghe buff realtime từ admin
   startAdminBuffListener();
+}
+
+
+// ===================== REAL VIETNAM LIFE SYSTEM =====================
+const VIETNAM_WEATHER=[
+  {name:'☀️ Nắng đẹp',desc:'Trời quang, đi lại thuận lợi.',mult:1},
+  {name:'🌦️ Mưa rào',desc:'Đường ướt, hàng quán đông khách.',mult:.95},
+  {name:'⛈️ Mưa lớn',desc:'Dễ kẹt xe và phát sinh chi phí.',mult:.82},
+  {name:'🔥 Nắng nóng',desc:'Đi ngoài trời tốn sức hơn.',mult:.9},
+  {name:'🌫️ Sáng se lạnh',desc:'Thời tiết dễ chịu, tinh thần tốt.',mult:1.05}
+];
+const VIETNAM_ACTIVITIES=[
+  {id:'streetfood',icon:'🍜',name:'Ăn hàng vỉa hè',desc:'Bún/phở/cơm tấm và tám chuyện.',cost:60000,energy:1,effects:{happy:7,eq:3,stress:-3},req:0},
+  {id:'market',icon:'🛵',name:'Đi chợ',desc:'Mua đồ, săn giá rẻ cho gia đình.',cost:120000,energy:1,effects:{happy:3,stress:-2},req:0},
+  {id:'football',icon:'⚽',name:'Đá bóng sân cỏ',desc:'Tăng sức khỏe, giảm căng thẳng.',cost:30000,energy:1,effects:{hp:4,happy:6,stress:-5},req:0},
+  {id:'study',icon:'📚',name:'Học thêm / tự học',desc:'Dành thời gian nâng IQ và EQ.',cost:0,energy:1,effects:{iq:5,eq:3,stress:2,happy:1},req:6},
+  {id:'volunteer',icon:'🤝',name:'Làm thiện nguyện',desc:'Giúp cộng đồng và xây danh tiếng.',cost:10000,energy:1,effects:{eq:6,happy:4,stress:-2,reputation:3},req:8},
+  {id:'delivery',icon:'🛵',name:'Chạy giao hàng',desc:'Kiếm thêm tiền, đổi lại tốn sức.',cost:0,energy:1,effects:{money:160000,hp:-2,stress:3,reputation:1},req:18},
+  {id:'gig',icon:'💻',name:'Làm freelance',desc:'Dùng IQ để kiếm thu nhập online.',cost:0,energy:1,effects:{money:Math.max(180000,Math.round((G.iq||100)*2200)),iq:2,stress:4,reputation:1},req:16},
+  {id:'hospital',icon:'🏥',name:'Khám sức khỏe',desc:'Tốn tiền nhưng phục hồi sức khỏe.',cost:250000,energy:1,effects:{hp:12,stress:-7,happy:2},req:12},
+  {id:'coffee',icon:'☕',name:'Cà phê sáng',desc:'Một ly cà phê và vài câu chuyện đời.',cost:45000,energy:1,effects:{happy:5,eq:2,stress:-4},req:10},
+  {id:'travel',icon:'🚌',name:'Du lịch ngắn ngày',desc:'Đổi gió ở một thành phố khác.',cost:450000,energy:2,effects:{happy:14,eq:5,stress:-10,reputation:1},req:18}
+];
+
+function cityWeather(){return G.weather||VIETNAM_WEATHER[0];}
+function cityLevel(){return G.age<6?'Trẻ nhỏ':G.age<12?'Tiểu học':G.age<16?'Thiếu niên':G.age<22?'Sinh viên':G.age<40?'Người đi làm':G.age<60?'Trung niên':'Tuổi nghỉ ngơi';}
+function cityCanDo(a){
+  if(G.age<a.req)return {ok:false,reason:`🔒 Cần ${a.req} tuổi`};
+  if((G.energy||0)<a.energy)return {ok:false,reason:'⚡ Hết năng lượng'};
+  if((G.money||0)<a.cost)return {ok:false,reason:`💸 Cần ${fmt(a.cost)}`};
+  return {ok:true};
+}
+function doCityActivity(id){
+  if(!G.alive)return;
+  const a=VIETNAM_ACTIVITIES.find(x=>x.id===id); if(!a)return;
+  const c=cityCanDo(a);
+  if(!c.ok){showNotif(c.reason,'#e74c3c');return;}
+  G.energy-=a.energy;
+  if(a.cost)G.money-=a.cost;
+  const effects={...a.effects};
+  // Dynamic freelance reward
+  if(id==='gig')effects.money=Math.max(180000,Math.round((G.iq||100)*2200));
+  Object.entries(effects).forEach(([k,v])=>{
+    if(k==='money')G.money=Math.max(0,G.money+v);
+    else if(k==='reputation')G.reputation=clamp((G.reputation||0)+v,-100,100);
+    else if(k==='hp')G.hp=clamp(G.hp+v,0,HP_MAX);
+    else if(k==='iq')G.iq=clamp(G.iq+v,0,getIQMax());
+    else if(k==='eq')G.eq=clamp(G.eq+v,0,getEQMax());
+    else if(k==='happy')G.happy=clamp(G.happy+v,0,HAPPY_MAX);
+    else if(k==='stress')G.stress=clamp(G.stress+v,0,STRESS_MAX);
+  });
+  G.currentActivity=a.name;
+  const fx=[];
+  if(effects.money)fx.push((effects.money>0?'+':'')+fmt(effects.money)+'đ');
+  if(effects.hp)fx.push((effects.hp>0?'+':'')+effects.hp+' SK');
+  if(effects.iq)fx.push((effects.iq>0?'+':'')+effects.iq+' IQ');
+  if(effects.eq)fx.push((effects.eq>0?'+':'')+effects.eq+' EQ');
+  if(effects.happy)fx.push((effects.happy>0?'+':'')+effects.happy+' HPX');
+  if(effects.stress)fx.push((effects.stress>0?'+':'')+effects.stress+' stress');
+  if(effects.reputation)fx.push((effects.reputation>0?'+':'')+effects.reputation+' danh tiếng');
+  G.activityHistory.unshift({season:G.totalSeasons+1,age:G.age,text:`${a.icon} ${a.name}`,fx:fx.join(' · ')});
+  if(G.activityHistory.length>40)G.activityHistory.pop();
+  addLog(G.age,`${a.icon} ${a.name} – ${fx.join(' · ')||'Hoàn thành'}`,'event');
+  showNotif(`${a.icon} ${a.name}: ${fx.join(' · ')||'xong!'}`,'#2ecc71');
+  renderCity();renderGame();saveGameState();
+}
+function cityBankDeposit(){
+  const amount=Number(document.getElementById('city-bank-deposit')?.value)||0;
+  if(amount<=0||amount>G.money){showNotif('❌ Số tiền gửi không hợp lệ!','#e74c3c');return;}
+  G.money-=amount;G.bank=(G.bank||0)+amount;
+  addLog(G.age,`🏦 Gửi tiết kiệm ${fmt(amount)} VNĐ`,'good');renderCity();renderGame();saveGameState();
+}
+function cityBankWithdraw(){
+  const amount=Number(document.getElementById('city-bank-withdraw')?.value)||0;
+  if(amount<=0||amount>(G.bank||0)){showNotif('❌ Số tiền rút không hợp lệ!','#e74c3c');return;}
+  G.bank-=amount;G.money+=amount;
+  addLog(G.age,`🏦 Rút ${fmt(amount)} VNĐ từ tiết kiệm`,'neutral');renderCity();renderGame();saveGameState();
+}
+function renderCity(){
+  const w=cityWeather();
+  const weatherEl=document.getElementById('city-weather'); if(weatherEl)weatherEl.textContent=`${w.name} • ${w.desc}`;
+  const e=document.getElementById('city-energy'); if(e)e.textContent=`⚡ ${G.energy||0}/3 năng lượng`;
+  const r=document.getElementById('city-rep'); if(r)r.textContent=`⭐ Danh tiếng ${G.reputation||0}`;
+  const h=document.getElementById('city-hometown'); if(h)h.textContent=G.hometown||'Việt Nam';
+  const stats=document.getElementById('city-stats');
+  if(stats)stats.innerHTML=`
+    <div class="city-stat"><div class="v">${fmt(G.money||0)}</div><div class="l">💵 Tiền mặt</div></div>
+    <div class="city-stat"><div class="v">${fmt(G.bank||0)}</div><div class="l">🏦 Tiết kiệm</div></div>
+    <div class="city-stat"><div class="v">${cityLevel()}</div><div class="l">👤 Giai đoạn</div></div>`;
+  const acts=document.getElementById('city-activities');
+  if(acts)acts.innerHTML=VIETNAM_ACTIVITIES.map(a=>{
+    const c=cityCanDo(a); const dynamic=a.id==='gig'?Math.max(180000,Math.round((G.iq||100)*2200)):a.effects.money;
+    const fx=[];
+    if(a.cost)fx.push(`-${fmt(a.cost)}đ`);
+    if(dynamic)fx.push(`${dynamic>0?'+':''}${fmt(dynamic)}đ`);
+    if(a.effects.happy)fx.push(`${a.effects.happy>0?'+':''}${a.effects.happy} 😊`);
+    if(a.effects.hp)fx.push(`${a.effects.hp>0?'+':''}${a.effects.hp} 💪`);
+    if(a.effects.iq)fx.push(`${a.effects.iq>0?'+':''}${a.effects.iq} 🧠`);
+    return `<div class="activity-card ${c.ok?'':'disabled'}" onclick="${c.ok?`doCityActivity('${a.id}')`:''}">
+      <div class="ico">${a.icon}</div><div class="nm">${a.name}</div><div class="ds">${a.desc}</div>
+      <div class="fx">${c.ok?(fx.join(' · ')||'Miễn phí'):'🚫 '+c.reason}</div>
+    </div>`;
+  }).join('');
+  const bank=document.getElementById('city-bank');
+  if(bank)bank.innerHTML=`
+    <div style="font-size:.74rem;color:#bbb;margin:5px 0;">Số dư tiết kiệm: <b style="color:#5dade2;">${fmt(G.bank||0)} VNĐ</b> • Lãi mùa: <b style="color:#2ecc71;">+1%</b></div>
+    <div style="display:flex;gap:4px;">
+      <input id="city-bank-deposit" type="number" min="1" placeholder="Gửi VNĐ" style="margin:0;font-size:.72rem;">
+      <button class="btn btn-blue btn-sm" onclick="cityBankDeposit()">Gửi</button>
+      <input id="city-bank-withdraw" type="number" min="1" placeholder="Rút VNĐ" style="margin:0;font-size:.72rem;">
+      <button class="btn btn-gold btn-sm" onclick="cityBankWithdraw()">Rút</button>
+    </div>`;
+  const ev=document.getElementById('city-events');
+  if(ev)ev.innerHTML=(G.cityEvents||[]).slice(0,5).map(x=>`<div class="vietnam-event">${x}</div>`).join('')||'<div style="color:#888;font-size:.75rem;text-align:center;padding:6px;">Chưa có chuyện gì đặc biệt.</div>';
+  const hist=document.getElementById('city-history');
+  if(hist)hist.innerHTML=(G.activityHistory||[]).slice(0,15).map(x=>`<div style="padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04);">[${x.age??G.age}t] ${x.text} <span style="color:#888;">${x.fx||''}</span></div>`).join('')||'<div style="color:#666;text-align:center;">Lịch sử hoạt động sẽ xuất hiện ở đây.</div>';
+}
+function processCitySeason(){
+  // Interest on savings
+  if((G.bank||0)>0){
+    const interest=Math.max(1000,Math.round(G.bank*0.01));
+    G.bank+=interest;
+    G.cityEvents.unshift(`🏦 Tiền gửi sinh lãi +${fmt(interest)} VNĐ.`);
+  }
+  // Weather can create a small local flavor event
+  const w=cityWeather();
+  if(w.name.includes('Mưa lớn')){
+    const cost=Math.min(G.money,50000);
+    if(cost>0){G.money-=cost;G.cityEvents.unshift(`🌧️ Mưa lớn làm phát sinh ${fmt(cost)} VNĐ chi phí đi lại.`);}
+  }else if(w.name.includes('Nắng đẹp')){
+    G.cityEvents.unshift('☀️ Nắng đẹp: đường phố nhộn nhịp, tinh thần cả ngày tốt hơn.');
+  }
+  // Reputation milestones
+  if((G.reputation||0)>=25 && G.reputation<999){
+    G.cityEvents.unshift('🏅 Bạn bắt đầu được mọi người trong khu phố biết đến!');
+  }
+  if((G.cityEvents||[]).length>12)G.cityEvents.length=12;
+  G.energy=3;G.currentActivity=null;
+  G.weather=VIETNAM_WEATHER[rand(0,VIETNAM_WEATHER.length-1)];
 }
 
 // ===================== RENDER =====================
@@ -1591,6 +1812,7 @@ function renderGame(){
   if(G.car)badges+=` <span style="color:#e67e22;font-size:0.72rem;">${G.car.icon}</span>`;
   document.getElementById('g-badges').innerHTML=badges;
   renderLog();
+  renderCity();
 }
 
 function updateBar(stat,val,max){
@@ -1614,7 +1836,7 @@ function renderLog(){
 function renderCCCD(){
   const el=document.getElementById('cccd-content');
   const avatar=G.gender==='Nam'?'👨':'👩';
-  const dob=`${rand(1,28).toString().padStart(2,'0')}/${rand(1,12).toString().padStart(2,'0')}/${G.yearBorn}`;
+  const dob=G.birthDate||`01/01/${G.yearBorn}`;
   const expiry=`${G.yearBorn+25}`;
   const face=G.gender==='Nam'?(G.age<18?'👦':G.age<60?'👨':'🧓'):(G.age<18?'👧':G.age<60?'👩':'👵');
   el.innerHTML=`
@@ -1673,6 +1895,9 @@ function nextSeason(){
 
   // --- Farm season ---
   processFarmSeason();
+
+  // --- Player-chosen real-life activities + bank ---
+  processCitySeason();
 
   // --- Seasonal random event ---
   if(Math.random()<0.5){
@@ -2935,7 +3160,7 @@ function setMaxBuy(id,price){
 function restartGame(){
   stopAdminBuffListener();
   clearSaveState();
-  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{}});
+  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{},birthDate:'',energy:3,reputation:0,bank:0,phoneLevel:0,currentActivity:null,activityHistory:[],cityEvents:[],weather:null,lotteryState:{ticket:null,revealed:[false,false,false],used:false,stats:{bought:0,won:0,totalWon:0}}});
   document.getElementById('player-name').value='';
   showScreen('intro'); updateLoginUserBar();
 }
@@ -3242,6 +3467,13 @@ let lotteryTicket = null; // current ticket symbols
 let lotteryRevealed = [false,false,false];
 let lotteryUsed = false;
 let lotteryStats = {bought:0, won:0, totalWon:0};
+if(window.__savedLotteryState){
+  lotteryTicket=window.__savedLotteryState.ticket||null;
+  lotteryRevealed=Array.isArray(window.__savedLotteryState.revealed)?window.__savedLotteryState.revealed:[false,false,false];
+  lotteryUsed=!!window.__savedLotteryState.used;
+  lotteryStats={...lotteryStats,...(window.__savedLotteryState.stats||{})};
+  delete window.__savedLotteryState;
+}
 
 function renderLotterySection(){
   const el = document.getElementById('lottery-money');
@@ -3321,6 +3553,7 @@ function scratchCell(i){
 function checkLotteryResult(){
   lotteryUsed = true;
   const sym = lotteryTicket;
+  saveGameState();
   const resultEl = document.getElementById('lottery-result');
   // Check prizes
   let prizeAmount = 0, msg = '';
@@ -3363,6 +3596,7 @@ function resetLotteryCard(){
   document.getElementById('lottery-result').style.display='none';
   document.getElementById('lottery-reset-btn').disabled=true;
   document.getElementById('lottery-buy-btn').disabled=false;
+  saveGameState();
 }
 
 
