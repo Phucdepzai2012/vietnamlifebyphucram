@@ -331,6 +331,33 @@ select option{background:var(--brown);}
 @media(min-width:768px){
   #chat-float-btn{display:none;}
 }
+
+/* ===== PHONE SYSTEM ===== */
+.phone-wrap{background:linear-gradient(180deg,#0b1220,#05070c);border:3px solid #222;border-radius:28px;padding:10px;max-width:390px;margin:0 auto;box-shadow:0 18px 45px rgba(0,0,0,.65);position:relative;overflow:hidden;}
+.phone-notch{width:120px;height:22px;background:#000;border-radius:0 0 16px 16px;margin:0 auto 6px;}
+.phone-screen{background:linear-gradient(180deg,#101b31,#111827);border-radius:20px;padding:10px;min-height:600px;position:relative;overflow:hidden;}
+.phone-status{display:flex;justify-content:space-between;font-size:.63rem;color:#e5e7eb;padding:1px 4px 8px;}
+.phone-home{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:12px 5px;}
+.phone-app{border:0;background:transparent;color:white;text-align:center;cursor:pointer;padding:4px 2px;border-radius:12px;font-family:'Baloo 2',cursive;transition:transform .15s,background .15s;}
+.phone-app:hover{transform:translateY(-2px);background:rgba(255,255,255,.07);}
+.phone-app .ico{width:52px;height:52px;margin:0 auto 4px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.65rem;box-shadow:0 6px 16px rgba(0,0,0,.25);}
+.phone-app .nm{font-size:.65rem;line-height:1.1;color:#f3f4f6;}
+.phone-app .badge{position:absolute;margin:-58px 0 0 27px;background:#ef4444;color:#fff;border-radius:999px;min-width:17px;height:17px;font-size:.55rem;display:flex;align-items:center;justify-content:center;font-weight:800;}
+.phone-dock{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:18px;display:grid;grid-template-columns:repeat(4,1fr);padding:7px;gap:4px;}
+.phone-dock button{border:0;background:transparent;color:white;font-size:1.25rem;cursor:pointer;}
+.phone-page{display:none;height:100%;}.phone-page.active{display:block;}
+.phone-back{display:flex;align-items:center;gap:7px;margin-bottom:8px;}.phone-back button{border:0;background:rgba(255,255,255,.08);color:#fff;border-radius:9px;padding:5px 9px;cursor:pointer;}.phone-title{font-weight:800;color:#fff;font-size:.9rem;}
+.phone-balance{background:linear-gradient(135deg,#162a46,#0d1a2d);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;margin-bottom:8px;text-align:center;}
+.phone-balance .v{font-size:1.15rem;color:#ffd54a;font-weight:800;}
+.phone-balance .s{font-size:.62rem;color:#94a3b8;}
+.phone-action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.phone-action{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:9px 5px;text-align:center;color:white;cursor:pointer;font-family:'Baloo 2',cursive;}
+.phone-action:hover{background:rgba(255,255,255,.1);}.phone-action .i{font-size:1.4rem;}.phone-action .t{font-size:.64rem;margin-top:2px;}
+.phone-bet{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:9px;margin-top:8px;}
+.phone-bet input,.phone-bet select{margin:0 0 6px;background:#0b1220;border-color:#334155;color:#fff;}
+.dice-result{min-height:95px;border-radius:14px;background:radial-gradient(circle,#263855,#111827);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:1.15rem;font-weight:800;margin:8px 0;}
+.dice-result .big{font-size:2.2rem;letter-spacing:6px;}.phone-note{font-size:.62rem;color:#94a3b8;text-align:center;margin-top:7px;line-height:1.4;}
+
 </style>
 </head>
 <body>
@@ -433,6 +460,7 @@ select option{background:var(--brown);}
     <p style="margin-bottom:4px;">• Đến tuổi đến trường → chọn trường cụ thể (tên thật)</p>
     <p style="margin-bottom:4px;">• 🧬 Tố Chất Bẩm Sinh: Thiên Tài / Học Giỏi / Bình Thường / Học Yếu</p>
     <p style="margin-bottom:4px;">• 📈 Chứng khoán: Mua/Bán cổ phiếu FPT, VIC, HPG... theo giá thị trường</p>
+    <p style="margin-bottom:4px;">📱 Điện thoại: nhắn tin, ngân hàng, đặt đồ ăn, bản đồ, mini game và các app giải trí 18+ dùng tiền ảo.</p>
     <p>• 💑 Tên vợ/chồng được random không trùng lặp • Căn Cước Công Dân (CCCD)</p>
   </div>
 </div>
@@ -473,7 +501,7 @@ select option{background:var(--brown);}
     <button onclick="showSection('marriage')" id="nav-marriage">💑 Hôn Nhân</button>
     <button onclick="showSection('hokhau')" id="nav-hokhau">📋 Hộ Khẩu</button>
     <button onclick="showSection('stock')" id="nav-stock">📈 CK</button>
-    <button onclick="showSection('lottery')" id="nav-lottery">🎫 Xổ Số</button>
+    <button onclick="showSection('phone')" id="nav-phone">📱 Điện Thoại</button>
     <button onclick="showSection('lb')" id="nav-lb">🏆 BXH</button>
   </div>
 
@@ -651,39 +679,78 @@ select option{background:var(--brown);}
     </div>
   </div>
 
-  <!-- LOTTERY -->
-  <div id="section-lottery" class="section">
+
+  <!-- PHONE -->
+  <div id="section-phone" class="section">
     <div class="card">
-      <h2>🎫 Xổ Số Cào May Mắn</h2>
-      <div style="text-align:center;font-size:0.8rem;color:#f0a500;margin-bottom:10px;">💡 Mỗi vé 100.000 VNĐ – Cào 3 ô để xem kết quả!</div>
-      <div style="text-align:center;margin-bottom:10px;">
-        <span style="font-size:0.85rem;">💰 Tiền hiện có: </span>
-        <span id="lottery-money" style="color:var(--gold2);font-weight:800;font-size:1rem;"></span>
-      </div>
-      <!-- Ticket area -->
-      <div class="scratch-card" id="lottery-card">
-        <div style="font-size:0.95rem;font-weight:800;color:rgba(255,255,255,0.9);letter-spacing:1px;">✨ VÉ SỐ MAY MẮN ✨</div>
-        <div style="font-size:0.72rem;color:rgba(255,255,255,0.6);margin-top:2px;">Nhấn từng ô để cào</div>
-        <div class="scratch-ticket" id="scratch-cells"></div>
-        <div id="lottery-result" style="display:none;"></div>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:10px;">
-        <button class="btn btn-gold btn-full" onclick="buyLotteryTicket()" id="lottery-buy-btn">🎫 Mua Vé (100.000 VNĐ)</button>
-        <button class="btn btn-gray btn-sm" onclick="resetLotteryCard()" style="min-width:80px;" id="lottery-reset-btn" disabled>🔄 Vé Mới</button>
-      </div>
-      <hr class="divider">
-      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px;font-size:0.8rem;">
-        <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">🏆 Bảng Giải Thưởng</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;color:#ccc;">
-          <div>🌟🌟🌟 Ba sao = <span style="color:#ffd700;font-weight:700;">50.000.000 VNĐ</span></div>
-          <div>💎💎💎 Ba kim cương = <span style="color:#3498db;font-weight:700;">20.000.000 VNĐ</span></div>
-          <div>7️⃣7️⃣7️⃣ Ba số 7 = <span style="color:#e74c3c;font-weight:700;">10.000.000 VNĐ</span></div>
-          <div>🍀🍀🍀 Ba lá = <span style="color:#2ecc71;font-weight:700;">5.000.000 VNĐ</span></div>
-          <div>🎯🎯🎯 Ba hồng = <span style="color:#e67e22;font-weight:700;">2.000.000 VNĐ</span></div>
-          <div>Bất kỳ 2 giống = <span style="color:#f39c12;font-weight:700;">300.000 VNĐ</span></div>
+      <h2>📱 Điện Thoại</h2>
+      <div class="phone-wrap">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-status"><span id="phone-clock">20:53</span><span>📶 5G · 🔋 92%</span></div>
+
+          <div id="phone-home" class="phone-page active">
+            <div style="text-align:center;color:#fff;font-weight:800;font-size:.9rem;padding:8px 0 2px;">VIETNAM LIFE PHONE</div>
+            <div style="text-align:center;color:#94a3b8;font-size:.62rem;margin-bottom:8px;">Điện thoại của bạn</div>
+            <div class="phone-balance"><div class="v" id="phone-home-money">0 VNĐ</div><div class="s">Số dư tiền trong game</div></div>
+            <div class="phone-home">
+              <button class="phone-app" onclick="phoneOpen('social')"><div class="ico" style="background:linear-gradient(135deg,#2563eb,#60a5fa)">💬</div><div class="nm">Tin nhắn</div></button>
+              <button class="phone-app" onclick="phoneOpen('bank')"><div class="ico" style="background:linear-gradient(135deg,#0f766e,#22c55e)">🏦</div><div class="nm">Ngân hàng</div></button>
+              <button class="phone-app" onclick="phoneOpen('map')"><div class="ico" style="background:linear-gradient(135deg,#db2777,#f472b6)">🗺️</div><div class="nm">Bản đồ</div></button>
+              <button class="phone-app" onclick="phoneOpen('food')"><div class="ico" style="background:linear-gradient(135deg,#ea580c,#f59e0b)">🍜</div><div class="nm">Đồ ăn</div></button>
+              <button class="phone-app" onclick="phoneOpen('games')"><div class="ico" style="background:linear-gradient(135deg,#7c3aed,#c084fc)">🎮</div><div class="nm">Game</div></button>
+              <button class="phone-app" onclick="phoneOpen('xocdia')"><div class="ico" style="background:linear-gradient(135deg,#92400e,#f59e0b)">🥣</div><div class="nm">Xóc Đĩa</div><div class="badge">18+</div></button>
+              <button class="phone-app" onclick="phoneOpen('cuabau')"><div class="ico" style="background:linear-gradient(135deg,#047857,#34d399)">🦀</div><div class="nm">Cua Bầu</div><div class="badge">18+</div></button>
+              <button class="phone-app" onclick="phoneOpen('taixiu')"><div class="ico" style="background:linear-gradient(135deg,#b91c1c,#f97316)">🎲</div><div class="nm">Tài Xỉu</div><div class="badge">18+</div></button>
+              <button class="phone-app" onclick="phoneOpen('settings')"><div class="ico" style="background:linear-gradient(135deg,#475569,#94a3b8)">⚙️</div><div class="nm">Cài đặt</div></button>
+            </div>
+            <div class="phone-dock">
+              <button onclick="phoneOpen('social')">💬</button><button onclick="phoneOpen('food')">🍜</button><button onclick="phoneOpen('map')">🗺️</button><button onclick="phoneOpen('home')">🏠</button>
+            </div>
+          </div>
+
+          <div id="phone-social" class="phone-page">
+            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">💬 Tin nhắn</span></div>
+            <div class="phone-balance"><div class="v" style="font-size:.95rem;color:#fff;">Bạn bè đang hoạt động</div><div class="s">Kết nối bạn bè trong Vietnam Life</div></div>
+            <div class="phone-action-grid"><div class="phone-action"><div class="i">👨‍👩‍👧</div><div class="t">Gia đình</div></div><div class="phone-action"><div class="i">🧑‍🤝‍🧑</div><div class="t">Bạn bè</div></div><div class="phone-action"><div class="i">💌</div><div class="t">Tin mới</div></div></div>
+            <div class="phone-note">Hệ thống chat bên phải game vẫn dùng Firebase như cũ.</div>
+          </div>
+
+          <div id="phone-bank" class="phone-page">
+            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🏦 Ngân hàng</span></div>
+            <div class="phone-balance"><div class="v" id="phone-bank-money">0 VNĐ</div><div class="s">Tiền mặt</div></div>
+            <div class="phone-balance"><div class="v" id="phone-bank-saving">0 VNĐ</div><div class="s">Tiết kiệm</div></div>
+            <button class="btn btn-blue btn-full" onclick="showSection('city')">🏦 Mở quản lý tiết kiệm</button>
+          </div>
+
+          <div id="phone-map" class="phone-page">
+            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🗺️ Bản đồ Việt Nam</span></div>
+            <div class="phone-balance"><div class="v" style="color:#fff">📍 <span id="phone-hometown">Việt Nam</span></div><div class="s">Quê quán hiện tại</div></div>
+            <div class="phone-action-grid"><div class="phone-action" onclick="doPhoneTrip('Hà Nội',180000)"><div class="i">🏙️</div><div class="t">Hà Nội</div></div><div class="phone-action" onclick="doPhoneTrip('Đà Nẵng',260000)"><div class="i">🌊</div><div class="t">Đà Nẵng</div></div><div class="phone-action" onclick="doPhoneTrip('TP.HCM',320000)"><div class="i">🏢</div><div class="t">TP.HCM</div></div></div>
+            <div class="phone-note">Du lịch tốn tiền nhưng tăng hạnh phúc và trải nghiệm.</div>
+          </div>
+
+          <div id="phone-food" class="phone-page">
+            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🍜 Đặt đồ ăn</span></div>
+            <div class="phone-action-grid"><div class="phone-action" onclick="phoneFood('🍜 Phở bò',65000)"><div class="i">🍜</div><div class="t">Phở bò<br>65k</div></div><div class="phone-action" onclick="phoneFood('🍚 Cơm tấm',55000)"><div class="i">🍚</div><div class="t">Cơm tấm<br>55k</div></div><div class="phone-action" onclick="phoneFood('🧋 Trà sữa',45000)"><div class="i">🧋</div><div class="t">Trà sữa<br>45k</div></div></div>
+          </div>
+
+          <div id="phone-games" class="phone-page">
+            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🎮 Game</span></div>
+            <div class="phone-action-grid"><div class="phone-action" onclick="phonePlayTap()"><div class="i">⚡</div><div class="t">Tap nhanh</div></div><div class="phone-action" onclick="phonePlayGuess()"><div class="i">🔢</div><div class="t">Đoán số</div></div><div class="phone-action" onclick="phonePlayLucky()"><div class="i">🍀</div><div class="t">May mắn</div></div></div>
+            <div id="phone-game-result" class="dice-result"><div>Chọn một mini game</div></div>
+          </div>
+
+          <div id="phone-xocdia" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🥣 Xóc Đĩa</span></div><div class="phone-bet"><div style="font-size:.7rem;color:#cbd5e1;margin-bottom:5px">18+ · chỉ dùng tiền ảo trong game</div><input id="xocdia-bet" type="number" min="1000" step="1000" placeholder="Tiền cược (VNĐ)"><select id="xocdia-choice"><option value="chan">Chẵn</option><option value="le">Lẻ</option></select><button class="btn btn-gold btn-full" onclick="playXocDia()">🥣 Xóc!</button></div><div id="xocdia-result" class="dice-result"><div>Đặt cược rồi xóc</div></div><div class="phone-note">Trò chơi mô phỏng giải trí, không nạp/rút tiền thật.</div></div>
+
+          <div id="phone-cuabau" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🦀 Cua Bầu</span></div><div class="phone-bet"><div style="font-size:.7rem;color:#cbd5e1;margin-bottom:5px">18+ · chỉ dùng tiền ảo trong game</div><input id="cuabau-bet" type="number" min="1000" step="1000" placeholder="Tiền cược (VNĐ)"><select id="cuabau-choice"><option value="crab">🦀 Cua</option><option value="gourd">🎃 Bầu</option><option value="fish">🐟 Cá</option><option value="chicken">🐔 Gà</option><option value="shrimp">🦐 Tôm</option><option value="rooster">🐓 Nai</option></select><button class="btn btn-green btn-full" onclick="playCuaBau()">🎲 Lắc 3 viên</button></div><div id="cuabau-result" class="dice-result"><div>Chọn cửa rồi lắc</div></div></div>
+
+          <div id="phone-taixiu" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🎲 Tài Xỉu</span></div><div class="phone-bet"><div style="font-size:.7rem;color:#cbd5e1;margin-bottom:5px">18+ · chỉ dùng tiền ảo trong game</div><input id="taixiu-bet" type="number" min="1000" step="1000" placeholder="Tiền cược (VNĐ)"><select id="taixiu-choice"><option value="tai">🔥 Tài (11–17)</option><option value="xiu">❄️ Xỉu (4–10)</option></select><button class="btn btn-red btn-full" onclick="playTaiXiu()">🎲 Tung 3 xúc xắc</button></div><div id="taixiu-result" class="dice-result"><div>Chọn Tài/Xỉu rồi tung</div></div></div>
+
+          <div id="phone-settings" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">⚙️ Cài đặt</span></div><div class="phone-balance"><div class="v" style="color:#fff">📱 Cấp điện thoại: <span id="phone-level-value">1</span></div><div class="s">Nâng cấp để mở thêm tiện ích trong các bản sau.</div></div><button class="btn btn-purple btn-full" onclick="upgradePhone()">⬆️ Nâng cấp điện thoại</button><div class="phone-note">Chi phí nâng cấp tăng theo từng cấp.</div></div>
         </div>
       </div>
-      <div style="font-size:0.72rem;color:#666;text-align:center;margin-top:8px;">Lịch sử: <span id="lottery-stats">Chưa mua vé nào</span></div>
+      <div style="text-align:center;font-size:.67rem;color:#777;margin-top:8px;">📱 Điện thoại là hệ thống trong game • các app cờ bạc chỉ dùng tiền ảo</div>
     </div>
   </div>
 
@@ -949,7 +1016,8 @@ const G={
   activityHistory:[],
   cityEvents:[],
   weather:null,
-  lotteryState:{ticket:null,revealed:[false,false,false],used:false,stats:{bought:0,won:0,totalWon:0}},
+  phoneLevel:1,
+  phoneStats:{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}},
 };
 
 // ===================== CONSTANTS =====================
@@ -1169,11 +1237,8 @@ async function checkAndResume(){
 function loadSavedGame(sg){
   const clean=JSON.parse(JSON.stringify(sg));
   Object.assign(G,clean);
-  G.energy=Number.isFinite(G.energy)?G.energy:3; G.reputation=Number.isFinite(G.reputation)?G.reputation:0; G.bank=Number.isFinite(G.bank)?G.bank:0;
+  G.energy=Number.isFinite(G.energy)?G.energy:3; G.reputation=Number.isFinite(G.reputation)?G.reputation:0; G.bank=Number.isFinite(G.bank)?G.bank:0; ensurePhoneState();
   G.activityHistory=Array.isArray(G.activityHistory)?G.activityHistory:[]; G.cityEvents=Array.isArray(G.cityEvents)?G.cityEvents:[]; G.weather=G.weather||VIETNAM_WEATHER[0];
-  if(G.lotteryState){
-    window.__savedLotteryState=JSON.parse(JSON.stringify(G.lotteryState));
-  }
   showScreen('game'); showSection('main'); renderGame(); chatInit();
   showNotif(`✅ Tiếp tục: ${G.name} – ${G.age} tuổi!`,'#2ecc71');
   // Lắng nghe buff realtime từ admin
@@ -1208,14 +1273,6 @@ function initProfile(){
 
 function saveGameState(){
   if(!G.name) return;
-  if(typeof lotteryTicket!=='undefined'){
-    G.lotteryState={
-      ticket:Array.isArray(lotteryTicket)?[...lotteryTicket]:null,
-      revealed:Array.isArray(lotteryRevealed)?[...lotteryRevealed]:[false,false,false],
-      used:!!lotteryUsed,
-      stats:{...(lotteryStats||{})}
-    };
-  }
   LS.set('vl_savestate',G);
   // Đồng bộ lên Firebase để chơi tiếp trên trình duyệt khác
   const acc = playerProfile?.accountName;
@@ -1412,7 +1469,6 @@ const JOBS=[
   {id:'crypto',name:'🪙 Crypto Trader',income:0,minAge:18,eduReq:null,cat:'Thời Đại',desc:'Đầu tư coin (rủi ro)'},
   // ── HỌC SINH ──
   {id:'study_child',name:'📚 Tập Trung Học',income:0,minAge:6,maxAge:17,eduReq:null,cat:'Học Sinh',desc:'IQ+20,EQ+5/mùa',childOnly:true},
-  {id:'sell_lottery',name:'🎫 Bán Vé Số',income:200000,minAge:8,maxAge:17,eduReq:null,cat:'Học Sinh',desc:'Kiếm ít tiền',childOnly:true},
   {id:'help_farm',name:'🌾 Phụ Nông',income:300000,minAge:10,maxAge:17,eduReq:null,cat:'Học Sinh',desc:'Phụ cha mẹ',childOnly:true},
 ];
 
@@ -1565,7 +1621,7 @@ function showSection(id){
   if(id==='farm')renderFarm();
   if(id==='shop')renderShop();
   if(id==='lb'){showLbTab('age');showAdminPanel();}
-  if(id==='lottery'){renderLotterySection(); if(lotteryTicket){renderScratchCells();} else {const sc=document.getElementById('scratch-cells');if(sc)sc.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#aaa;padding:20px 0;font-size:0.9rem;">Mua vé để cào! 🎫</div>';}}
+  if(id==='phone')renderPhone();
   if(id==='marriage')renderMarriage();
   if(id==='hokhau')renderHoKhau();
   if(id==='edu')renderEdu();
@@ -1637,7 +1693,7 @@ function startGame(){
 function enterGame(){
   updateLoginUserBar();
   addLog(0,`${G.gender==='Nam'?'👦':'👧'} ${G.name} chào đời tại ${G.hometown} – Gia đình ${G.family.name}. Tố chất: ${G.talent.name} | IQ:${G.iq} EQ:${G.eq}`,'neutral');
-  showScreen('game');showSection('main');renderGame();chatInit();
+  ensurePhoneState(); showScreen('game');showSection('main');renderGame();chatInit();
   // Lắng nghe buff realtime từ admin
   startAdminBuffListener();
 }
@@ -1813,6 +1869,7 @@ function renderGame(){
   document.getElementById('g-badges').innerHTML=badges;
   renderLog();
   renderCity();
+  renderPhone();
 }
 
 function updateBar(stat,val,max){
@@ -2949,6 +3006,88 @@ async function checkIfBanned(email){
 function openDonate(){document.getElementById('donate-modal').style.display='flex';}
 function closeDonate(){document.getElementById('donate-modal').style.display='none';}
 
+
+// ===================== PHONE SYSTEM =====================
+function ensurePhoneState(){
+  G.phoneLevel=Number.isFinite(G.phoneLevel)?Math.max(1,G.phoneLevel):1;
+  G.phoneStats=G.phoneStats||{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}};
+  ['xocdia','cuabau','taixiu'].forEach(k=>G.phoneStats[k]=G.phoneStats[k]||{plays:0,wins:0});
+}
+function phoneOpen(page){
+  ensurePhoneState();
+  document.querySelectorAll('.phone-page').forEach(x=>x.classList.remove('active'));
+  const el=document.getElementById('phone-'+page); if(el)el.classList.add('active');
+  renderPhone();
+}
+function renderPhone(){
+  ensurePhoneState();
+  const money=document.getElementById('phone-home-money'); if(money)money.textContent=fmt(G.money||0)+' VNĐ';
+  const bm=document.getElementById('phone-bank-money'); if(bm)bm.textContent=fmt(G.money||0)+' VNĐ';
+  const bs=document.getElementById('phone-bank-saving'); if(bs)bs.textContent=fmt(G.bank||0)+' VNĐ';
+  const pl=document.getElementById('phone-level-value'); if(pl)pl.textContent=G.phoneLevel;
+  const ph=document.getElementById('phone-hometown'); if(ph)ph.textContent=G.hometown||'Việt Nam';
+  const clock=document.getElementById('phone-clock'); if(clock)clock.textContent=new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
+}
+function phoneSpend(amount,desc){
+  if(amount<=0||G.money<amount){showNotif('💸 Không đủ tiền!','#e74c3c');return false;}
+  G.money-=amount; addLog(G.age,desc+' -'+fmt(amount)+' VNĐ','neutral'); renderPhone();renderGame();saveGameState(); return true;
+}
+function phoneFood(name,cost){
+  if(!phoneSpend(cost,`🍜 Đặt ${name}`))return;
+  G.happy=clamp(G.happy+5,0,HAPPY_MAX); G.stress=clamp(G.stress-2,0,STRESS_MAX);
+  document.getElementById('phone-home').classList.remove('active'); document.getElementById('phone-food').classList.add('active');
+  showNotif(`🍜 ${name} đã giao tới! +5 hạnh phúc`,'#2ecc71'); renderGame(); saveGameState();
+}
+function doPhoneTrip(city,cost){
+  if(G.age<12){showNotif('🔒 Cần từ 12 tuổi để tự đi du lịch!','#e74c3c');return;}
+  if(!phoneSpend(cost,`🚌 Du lịch ${city}`))return;
+  G.happy=clamp(G.happy+10,0,HAPPY_MAX); G.eq=clamp(G.eq+3,0,getEQMax());
+  showNotif(`🚌 Đã tới ${city}! +10 😊 +3 EQ`,'#2ecc71'); renderGame();saveGameState();
+}
+function phoneGameResult(text){const el=document.getElementById('phone-game-result');if(el)el.innerHTML=text;}
+function phonePlayTap(){
+  const reward=Math.floor(5000+Math.random()*25000); G.money+=reward; phoneGameResult(`<div>⚡ CLICK!</div><div style="color:#2ecc71">+${fmt(reward)} VNĐ</div>`); showNotif(`⚡ Mini game: +${fmt(reward)} VNĐ`,'#2ecc71'); addLog(G.age,`⚡ Chơi Tap nhanh +${fmt(reward)} VNĐ`,'good'); renderGame();saveGameState();
+}
+function phonePlayGuess(){
+  const secret=rand(1,5),guess=prompt('Đoán số từ 1 đến 5'); if(guess===null)return; const n=parseInt(guess); const win=n===secret; const reward=win?50000:0; if(reward)G.money+=reward; phoneGameResult(`<div>🎯 Số bí mật: ${secret}</div><div style="color:${win?'#2ecc71':'#ef4444'}">${win?'+50.000 VNĐ':'Trượt rồi!'}</div>`); showNotif(win?'🎉 Đoán đúng! +50.000 VNĐ':'😅 Sai số rồi!','#f39c12'); renderGame();saveGameState();
+}
+function phonePlayLucky(){
+  const win=Math.random()<0.45,reward=win?Math.floor(10000+Math.random()*60000):0; if(reward)G.money+=reward; phoneGameResult(`<div>🍀 ${win?'MAY MẮN!':'XUI RỒI!'}</div><div style="color:${win?'#2ecc71':'#ef4444'}">${win?'+'+fmt(reward)+' VNĐ':'Không có thưởng'}</div>`); addLog(G.age,`🍀 Mini game may mắn ${win?'thắng +'+fmt(reward):'không thưởng'}` ,win?'good':'neutral'); renderGame();saveGameState();
+}
+function validateBet(id){
+  const bet=Number(document.getElementById(id)?.value)||0;
+  if(G.age<18){showNotif('🔞 Ứng dụng này yêu cầu nhân vật 18+ trong game.','#e74c3c');return 0;}
+  if(bet<1000){showNotif('💸 Mức cược tối thiểu 1.000 VNĐ tiền ảo.','#e74c3c');return 0;}
+  if(bet>G.money){showNotif('💸 Không đủ tiền để đặt cược!','#e74c3c');return 0;}
+  G.money-=bet; return bet;
+}
+function finishBet(app,bet,won,payout,resultId,logText){
+  ensurePhoneState(); G.phoneStats[app].plays++; if(won)G.phoneStats[app].wins++;
+  if(payout>0)G.money+=payout;
+  const el=document.getElementById(resultId); if(el)el.innerHTML=`<div>${won?'🎉 THẮNG':'😵 THUA'}</div><div class="big">${logText}</div><div style="color:${won?'#2ecc71':'#ef4444'}">${won?'+'+fmt(payout)+' VNĐ':'-'+fmt(bet)+' VNĐ'}</div>`;
+  addLog(G.age,`${app==='xocdia'?'🥣':app==='cuabau'?'🦀':'🎲'} ${logText} – ${won?'thắng '+fmt(payout):'thua '+fmt(bet)}` ,won?'good':'bad');
+  renderPhone();renderGame();saveGameState();
+}
+function playXocDia(){
+  const bet=validateBet('xocdia-bet'); if(!bet)return; const choice=document.getElementById('xocdia-choice').value;
+  const coins=[0,0,0,0].map(()=>Math.random()<0.5?1:0); const heads=coins.reduce((a,b)=>a+b,0); const even=heads%2===0; const won=(choice==='chan')===even; const payout=won?bet*2:0;
+  finishBet('xocdia',bet,won,payout,'xocdia-result',`${['⚪','⚫'].slice(0,2).join('')} ${heads} mặt`);
+}
+function playCuaBau(){
+  const bet=validateBet('cuabau-bet'); if(!bet)return; const choice=document.getElementById('cuabau-choice').value;
+  const faces=[['crab','🦀'],['gourd','🎃'],['fish','🐟'],['chicken','🐔'],['shrimp','🦐'],['rooster','🐓']]; const rolls=[0,0,0].map(()=>faces[Math.floor(Math.random()*faces.length)]); const count=rolls.filter(x=>x[0]===choice).length; const won=count>0; const multiplier=count===3?4:count===2?3:count===1?2:0; const payout=bet*multiplier;
+  finishBet('cuabau',bet,won,payout,'cuabau-result',rolls.map(x=>x[1]).join(' '));
+}
+function playTaiXiu(){
+  const bet=validateBet('taixiu-bet'); if(!bet)return; const choice=document.getElementById('taixiu-choice').value;
+  const rolls=[rand(1,6),rand(1,6),rand(1,6)],sum=rolls.reduce((a,b)=>a+b,0); const isTai=sum>=11; const won=(choice==='tai')===isTai; const payout=won?bet*2:0;
+  finishBet('taixiu',bet,won,payout,'taixiu-result',`${rolls.join(' + ')} = ${sum}`);
+}
+function upgradePhone(){
+  ensurePhoneState(); if(G.phoneLevel>=10){showNotif('📱 Điện thoại đã đạt cấp tối đa!','#f0a500');return;}
+  const cost=500000*G.phoneLevel; if(!phoneSpend(cost,`📱 Nâng cấp điện thoại lên cấp ${G.phoneLevel+1}`))return; G.phoneLevel++; showNotif(`📱 Nâng cấp thành công! Cấp ${G.phoneLevel}`,'#9b59b6'); renderPhone();saveGameState();
+}
+
 // ===================== STOCK MARKET =====================
 const STOCKS=[
   {id:'FPT',name:'FPT Corporation',icon:'💻',basePrice:95000,sector:'Công Nghệ'},
@@ -3160,7 +3299,7 @@ function setMaxBuy(id,price){
 function restartGame(){
   stopAdminBuffListener();
   clearSaveState();
-  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{},birthDate:'',energy:3,reputation:0,bank:0,phoneLevel:0,currentActivity:null,activityHistory:[],cityEvents:[],weather:null,lotteryState:{ticket:null,revealed:[false,false,false],used:false,stats:{bought:0,won:0,totalWon:0}}});
+  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{},birthDate:'',energy:3,reputation:0,bank:0,phoneLevel:0,currentActivity:null,activityHistory:[],cityEvents:[],weather:null,phoneLevel:1,phoneStats:{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}}});
   document.getElementById('player-name').value='';
   showScreen('intro'); updateLoginUserBar();
 }
