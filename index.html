@@ -372,6 +372,7 @@ select option{background:var(--brown);}
 .phone-bet input,.phone-bet select{margin:0 0 6px;background:#0b1220;border-color:#334155;color:#fff;}
 .dice-result{min-height:95px;border-radius:14px;background:radial-gradient(circle,#263855,#111827);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:1.15rem;font-weight:800;margin:8px 0;}
 .dice-result .big{font-size:2.2rem;letter-spacing:6px;}.phone-note{font-size:.62rem;color:#94a3b8;text-align:center;margin-top:7px;line-height:1.4;}
+.mini-game-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}.mini-game-tab{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#cbd5e1;border-radius:10px;padding:8px;font-family:'Baloo 2',cursive;font-weight:800;cursor:pointer}.mini-game-tab.active{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;border-color:#a78bfa}.mini-game-panel{display:none}.mini-game-panel.active{display:block}.mini-game-head{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:8px 10px;border-radius:10px 10px 0 0;color:#fff;font-size:.75rem}.mini-canvas{display:block;width:100%;max-width:340px;margin:0 auto 8px;background:#93c5fd;border:1px solid rgba(255,255,255,.12);border-radius:0 0 12px 12px}.snake-controls{display:flex;flex-direction:column;align-items:center;gap:4px;margin:5px 0}.snake-controls button{width:42px;height:36px;border:0;border-radius:9px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}.snake-controls>div{display:flex;gap:4px}.news-banner{background:linear-gradient(135deg,#0f766e,#115e59);border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(45,212,191,.35)}.news-banner-title{font-size:.95rem;font-weight:900;color:#fff}.news-banner-sub{font-size:.62rem;color:#ccfbf1;margin-top:2px}.news-list{display:flex;flex-direction:column;gap:6px}.news-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:9px}.news-card .tag{display:inline-block;font-size:.58rem;color:#99f6e4;border:1px solid rgba(45,212,191,.35);border-radius:999px;padding:2px 6px;margin-bottom:4px}.news-card h4{font-size:.76rem;color:#fff;margin-bottom:3px}.news-card p{font-size:.64rem;color:#cbd5e1;line-height:1.45}.news-card .time{font-size:.57rem;color:#64748b;margin-top:4px}
 
 </style>
 </head>
@@ -727,6 +728,7 @@ select option{background:var(--brown);}
               <button class="phone-app" onclick="phoneOpen('map')"><div class="ico" style="background:linear-gradient(135deg,#db2777,#f472b6)">🗺️</div><div class="nm">Bản đồ</div></button>
               <button class="phone-app" onclick="phoneOpen('food')"><div class="ico" style="background:linear-gradient(135deg,#ea580c,#f59e0b)">🍜</div><div class="nm">Đồ ăn</div></button>
               <button class="phone-app" onclick="phoneOpen('games')"><div class="ico" style="background:linear-gradient(135deg,#7c3aed,#c084fc)">🎮</div><div class="nm">Game</div></button>
+              <button class="phone-app" onclick="phoneOpen('news')"><div class="ico" style="background:linear-gradient(135deg,#0f766e,#14b8a6)">📰</div><div class="nm">Tin tức</div></button>
               <button class="phone-app" onclick="phoneOpen('xocdia')"><div class="ico" style="background:linear-gradient(135deg,#92400e,#f59e0b)">🥣</div><div class="nm">Xóc Đĩa</div><div class="badge">18+</div></button>
               <button class="phone-app" onclick="phoneOpen('cuabau')"><div class="ico" style="background:linear-gradient(135deg,#047857,#34d399)">🦀</div><div class="nm">Cua Bầu</div><div class="badge">18+</div></button>
               <button class="phone-app" onclick="phoneOpen('taixiu')"><div class="ico" style="background:linear-gradient(135deg,#b91c1c,#f97316)">🎲</div><div class="nm">Tài Xỉu</div><div class="badge">18+</div></button>
@@ -764,9 +766,30 @@ select option{background:var(--brown);}
           </div>
 
           <div id="phone-games" class="phone-page">
-            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🎮 Game</span></div>
-            <div class="phone-action-grid"><div class="phone-action" onclick="phonePlayTap()"><div class="i">⚡</div><div class="t">Tap nhanh</div></div><div class="phone-action" onclick="phonePlayGuess()"><div class="i">🔢</div><div class="t">Đoán số</div></div><div class="phone-action" onclick="phonePlayLucky()"><div class="i">🍀</div><div class="t">May mắn</div></div></div>
-            <div id="phone-game-result" class="dice-result"><div>Chọn một mini game</div></div>
+            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🎮 Game mini</span></div>
+            <div class="mini-game-tabs">
+              <button id="mg-tab-flappy" class="mini-game-tab active" onclick="openMiniGame('flappy')">🐦 Flappy Bird</button>
+              <button id="mg-tab-snake" class="mini-game-tab" onclick="openMiniGame('snake')">🐍 Rắn ăn táo</button>
+            </div>
+            <div id="mini-game-flappy" class="mini-game-panel active">
+              <div class="mini-game-head"><b>🐦 Flappy Bird</b><span id="flappy-score">Điểm: 0</span></div>
+              <canvas id="flappy-canvas" width="340" height="420" class="mini-canvas"></canvas>
+              <button class="btn btn-gold btn-full" onclick="startFlappy()">▶️ Bắt đầu / Chơi lại</button>
+              <div class="phone-note">Nhấn nút hoặc phím Space để bay. Game chỉ tính điểm, không thưởng tiền.</div>
+            </div>
+            <div id="mini-game-snake" class="mini-game-panel">
+              <div class="mini-game-head"><b>🐍 Rắn ăn táo</b><span id="snake-score">Điểm: 0</span></div>
+              <canvas id="snake-canvas" width="340" height="340" class="mini-canvas"></canvas>
+              <div class="snake-controls"><button onclick="snakeDir('up')">⬆️</button><div><button onclick="snakeDir('left')">⬅️</button><button onclick="snakeDir('down')">⬇️</button><button onclick="snakeDir('right')">➡️</button></div></div>
+              <button class="btn btn-green btn-full" onclick="startSnake()">▶️ Bắt đầu / Chơi lại</button>
+              <div class="phone-note">Ăn táo để dài thêm. Dùng phím mũi tên trên máy tính.</div>
+            </div>
+          </div>
+
+          <div id="phone-news" class="phone-page">
+            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">📰 Tin tức Việt Nam</span></div>
+            <div class="news-banner"><div class="news-banner-title">🇻🇳 BẢN TIN HÔM NAY</div><div class="news-banner-sub">Tin mô phỏng trong thế giới Vietnam Life • cập nhật theo từng mùa</div></div>
+            <div id="phone-news-list" class="news-list"></div>
           </div>
 
           <div id="phone-xocdia" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🥣 Xóc Đĩa</span></div><div class="phone-bet"><div style="font-size:.7rem;color:#cbd5e1;margin-bottom:5px">18+ · chỉ dùng tiền ảo trong game</div><input id="xocdia-bet" type="number" min="1000" step="1000" placeholder="Tiền cược (VNĐ)"><select id="xocdia-choice"><option value="chan">Chẵn</option><option value="le">Lẻ</option></select><button class="btn btn-gold btn-full" onclick="playXocDia()">🥣 Xóc!</button></div><div id="xocdia-result" class="dice-result"><div>Đặt cược rồi xóc</div></div><div class="phone-note">Trò chơi mô phỏng giải trí, không nạp/rút tiền thật.</div></div>
@@ -3116,6 +3139,8 @@ function renderPhone(){
   const pl=document.getElementById('phone-level-value'); if(pl)pl.textContent=G.phoneLevel;
   const ph=document.getElementById('phone-hometown'); if(ph)ph.textContent=G.hometown||'Việt Nam';
   const clock=document.getElementById('phone-clock'); if(clock)clock.textContent=new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
+  renderPhoneNews();
+  if(document.getElementById('flappy-canvas'))drawFlappy(); if(document.getElementById('snake-canvas'))drawSnake();
   // 15–17 tuổi: điện thoại cơ bản; app cờ bạc vẫn bị khóa ở 18+.
   ['xocdia','cuabau','taixiu'].forEach(k=>{
     const b=document.querySelector(`button.phone-app[onclick=\"phoneOpen('${k}')\"]`);
@@ -3138,16 +3163,71 @@ function doPhoneTrip(city,cost){
   G.happy=clamp(G.happy+10,0,HAPPY_MAX); G.eq=clamp(G.eq+3,0,getEQMax());
   showNotif(`🚌 Đã tới ${city}! +10 😊 +3 EQ`,'#2ecc71'); renderGame();saveGameState();
 }
-function phoneGameResult(text){const el=document.getElementById('phone-game-result');if(el)el.innerHTML=text;}
-function phonePlayTap(){
-  const reward=Math.floor(5000+Math.random()*25000); G.money+=reward; phoneGameResult(`<div>⚡ CLICK!</div><div style="color:#2ecc71">+${fmt(reward)} VNĐ</div>`); showNotif(`⚡ Mini game: +${fmt(reward)} VNĐ`,'#2ecc71'); addLog(G.age,`⚡ Chơi Tap nhanh +${fmt(reward)} VNĐ`,'good'); renderGame();saveGameState();
+function openMiniGame(kind){
+  if(Number(G.age||0)<15){showNotif('📵 Điện thoại chỉ được sử dụng từ 15 tuổi trong game.','#e74c3c');return;}
+  document.querySelectorAll('.mini-game-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.mini-game-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('mg-tab-'+kind)?.classList.add('active');
+  document.getElementById('mini-game-'+kind)?.classList.add('active');
 }
-function phonePlayGuess(){
-  const secret=rand(1,5),guess=prompt('Đoán số từ 1 đến 5'); if(guess===null)return; const n=parseInt(guess); const win=n===secret; const reward=win?50000:0; if(reward)G.money+=reward; phoneGameResult(`<div>🎯 Số bí mật: ${secret}</div><div style="color:${win?'#2ecc71':'#ef4444'}">${win?'+50.000 VNĐ':'Trượt rồi!'}</div>`); showNotif(win?'🎉 Đoán đúng! +50.000 VNĐ':'😅 Sai số rồi!','#f39c12'); renderGame();saveGameState();
+let flappyState=null;
+function drawFlappy(){
+  const c=document.getElementById('flappy-canvas'); if(!c)return; const x=c.getContext('2d');
+  x.clearRect(0,0,c.width,c.height);
+  const g=x.createLinearGradient(0,0,0,c.height);g.addColorStop(0,'#7dd3fc');g.addColorStop(1,'#dbeafe');x.fillStyle=g;x.fillRect(0,0,c.width,c.height);
+  if(!flappyState){x.fillStyle='#1e3a8a';x.font='bold 22px Baloo 2';x.textAlign='center';x.fillText('🐦 FLAPPY BIRD',c.width/2,80);x.font='16px Baloo 2';x.fillText('Nhấn Bắt đầu hoặc Space',c.width/2,112);return;}
+  x.fillStyle='#65a30d';(flappyState.pipes||[]).forEach(p=>{x.fillRect(p.x,0,46,p.gapY-65);x.fillRect(p.x,p.gapY+65,46,c.height-70-p.gapY);});
+  x.fillStyle='#facc15';x.beginPath();x.arc(65,flappyState.y,15,0,Math.PI*2);x.fill();x.fillStyle='#ef4444';x.beginPath();x.arc(70,flappyState.y-3,3,0,Math.PI*2);x.fill();
+  x.fillStyle='#16a34a';x.fillRect(0,c.height-45,c.width,45);
+  x.fillStyle='#fff';x.font='bold 18px Baloo 2';x.textAlign='left';x.fillText('Điểm: '+flappyState.score,10,28);
 }
-function phonePlayLucky(){
-  const win=Math.random()<0.45,reward=win?Math.floor(10000+Math.random()*60000):0; if(reward)G.money+=reward; phoneGameResult(`<div>🍀 ${win?'MAY MẮN!':'XUI RỒI!'}</div><div style="color:${win?'#2ecc71':'#ef4444'}">${win?'+'+fmt(reward)+' VNĐ':'Không có thưởng'}</div>`); addLog(G.age,`🍀 Mini game may mắn ${win?'thắng +'+fmt(reward):'không thưởng'}` ,win?'good':'neutral'); renderGame();saveGameState();
+function flappyStep(){
+  if(!flappyState||!flappyState.running)return;
+  flappyState.vy+=0.42;flappyState.y+=flappyState.vy;
+  flappyState.t++; if(flappyState.t%85===0){const gapY=95+Math.random()*190;flappyState.pipes.push({x:340,gapY});}
+  flappyState.pipes.forEach(p=>p.x-=2.7);flappyState.pipes=flappyState.pipes.filter(p=>p.x>-55);
+  flappyState.pipes.forEach(p=>{if(!p.passed&&p.x+46<65){p.passed=true;flappyState.score++;document.getElementById('flappy-score').textContent='Điểm: '+flappyState.score;}});
+  const hitFloor=flappyState.y>cHeight(420)-60,hitTop=flappyState.y<0;
+  const hitPipe=flappyState.pipes.some(p=>p.x<80&&p.x+46>50&&(flappyState.y<p.gapY-65||flappyState.y>p.gapY+65));
+  if(hitFloor||hitTop||hitPipe){flappyState.running=false;showNotif('💥 Flappy Bird kết thúc! Điểm '+flappyState.score,'#f39c12');drawFlappy();return;}
+  drawFlappy();requestAnimationFrame(flappyStep);
 }
+function cHeight(v){return v}
+function startFlappy(){
+  if(Number(G.age||0)<15){showNotif('📵 Cần từ 15 tuổi để dùng điện thoại.','#e74c3c');return;}
+  flappyState={running:true,y:210,vy:0,t:0,pipes:[],score:0};document.getElementById('flappy-score').textContent='Điểm: 0';drawFlappy();requestAnimationFrame(flappyStep);
+}
+function flap(){if(flappyState&&flappyState.running){flappyState.vy=-6.2;}else startFlappy();}
+window.addEventListener('keydown',e=>{if(e.code==='Space'&&document.getElementById('mini-game-flappy')?.classList.contains('active')){e.preventDefault();flap();} if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)&&document.getElementById('mini-game-snake')?.classList.contains('active')){e.preventDefault();snakeDir(e.key.replace('Arrow','').toLowerCase());}});
+let snakeState=null,snakeTimer=null;
+function drawSnake(){
+  const c=document.getElementById('snake-canvas');if(!c)return;const x=c.getContext('2d'),N=17,S=c.width/N;
+  x.fillStyle='#052e16';x.fillRect(0,0,c.width,c.height);
+  x.strokeStyle='rgba(255,255,255,.04)';for(let i=0;i<=N;i++){x.beginPath();x.moveTo(i*S,0);x.lineTo(i*S,c.height);x.stroke();x.beginPath();x.moveTo(0,i*S);x.lineTo(c.width,i*S);x.stroke();}
+  if(!snakeState){x.fillStyle='#bbf7d0';x.font='bold 20px Baloo 2';x.textAlign='center';x.fillText('🐍 RẮN ĂN TÁO',c.width/2,155);x.font='15px Baloo 2';x.fillText('Nhấn Bắt đầu',c.width/2,185);return;}
+  x.fillStyle='#ef4444';x.beginPath();x.arc((snakeState.apple.x+.5)*S,(snakeState.apple.y+.5)*S,S*.34,0,Math.PI*2);x.fill();
+  x.fillStyle='#22c55e';snakeState.snake.forEach((p,i)=>{x.fillRect(p.x*S+2,p.y*S+2,S-4,S-4);if(i===0){x.fillStyle='#86efac';x.fillRect(p.x*S+5,p.y*S+5,S-10,S-10);x.fillStyle='#22c55e';}});
+}
+function spawnApple(){const N=17;let a;do{a={x:Math.floor(Math.random()*N),y:Math.floor(Math.random()*N)}}while(snakeState.snake.some(p=>p.x===a.x&&p.y===a.y));return a}
+function snakeTick(){
+  if(!snakeState||!snakeState.running)return;const N=17,head=snakeState.snake[0],nh={x:head.x+snakeState.dir.x,y:head.y+snakeState.dir.y};
+  if(nh.x<0||nh.y<0||nh.x>=N||nh.y>=N||snakeState.snake.some(p=>p.x===nh.x&&p.y===nh.y)){snakeState.running=false;clearInterval(snakeTimer);showNotif('💥 Rắn đâm! Điểm '+snakeState.score,'#f39c12');drawSnake();return;}
+  snakeState.snake.unshift(nh);
+  if(nh.x===snakeState.apple.x&&nh.y===snakeState.apple.y){snakeState.score++;document.getElementById('snake-score').textContent='Điểm: '+snakeState.score;snakeState.apple=spawnApple();}else snakeState.snake.pop();drawSnake();
+}
+function startSnake(){
+  if(Number(G.age||0)<15){showNotif('📵 Cần từ 15 tuổi để dùng điện thoại.','#e74c3c');return;}
+  clearInterval(snakeTimer);snakeState={running:true,snake:[{x:8,y:8},{x:7,y:8},{x:6,y:8}],dir:{x:1,y:0},nextDir:{x:1,y:0},apple:{x:12,y:8},score:0};document.getElementById('snake-score').textContent='Điểm: 0';snakeTimer=setInterval(()=>{snakeState.dir=snakeState.nextDir;snakeTick();},120);drawSnake();
+}
+function snakeDir(d){if(!snakeState||!snakeState.running){if(d==='up'||d==='down'||d==='left'||d==='right')startSnake();return;}const m={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}}[d];if(!m)return;if(m.x===-snakeState.dir.x&&m.y===-snakeState.dir.y)return;snakeState.nextDir=m;}
+const VIETNAM_NEWS=[
+  {tag:'ĐỜI SỐNG',title:'Chợ sáng đông khách, giá rau thay đổi theo mùa',text:'Người dân tranh thủ đi chợ sớm. Giá một số mặt hàng trong thế giới game thay đổi theo cung cầu và mùa vụ.',time:'08:10'},
+  {tag:'GIAO THÔNG',title:'Đường phố đông hơn vào giờ cao điểm',text:'Các tuyến phố lớn xuất hiện nhiều xe máy, xe buýt và hàng quán. Đi lại đúng giờ giúp bạn bớt stress.',time:'09:25'},
+  {tag:'KINH TẾ',title:'Người lao động quan tâm tiết kiệm',text:'Thu nhập và chi phí sinh hoạt tiếp tục là chủ đề được bàn luận tại các gia đình trong Vietnam Life.',time:'11:40'},
+  {tag:'THỂ THAO',title:'Phong trào đá bóng khu phố nhộn nhịp',text:'Các sân bóng địa phương đông người hơn vào cuối tuần. Thể thao giúp nhân vật cải thiện sức khỏe.',time:'15:05'},
+  {tag:'CÔNG NGHỆ',title:'Điện thoại trở thành công cụ học và giải trí',text:'Ứng dụng học tập, bản đồ, tin tức và mini game ngày càng phổ biến với nhân vật đủ tuổi sử dụng điện thoại.',time:'18:20'}
+];
+function renderPhoneNews(){const el=document.getElementById('phone-news-list');if(!el)return;el.innerHTML=VIETNAM_NEWS.map(n=>`<article class="news-card"><span class="tag">${n.tag}</span><h4>${n.title}</h4><p>${n.text}</p><div class="time">Cập nhật ${n.time}</div></article>`).join('');}
 function validateBet(id){
   const bet=Number(document.getElementById(id)?.value)||0;
   if(G.age<18){showNotif('🔞 Ứng dụng này yêu cầu nhân vật 18+ trong game.','#e74c3c');return 0;}
