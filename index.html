@@ -1067,6 +1067,7 @@ const G={
   phoneLevel:1,
   phoneStats:{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}},
   studyEffort:0,
+  spouseBirthOffset:0,
 };
 
 // ===================== CONSTANTS =====================
@@ -1279,7 +1280,7 @@ function loadSavedGame(sg){
   const clean=JSON.parse(JSON.stringify(sg));
   Object.assign(G,clean);
   G.energy=Number.isFinite(G.energy)?G.energy:3; G.reputation=Number.isFinite(G.reputation)?G.reputation:0; G.bank=Number.isFinite(G.bank)?G.bank:0; ensurePhoneState();
-  G.activityHistory=Array.isArray(G.activityHistory)?G.activityHistory:[]; G.cityEvents=Array.isArray(G.cityEvents)?G.cityEvents:[]; G.weather=G.weather||VIETNAM_WEATHER[0];
+  G.activityHistory=Array.isArray(G.activityHistory)?G.activityHistory:[]; G.cityEvents=Array.isArray(G.cityEvents)?G.cityEvents:[]; G.weather=G.weather||VIETNAM_WEATHER[0]; G.studyEffort=Number(G.studyEffort)||0; G.spouseBirthOffset=Number(G.spouseBirthOffset)||0;
   showScreen('game'); showSection('main'); renderGame(); chatInit();
   showNotif(`✅ Tiếp tục: ${G.name} – ${G.age} tuổi!`,'#2ecc71');
   // Lắng nghe buff realtime từ admin
@@ -1447,14 +1448,13 @@ const JOBS=[
   {id:'boc_vac',name:'💪 Bốc Vác',income:4500000,minAge:18,eduReq:null,cat:'Phổ Thông',desc:'Bốc hàng'},
   {id:'phu_ho',name:'🏗️ Phụ Hồ',income:5500000,minAge:18,eduReq:null,cat:'Phổ Thông',desc:'Làm xây dựng'},
   {id:'farmer',name:'👨‍🌾 Nông Dân',income:4000000,minAge:18,eduReq:null,cat:'Phổ Thông',desc:'Trồng trọt'},
-  {id:'vendor',name:'🥘 Bán Hàng Rong',income:3500000,minAge:16,eduReq:null,cat:'Phổ Thông',desc:'Bán đồ ăn'},
+  {id:'vendor',name:'🥘 Bán Hàng Rong',income:3500000,minAge:18,eduReq:null,cat:'Phổ Thông',desc:'Bán đồ ăn'},
   {id:'worker',name:'🏭 Công Nhân',income:7000000,minAge:18,eduReq:null,cat:'Phổ Thông',desc:'Nhà máy'},
   {id:'security',name:'🛡️ Bảo Vệ',income:5500000,minAge:20,eduReq:null,cat:'Phổ Thông',desc:'Bảo vệ'},
   {id:'taxi',name:'🚖 Tài Xế',income:8000000,minAge:22,eduReq:null,cat:'Phổ Thông',desc:'Lái xe'},
   {id:'hair',name:'✂️ Thợ Cắt Tóc',income:7000000,minAge:18,eduReq:null,cat:'Phổ Thông',desc:'Tiệm tóc'},
   {id:'fisher',name:'🎣 Ngư Dân',income:9000000,minAge:18,eduReq:null,cat:'Phổ Thông',desc:'Biển'},
   {id:'mechanic_basic',name:'🔩 Thợ Sửa Xe',income:8000000,minAge:18,eduReq:null,cat:'Phổ Thông',desc:'Sửa xe máy'},
-  {id:'thief',name:'🥷 Trộm Cắp',income:0,minAge:16,eduReq:null,cat:'Phổ Thông',desc:'Rủi ro cao'},
   // ── NGHỀ ──
   {id:'welder',name:'⚙️ Thợ Hàn',income:12000000,minAge:18,eduReq:'trung_cap',focus:'welding',cat:'Nghề',desc:'Hàn cơ khí'},
   {id:'electrician',name:'⚡ Thợ Điện',income:13000000,minAge:18,eduReq:'trung_cap',focus:'electric',cat:'Nghề',desc:'Lắp điện'},
@@ -1717,7 +1717,7 @@ function startGame(){
   G.usedSpouseNames=[];
   if(typeof lotteryTicket!=='undefined'){lotteryTicket=null;lotteryRevealed=[false,false,false];lotteryUsed=false;lotteryStats={bought:0,won:0,totalWon:0};}
   G.birthDate=`${rand(1,28).toString().padStart(2,'0')}/${rand(1,12).toString().padStart(2,'0')}/${G.yearBorn}`;
-  G.energy=3;G.reputation=0;G.bank=0;G.phoneLevel=0;G.currentActivity=null;G.activityHistory=[];G.cityEvents=[];
+  G.energy=3;G.reputation=0;G.bank=0;G.phoneLevel=0;G.currentActivity=null;G.activityHistory=[];G.cityEvents=[];G.studyEffort=0;G.spouseBirthOffset=0;
   G.weather=VIETNAM_WEATHER[rand(0,VIETNAM_WEATHER.length-1)];
   G.cccdId=genCCCDId();
   // Lưu game state ban đầu
@@ -1751,16 +1751,16 @@ const VIETNAM_WEATHER=[
   {name:'🌫️ Sáng se lạnh',desc:'Thời tiết dễ chịu, tinh thần tốt.',mult:1.05}
 ];
 const VIETNAM_ACTIVITIES=[
-  {id:'streetfood',icon:'🍜',name:'Ăn hàng vỉa hè',desc:'Bún/phở/cơm tấm và tám chuyện.',cost:60000,energy:1,effects:{happy:7,eq:3,stress:-3},req:0},
-  {id:'market',icon:'🛵',name:'Đi chợ',desc:'Mua đồ, săn giá rẻ cho gia đình.',cost:120000,energy:1,effects:{happy:3,stress:-2},req:0},
-  {id:'football',icon:'⚽',name:'Đá bóng sân cỏ',desc:'Tăng sức khỏe, giảm căng thẳng.',cost:30000,energy:1,effects:{hp:4,happy:6,stress:-5},req:0},
-  {id:'study',icon:'📚',name:'Học thêm / tự học',desc:'IQ đến từ thiên phú + nỗ lực học tập.',cost:0,energy:1,effects:{eq:3,stress:2,happy:1},req:6},
-  {id:'volunteer',icon:'🤝',name:'Làm thiện nguyện',desc:'Giúp cộng đồng và xây danh tiếng.',cost:10000,energy:1,effects:{eq:6,happy:4,stress:-2,reputation:3},req:8},
+  {id:'streetfood',icon:'🍜',name:'Ăn hàng vỉa hè',desc:'Bún/phở/cơm tấm và tám chuyện.',cost:60000,energy:1,effects:{happy:7,eq:3,stress:-3},req:6},
+  {id:'market',icon:'🛵',name:'Đi chợ',desc:'Mua đồ, săn giá rẻ cho gia đình.',cost:120000,energy:1,effects:{happy:3,stress:-2},req:10},
+  {id:'football',icon:'⚽',name:'Đá bóng sân cỏ',desc:'Tăng sức khỏe, giảm căng thẳng.',cost:30000,energy:1,effects:{hp:4,happy:6,stress:-5},req:6},
+  {id:'study',icon:'📚',name:'Học thêm / tự học',desc:'IQ đến từ thiên phú + nỗ lực học tập.',cost:0,energy:1,effects:{eq:3,stress:2,happy:1,studyEffort:2},req:6},
+  {id:'volunteer',icon:'🤝',name:'Làm thiện nguyện',desc:'Giúp cộng đồng và xây danh tiếng.',cost:10000,energy:1,effects:{eq:6,happy:4,stress:-2,reputation:3},req:14},
   {id:'delivery',icon:'🛵',name:'Chạy giao hàng',desc:'Kiếm thêm tiền, đổi lại tốn sức.',cost:0,energy:1,effects:{money:160000,hp:-2,stress:3,reputation:1},req:18},
-  {id:'gig',icon:'💻',name:'Làm freelance',desc:'Dùng IQ để kiếm thu nhập online.',cost:0,energy:1,effects:{money:Math.max(180000,Math.round((G.iq||100)*2200)),iq:2,stress:4,reputation:1},req:16},
-  {id:'hospital',icon:'🏥',name:'Khám sức khỏe',desc:'Tốn tiền nhưng phục hồi sức khỏe.',cost:250000,energy:1,effects:{hp:12,stress:-7,happy:2},req:12},
-  {id:'coffee',icon:'☕',name:'Cà phê sáng',desc:'Một ly cà phê và vài câu chuyện đời.',cost:45000,energy:1,effects:{happy:5,eq:2,stress:-4},req:10},
-  {id:'travel',icon:'🚌',name:'Du lịch ngắn ngày',desc:'Đổi gió ở một thành phố khác.',cost:450000,energy:2,effects:{happy:14,eq:5,stress:-10,reputation:1},req:18}
+  {id:'gig',icon:'💻',name:'Làm freelance',desc:'Dùng kỹ năng để kiếm thu nhập online.',cost:0,energy:1,effects:{money:Math.max(180000,Math.round((G.iq||100)*2200)),stress:4,reputation:1},req:16},
+  {id:'hospital',icon:'🏥',name:'Khám sức khỏe',desc:'Tốn tiền nhưng phục hồi sức khỏe.',cost:250000,energy:1,effects:{hp:12,stress:-7,happy:2},req:15},
+  {id:'coffee',icon:'☕',name:'Cà phê sáng',desc:'Một ly cà phê và vài câu chuyện đời.',cost:45000,energy:1,effects:{happy:5,eq:2,stress:-4},req:15},
+  {id:'travel',icon:'🚌',name:'Du lịch ngắn ngày',desc:'Đổi gió ở một thành phố khác.',cost:450000,energy:2,effects:{happy:14,eq:5,stress:-10,reputation:1},req:15}
 ];
 
 function cityWeather(){return G.weather||VIETNAM_WEATHER[0];}
@@ -1773,6 +1773,7 @@ function cityCanDo(a){
 }
 function doCityActivity(id){
   if(!G.alive)return;
+  if(G.age<6){showNotif('👶 Trẻ dưới 6 tuổi chưa tự quyết định các hoạt động này trong game.','#e74c3c');return;}
   const a=VIETNAM_ACTIVITIES.find(x=>x.id===id); if(!a)return;
   const c=cityCanDo(a);
   if(!c.ok){showNotif(c.reason,'#e74c3c');return;}
@@ -1812,12 +1813,14 @@ function doCityActivity(id){
   renderCity();renderGame();saveGameState();
 }
 function cityBankDeposit(){
+  if(!requireAge(18,'Từ 18 tuổi mới tự quản lý tài khoản tiết kiệm trong game.'))return;
   const amount=Number(document.getElementById('city-bank-deposit')?.value)||0;
   if(amount<=0||amount>G.money){showNotif('❌ Số tiền gửi không hợp lệ!','#e74c3c');return;}
   G.money-=amount;G.bank=(G.bank||0)+amount;
   addLog(G.age,`🏦 Gửi tiết kiệm ${fmt(amount)} VNĐ`,'good');renderCity();renderGame();saveGameState();
 }
 function cityBankWithdraw(){
+  if(!requireAge(18,'Từ 18 tuổi mới tự quản lý tài khoản tiết kiệm trong game.'))return;
   const amount=Number(document.getElementById('city-bank-withdraw')?.value)||0;
   if(amount<=0||amount>(G.bank||0)){showNotif('❌ Số tiền rút không hợp lệ!','#e74c3c');return;}
   G.bank-=amount;G.money+=amount;
@@ -2102,8 +2105,11 @@ function processJobSeason(){
     const ev=CRYPTO_EVENTS[rand(0,CRYPTO_EVENTS.length-1)];
     applyEvent(ev);
   } else if(G.job==='study_child'){
-    G.iq=clamp(G.iq+4,0,getIQMax());G.eq=clamp(G.eq+4,0,getEQMax());
-    G.seasonEvents.push({text:'📚 Học chăm chỉ +4 IQ +4 EQ',type:'good'});
+    // Thời gian trôi qua không tự làm IQ tăng. Trẻ chỉ tích lũy nỗ lực học tập;
+    // IQ được cải thiện khi thực sự học và hoàn thành quá trình giáo dục.
+    G.studyEffort=clamp((G.studyEffort||0)+1,0,100);
+    G.eq=clamp(G.eq+1,0,getEQMax());
+    G.seasonEvents.push({text:'📚 Đi học bình thường: +1 EQ • tích lũy nỗ lực, không cộng IQ tự động',type:'neutral'});
   } else if(job.income>0){
     // Quarterly income
     let eduMult=1.0;
@@ -2119,7 +2125,10 @@ function processJobSeason(){
     addLog(G.age,`💰 ${job.name}: +${fmt(income)} VNĐ (${curSeason().name})`,'good');
     G.seasonEvents.push({text:`💰 ${job.name}: +${fmt(income)} VNĐ`,type:'good'});
     if(['doctor','nurse'].includes(G.job))G.hp=clamp(G.hp+0.5,0,HP_MAX);
-    if(['researcher','lecturer'].includes(G.job))G.iq=clamp(G.iq+1,0,getIQMax());
+    if(['researcher','lecturer'].includes(G.job)){
+      G.studyEffort=clamp((G.studyEffort||0)+1,0,100);
+      G.eq=clamp(G.eq+1,0,getEQMax());
+    }
     if(['singer','youtuber','streamer'].includes(G.job))G.eq=clamp(G.eq+1,0,getEQMax());
     if(['doctor','lawyer','ceo','politician'].includes(G.job))G.stress=clamp(G.stress+3,0,STRESS_MAX);
   }
@@ -2500,7 +2509,7 @@ function renderFarm(){
       <div class="farm-name">${fi.name}</div>
       <div class="farm-count">${c}</div>
       <div style="font-size:0.65rem;color:#aaa;">${c>0?'~'+fmt(inc)+'/mùa':fmt(fi.buyCost)}</div>
-      <button class="btn btn-green btn-sm" style="margin-top:3px;padding:3px 6px;font-size:0.7rem;" onclick="buyFarm('${fi.id}')">+1</button>
+      <button class="btn btn-green btn-sm" style="margin-top:3px;padding:3px 6px;font-size:0.7rem;" onclick="buyFarm('${fi.id}')" ${G.age<18?'disabled':''}>+1</button>
       ${sick?`<button class="btn btn-red btn-sm" style="margin-top:2px;padding:3px 6px;font-size:0.66rem;" onclick="treatSick('${fi.id}')">💊 3tr</button>`:''}
     </div>`;
   }).join('');
@@ -2510,6 +2519,7 @@ function renderFarm(){
 }
 
 function buyFarm(id){
+  if(!requireAge(18,'Từ 18 tuổi mới có thể tự đầu tư/mua tài sản nông trại.'))return;
   const fi=FARM_ITEMS.find(f=>f.id===id);
   if((G.farm[id]||0)>=fi.maxOwn){showNotif('⚠️ Đã đạt giới hạn!','#e74c3c');return;}
   if(G.money<fi.buyCost){showNotif('💸 Không đủ tiền!','#e74c3c');return;}
@@ -2519,6 +2529,7 @@ function buyFarm(id){
 }
 
 function treatSick(id){
+  if(!requireAge(18,'Từ 18 tuổi mới tự quản lý chi phí điều trị nông trại.'))return;
   if(G.money<3000000){showNotif('💸 Không đủ!','#e74c3c');return;}
   G.money-=3000000;G.farmSick[id]=false;
   showNotif(`💊 Chữa ${FARM_ITEMS.find(f=>f.id===id)?.name}!`,'#2ecc71');
@@ -2527,19 +2538,47 @@ function treatSick(id){
 }
 
 function buyVaccine(){
+  if(!requireAge(18,'Từ 18 tuổi mới tự mua vật tư nông trại.'))return;
   if(G.money<2000000){showNotif('💸 Không đủ!','#e74c3c');return;}
   G.money-=2000000;G.hasVaccine=true;showNotif('💉 Vaccine phòng dịch!','#3498db');renderFarm();
 }
 
 function buyPesticide(){
+  if(!requireAge(18,'Từ 18 tuổi mới tự mua vật tư nông trại.'))return;
   if(G.money<1000000){showNotif('💸 Không đủ!','#e74c3c');return;}
   G.money-=1000000;G.hasPesticide=true;showNotif('🌿 Thuốc sâu!','#2ecc71');renderFarm();
 }
 
+// ===== AGE REALISM HELPERS =====
+function ageStage(age){
+  age=Number(age)||0;
+  if(age<6)return {id:'baby',label:'👶 Trẻ nhỏ'};
+  if(age<11)return {id:'primary',label:'🧒 Tiểu học'};
+  if(age<15)return {id:'teen',label:'🎒 THCS'};
+  if(age<18)return {id:'olderTeen',label:'🧑‍🎓 THPT'};
+  if(age<22)return {id:'adultYoung',label:'🧑 Người trưởng thành'};
+  return {id:'adult',label:'👨 Người lớn'};
+}
+function requireAge(minAge,msg){
+  if(Number(G.age||0)<minAge){showNotif(`🔒 ${msg}`,'#e74c3c');return false;}
+  return true;
+}
+
 // ===================== SHOP =====================
 function renderShop(){
-  document.getElementById('shop-money').textContent=fmt(G.money);
-  document.getElementById('shop-grid').innerHTML=SHOP_ITEMS.map(i=>`
+  const moneyEl=document.getElementById('shop-money');
+  if(moneyEl)moneyEl.textContent=fmt(G.money);
+  const grid=document.getElementById('shop-grid');
+  if(!grid)return;
+  if(Number(G.age||0)<15){
+    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:22px 12px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08);border-radius:12px;">
+      <div style="font-size:2.5rem;margin-bottom:6px;">🧒</div>
+      <div style="font-weight:800;color:#fff;font-size:.95rem;">Chưa đến tuổi tự mua sắm</div>
+      <div style="font-size:.72rem;color:#9ca3af;line-height:1.5;margin-top:5px;">0–14 tuổi: chi tiêu cá nhân do gia đình/người giám hộ quản lý. Từ 15 tuổi mới mở Cửa Hàng Cá Nhân.</div>
+    </div>`;
+    return;
+  }
+  grid.innerHTML=SHOP_ITEMS.map(i=>`
     <div class="shop-item" onclick="buyItem('${i.id}')">
       <div class="item-icon">${i.icon}</div>
       <div class="item-name">${i.name}</div>
@@ -2549,21 +2588,19 @@ function renderShop(){
 }
 
 function buyItem(id){
+  if(!requireAge(15,'Từ 15 tuổi mới được tự mua đồ trong cửa hàng cá nhân.'))return;
   const i=SHOP_ITEMS.find(x=>x.id===id);
+  if(!i)return;
   if(G.money<i.price){showNotif('💸 Không đủ!','#e74c3c');return;}
   G.money-=i.price;
+  // Không có vật phẩm nào mua được IQ — IQ chỉ đến từ thiên phú và nỗ lực học tập.
   if(i.hp)G.hp=clamp(G.hp+i.hp,0,HP_MAX);
-  if(i.iq){
-    // Legacy items may exist in old saves, but money can never directly purchase IQ.
-    addLog(G.age,`📚 ${i.name}: không thể mua IQ — IQ chỉ tăng nhờ thiên phú và nỗ lực.`,'edu');
-  }
   if(i.eq)G.eq=clamp(G.eq+i.eq,0,getEQMax());
   if(i.happy)G.happy=clamp(G.happy+i.happy,0,HAPPY_MAX);
   if(i.stress)G.stress=clamp(G.stress+i.stress,0,STRESS_MAX);
   showNotif(`✅ ${i.icon} ${i.name}: ${i.desc}`,'#2ecc71');
   addLog(G.age,`🛒 ${i.name}: ${i.desc}`,'good');
-  document.getElementById('shop-money').textContent=fmt(G.money);
-  renderGame();
+  renderShop();renderGame();saveGameState();
 }
 
 // ===================== LIFE SECTION =====================
@@ -2591,10 +2628,13 @@ function renderLife(){
     :`<div style="font-size:0.8rem;color:#aaa;margin-bottom:6px;">Độc thân. <a href="#" onclick="showSection('marriage');return false;" style="color:var(--gold);">→ Tìm bạn đời</a></div>`;
 
   let pHTML='<div style="font-weight:700;color:var(--gold);margin:7px 0 5px;">🏠 Nhà Ở</div>';
+  if(G.age<18){
+    pHTML+=`<div style="background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:9px;font-size:.72rem;color:#9ca3af;margin-bottom:6px;">🔒 0–17 tuổi: nhà ở do gia đình quản lý. Từ 18 tuổi mới mở chức năng tự thuê/mua nhà.</div>`;
+  }
   pHTML+=`<div style="font-size:0.78rem;color:#aaa;margin-bottom:5px;">Đang ở: ${G.house?G.house.icon+' '+G.house.name:'🏚️ Chưa có'}</div>`;
   HOUSES.forEach(h=>{
     const own=G.house?.id===h.id;
-    const can=!own&&(h.cost===0||G.money>=h.cost);
+    const can=!own&&G.age>=18&&(h.cost===0||G.money>=h.cost);
     pHTML+=`<div class="property-item">
       <div><span>${h.icon}</span> <strong>${h.name}</strong><br><span style="font-size:0.7rem;color:#aaa;">${h.cost>0?fmt(h.cost)+' VNĐ':'Thuê '+fmt(h.costYear)+'/năm'} | +${h.happy} HP</span></div>
       <button class="btn ${can?'btn-blue':'btn-gray'} btn-sm" onclick="buyHouse('${h.id}')" ${!can?'disabled':''}>${own?'✓ Đang ở':'Mua'}</button>
@@ -2614,17 +2654,19 @@ function renderLife(){
 }
 
 function buyHouse(id){
+  if(!requireAge(18,'Từ 18 tuổi mới có thể tự thuê/mua nhà trong game.'))return;
   const h=HOUSES.find(x=>x.id===id);
   if(!h)return;
   if(h.cost>0&&G.money<h.cost){showNotif('💸 Không đủ!','#e74c3c');return;}
   if(h.cost>0)G.money-=h.cost;
   G.house=h;G.happy=clamp(G.happy+h.happy,0,HAPPY_MAX);
-  showNotif(`🏠 Mua ${h.name}!`,'#3498db');
-  addLog(G.age,`🏠 Mua ${h.name}${h.cost>0?': -'+fmt(h.cost)+' VNĐ':''}}`,'good');
-  renderLife();renderGame();
+  showNotif(`🏠 ${h.cost?'Mua':'Thuê'} ${h.name}!`,'#3498db');
+  addLog(G.age,`🏠 ${h.cost?'Mua':'Thuê'} ${h.name}${h.cost>0?': -'+fmt(h.cost)+' VNĐ':''}`,'good');
+  renderLife();renderGame();saveGameState();
 }
 
 function buyCar(id){
+  if(!requireAge(18,'Từ 18 tuổi mới có thể tự mua phương tiện.'))return;
   const c=CARS.find(x=>x.id===id);
   if(!c)return;
   if(G.money<c.cost){showNotif('💸 Không đủ!','#e74c3c');return;}
@@ -2643,18 +2685,19 @@ function renderMarriage(){
 
   if(!G.married){
     // Chưa kết hôn
-    const canMarry=age>=18&&G.eq>=100;
+    const legalAge=G.gender==='Nam'?20:18;
+    const canMarry=age>=legalAge&&G.eq>=100;
     const eqNeed=Math.max(0,100-G.eq);
     el.innerHTML=`
       <div style="text-align:center;padding:14px 0;">
         <div style="font-size:3rem;margin-bottom:8px;">💔</div>
         <div style="font-size:0.95rem;font-weight:700;color:var(--cream);margin-bottom:4px;">Bạn đang độc thân</div>
-        <div style="font-size:0.78rem;color:#aaa;margin-bottom:14px;">Điều kiện kết hôn: 18+ tuổi & EQ ≥ 100<br>EQ hiện tại: <strong style="color:${G.eq>=100?'#2ecc71':'#e74c3c'};">${G.eq}</strong>${eqNeed>0?' (cần thêm '+eqNeed+')':''}</div>
+        <div style="font-size:0.78rem;color:#aaa;margin-bottom:14px;">Tuổi kết hôn trong game: ${legalAge}+ (${G.gender==='Nam'?'nam':'nữ'}) & EQ ≥ 100<br>EQ hiện tại: <strong style="color:${G.eq>=100?'#2ecc71':'#e74c3c'};">${G.eq}</strong>${eqNeed>0?' (cần thêm '+eqNeed+')':''}</div>
       </div>
       <button class="btn btn-${canMarry?'red':'gray'} btn-full" onclick="tryMarry()" ${!canMarry?'disabled':''}>
         💑 ${canMarry?'Tìm Bạn Đời & Kết Hôn':'Chưa đủ điều kiện'}
       </button>
-      <div style="font-size:0.72rem;color:#666;text-align:center;margin-top:6px;">Hoặc chờ ngẫu nhiên (EQ≥150, tuổi 22-42)</div>`;
+      <div style="font-size:0.72rem;color:#666;text-align:center;margin-top:6px;">💡 Không có cưới tự động. Chỉ kết hôn khi chính người chơi chọn.</div>`;
   } else {
     // Đã kết hôn
     const spouseGender=G.gender==='Nam'?'👰 Vợ':'🤵 Chồng';
@@ -2687,7 +2730,8 @@ function renderMarriage(){
 }
 
 function tryMarry(){
-  if(G.age<18){showNotif('⚠️ Phải 18+ mới kết hôn!','#e74c3c');return;}
+  const legalAge=G.gender==='Nam'?20:18;
+  if(G.age<legalAge){showNotif(`⚠️ Nhân vật phải đủ ${legalAge} tuổi mới kết hôn!`,'#e74c3c');return;}
   if(G.eq<100){showNotif('⚠️ EQ chưa đủ 100!','#e74c3c');return;}
   if(G.married){showNotif('💑 Bạn đã kết hôn rồi!','#f39c12');return;}
   const MALE=['Hùng','Đức','Nam','Tuấn','Minh','Khoa','Phúc','Hải','Long','Dũng','Tú','Bảo','Thành','Quân','Hiếu'];
@@ -2695,7 +2739,7 @@ function tryMarry(){
   const pool=(G.gender==='Nam'?FEMALE:MALE).filter(n=>!G.usedSpouseNames.includes(n));
   const name=(pool.length?pool:FEMALE)[rand(0,((pool.length?pool:FEMALE).length)-1)];
   G.usedSpouseNames.push(name);
-  G.married=true;G.spouse=name;
+  G.married=true;G.spouse=name;G.spouseBirthOffset=rand(-3,3);
   G.happy=clamp(G.happy+20,0,HAPPY_MAX);G.eq=clamp(G.eq+10,0,getEQMax());
   G.money=clamp(G.money-30000000,0,Infinity); // Chi phí đám cưới 30tr
   addLog(G.age,`💑 Kết hôn với ${G.spouse}! Chi phí đám cưới: -30tr`,'good');
@@ -2721,7 +2765,7 @@ Mất 50tr tiền ly hôn và -20 Hạnh Phúc`))return;
   addLog(G.age,`💔 Ly hôn với ${G.spouse}. Phí ly hôn: -50tr`,'bad');
   G.money=clamp(G.money-50000000,0,Infinity);
   G.happy=clamp(G.happy-20,0,HAPPY_MAX);G.eq=clamp(G.eq-15,0,getEQMax());
-  G.married=false;G.spouse=null;
+  G.married=false;G.spouse=null;G.spouseBirthOffset=0;
   showNotif('💔 Đã ly hôn...','#e74c3c');
   renderMarriage();renderGame();renderLife();
 }
@@ -2742,7 +2786,7 @@ function renderHoKhau(){
   const gIcon=G.gender==='Nam'?'👦':'👧';
   const members=[
     {role:'Chủ hộ',name:`${gIcon} ${G.name}`,dob:`${year}`,gender:G.gender,rel:'Chủ hộ'},
-    ...(G.married&&G.spouse?[{role:G.gender==='Nam'?'Vợ':'Chồng',name:(G.gender==='Nam'?'👧':'👦')+' '+G.spouse,dob:`${year+rand(-3,3)}`,gender:G.gender==='Nam'?'Nữ':'Nam',rel:G.gender==='Nam'?'Vợ':'Chồng'}]:[]),
+    ...(G.married&&G.spouse?[{role:G.gender==='Nam'?'Vợ':'Chồng',name:(G.gender==='Nam'?'👧':'👦')+' '+G.spouse,dob:`${year + (G.spouseBirthOffset||0)}`,gender:G.gender==='Nam'?'Nữ':'Nam',rel:G.gender==='Nam'?'Vợ':'Chồng'}]:[]),
     ...Array.from({length:G.children||0},(_,i)=>({role:'Con',name:`👶 Con ${i+1}`,dob:`${year+G.age-(G.age-25)+i*2}`,gender:i%2===0?'Nam':'Nữ',rel:'Con'})),
   ];
   el.innerHTML=`
@@ -3072,6 +3116,11 @@ function renderPhone(){
   const pl=document.getElementById('phone-level-value'); if(pl)pl.textContent=G.phoneLevel;
   const ph=document.getElementById('phone-hometown'); if(ph)ph.textContent=G.hometown||'Việt Nam';
   const clock=document.getElementById('phone-clock'); if(clock)clock.textContent=new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
+  // 15–17 tuổi: điện thoại cơ bản; app cờ bạc vẫn bị khóa ở 18+.
+  ['xocdia','cuabau','taixiu'].forEach(k=>{
+    const b=document.querySelector(`button.phone-app[onclick=\"phoneOpen('${k}')\"]`);
+    if(b){b.style.opacity=age<18?'0.45':'1'; b.title=age<18?'Mở khóa ở tuổi 18':'Đã mở khóa';}
+  });
 }
 function phoneSpend(amount,desc){
   if(amount<=0||G.money<amount){showNotif('💸 Không đủ tiền!','#e74c3c');return false;}
@@ -3361,7 +3410,7 @@ function setMaxBuy(id,price){
 function restartGame(){
   stopAdminBuffListener();
   clearSaveState();
-  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{},birthDate:'',energy:3,reputation:0,bank:0,phoneLevel:1,currentActivity:null,activityHistory:[],cityEvents:[],weather:null,phoneLevel:1,phoneStats:{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}},studyEffort:0});
+  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{},birthDate:'',energy:3,reputation:0,bank:0,phoneLevel:1,currentActivity:null,activityHistory:[],cityEvents:[],weather:null,phoneLevel:1,phoneStats:{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}},studyEffort:0,spouseBirthOffset:0});
   document.getElementById('player-name').value='';
   showScreen('intro'); updateLoginUserBar();
 }
@@ -3687,6 +3736,7 @@ function renderLotterySection(){
 
 function buyLotteryTicket(){
   if(!G || !G.alive){ showNotif('⚠️ Không thể mua vé!','#e74c3c'); return; }
+  if(!requireAge(18,'Xổ số chỉ mở cho nhân vật từ 18 tuổi trong game.'))return;
   if(G.money < 100000){ showNotif('💸 Cần ít nhất 100.000 VNĐ!','#e74c3c'); return; }
   if(lotteryTicket && !lotteryUsed){ showNotif('⚠️ Hãy cào hết vé hiện tại trước!','#f39c12'); return; }
   G.money -= 100000;
