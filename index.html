@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🇻🇳 Vietnam Life v9 – Real Vietnam Update – by PHUCRAM</title>
+<title>🇻🇳 Vietnam Life v7 – by PHUCRAM</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics-compat.js"></script>
@@ -175,27 +175,6 @@ select option{background:var(--brown);}
 .season-dot.filled-autumn{background:#f39c12;}
 .season-dot.filled-winter{background:#3498db;}
 
-
-/* ===== VIETNAM REAL LIFE UPDATE ===== */
-.city-hero{background:linear-gradient(135deg,rgba(26,107,46,.35),rgba(26,74,138,.25),rgba(240,165,0,.12));border:2px solid #2ecc71;border-radius:14px;padding:12px;margin-bottom:9px;position:relative;overflow:hidden;}
-.city-hero::after{content:'🇻🇳';position:absolute;right:10px;top:4px;font-size:4rem;opacity:.08;transform:rotate(-8deg);}
-.life-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:4px 8px;font-size:.7rem;margin:2px;}
-.city-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:8px 0;}
-.city-stat{background:rgba(0,0,0,.32);border-radius:9px;padding:7px;text-align:center;border:1px solid rgba(255,255,255,.05);}
-.city-stat .v{font-size:1.05rem;font-weight:800;color:var(--gold2);}
-.city-stat .l{font-size:.62rem;color:#aaa;}
-.activity-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;}
-.activity-card{background:linear-gradient(145deg,rgba(255,255,255,.05),rgba(0,0,0,.28));border:1px solid rgba(240,165,0,.22);border-radius:10px;padding:8px;cursor:pointer;transition:.15s;min-height:82px;}
-.activity-card:hover{border-color:var(--gold);transform:translateY(-1px);background:rgba(240,165,0,.08);}
-.activity-card.disabled{opacity:.38;cursor:not-allowed;transform:none;}
-.activity-card .ico{font-size:1.5rem}.activity-card .nm{font-size:.8rem;font-weight:800;color:var(--cream)}.activity-card .ds{font-size:.63rem;color:#999;line-height:1.35;margin-top:2px}.activity-card .fx{font-size:.68rem;color:var(--gold);margin-top:3px;}
-.activity-history{max-height:180px;overflow-y:auto;background:rgba(0,0,0,.25);border-radius:8px;padding:7px;font-size:.72rem;}
-.vietnam-event{border-left:3px solid #f0a500;padding:7px 9px;margin:4px 0;background:rgba(240,165,0,.06);border-radius:0 8px 8px 0;font-size:.75rem;}
-.badge-rep{background:rgba(52,152,219,.16);color:#5dade2;border:1px solid rgba(52,152,219,.35);padding:3px 8px;border-radius:20px;font-size:.68rem;font-weight:800;}
-.badge-energy{background:rgba(46,204,113,.14);color:#58d68d;border:1px solid rgba(46,204,113,.3);padding:3px 8px;border-radius:20px;font-size:.68rem;font-weight:800;}
-.bank-card{background:linear-gradient(135deg,rgba(26,74,138,.25),rgba(52,152,219,.08));border:1px solid rgba(52,152,219,.35);border-radius:10px;padding:9px;margin-top:7px;}
-@media(max-width:480px){.activity-grid{grid-template-columns:1fr 1fr}.city-stat-grid{grid-template-columns:repeat(3,1fr)}}
-
 /* ===== MOBILE OPTIMIZATIONS ===== */
 @media(max-width:480px){
   #app{padding:4px;}
@@ -331,40 +310,13 @@ select option{background:var(--brown);}
 @media(min-width:768px){
   #chat-float-btn{display:none;}
 }
-
-/* ===== PHONE SYSTEM ===== */
-.phone-wrap{background:linear-gradient(180deg,#0b1220,#05070c);border:3px solid #222;border-radius:28px;padding:10px;max-width:390px;margin:0 auto;box-shadow:0 18px 45px rgba(0,0,0,.65);position:relative;overflow:hidden;}
-.phone-notch{width:120px;height:22px;background:#000;border-radius:0 0 16px 16px;margin:0 auto 6px;}
-.phone-screen{background:linear-gradient(180deg,#101b31,#111827);border-radius:20px;padding:10px;min-height:600px;position:relative;overflow:hidden;}
-.phone-status{display:flex;justify-content:space-between;font-size:.63rem;color:#e5e7eb;padding:1px 4px 8px;}
-.phone-home{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;padding:12px 5px;}
-.phone-app{border:0;background:transparent;color:white;text-align:center;cursor:pointer;padding:4px 2px;border-radius:12px;font-family:'Baloo 2',cursive;transition:transform .15s,background .15s;}
-.phone-app:hover{transform:translateY(-2px);background:rgba(255,255,255,.07);}
-.phone-app .ico{width:52px;height:52px;margin:0 auto 4px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.65rem;box-shadow:0 6px 16px rgba(0,0,0,.25);}
-.phone-app .nm{font-size:.65rem;line-height:1.1;color:#f3f4f6;}
-.phone-app .badge{position:absolute;margin:-58px 0 0 27px;background:#ef4444;color:#fff;border-radius:999px;min-width:17px;height:17px;font-size:.55rem;display:flex;align-items:center;justify-content:center;font-weight:800;}
-.phone-dock{position:absolute;left:10px;right:10px;bottom:10px;background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:18px;display:grid;grid-template-columns:repeat(4,1fr);padding:7px;gap:4px;}
-.phone-dock button{border:0;background:transparent;color:white;font-size:1.25rem;cursor:pointer;}
-.phone-page{display:none;height:100%;}.phone-page.active{display:block;}
-.phone-back{display:flex;align-items:center;gap:7px;margin-bottom:8px;}.phone-back button{border:0;background:rgba(255,255,255,.08);color:#fff;border-radius:9px;padding:5px 9px;cursor:pointer;}.phone-title{font-weight:800;color:#fff;font-size:.9rem;}
-.phone-balance{background:linear-gradient(135deg,#162a46,#0d1a2d);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;margin-bottom:8px;text-align:center;}
-.phone-balance .v{font-size:1.15rem;color:#ffd54a;font-weight:800;}
-.phone-balance .s{font-size:.62rem;color:#94a3b8;}
-.phone-action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
-.phone-action{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:9px 5px;text-align:center;color:white;cursor:pointer;font-family:'Baloo 2',cursive;}
-.phone-action:hover{background:rgba(255,255,255,.1);}.phone-action .i{font-size:1.4rem;}.phone-action .t{font-size:.64rem;margin-top:2px;}
-.phone-bet{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:9px;margin-top:8px;}
-.phone-bet input,.phone-bet select{margin:0 0 6px;background:#0b1220;border-color:#334155;color:#fff;}
-.dice-result{min-height:95px;border-radius:14px;background:radial-gradient(circle,#263855,#111827);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:1.15rem;font-weight:800;margin:8px 0;}
-.dice-result .big{font-size:2.2rem;letter-spacing:6px;}.phone-note{font-size:.62rem;color:#94a3b8;text-align:center;margin-top:7px;line-height:1.4;}
-
 </style>
 </head>
 <body>
 <div id="app">
 <div class="game-logo">
   <h1>🇻🇳 VIETNAM LIFE</h1>
-  <p>by PHUCRAM • v9.0 – Real Vietnam Life • Thành Phố • Tài Chính • Hoạt Động</p>
+  <p>by PHUCRAM • v3.0 – Mùa Vụ • CCCD • Cốt Truyện Thực Tế</p>
 </div>
 <div id="notif"></div>
 
@@ -380,7 +332,7 @@ select option{background:var(--brown);}
   </div>
 </div>
 <!-- DONATE FLOATING BUTTON -->
-<button onclick="openDonate()" style="position:fixed;bottom:82px;right:16px;z-index:500;background:linear-gradient(135deg,#e74c3c,#c0392b);border:none;border-radius:50px;padding:10px 16px;color:white;font-family:'Baloo 2',cursive;font-weight:700;font-size:0.82rem;cursor:pointer;box-shadow:0 4px 15px rgba(192,57,43,0.6);animation:pulse 2s ease-in-out infinite;">❤️ Donate PHUCRAM</button>
+<button onclick="openDonate()" style="position:fixed;bottom:16px;right:16px;z-index:500;background:linear-gradient(135deg,#e74c3c,#c0392b);border:none;border-radius:50px;padding:10px 16px;color:white;font-family:'Baloo 2',cursive;font-weight:700;font-size:0.82rem;cursor:pointer;box-shadow:0 4px 15px rgba(192,57,43,0.6);animation:pulse 2s ease-in-out infinite;">❤️ Donate PHUCRAM</button>
 
 
 <!-- SCHOOL CHOICE MODAL -->
@@ -402,7 +354,7 @@ select option{background:var(--brown);}
   <div class="card login-card">
     <div class="login-logo">🌟</div>
     <h2 style="margin-bottom:6px;">Đăng Nhập</h2>
-    <p style="font-size:0.82rem;color:#aaa;margin-bottom:24px;">Dùng tài khoản Google để lưu điểm & kết bạn</p>
+    <p style="font-size:0.82rem;color:#aaa;margin-bottom:24px;">Dùng tài khoản Google để lưu tiến trình • Mã KB để kết bạn</p>
 
     <!-- Google Button -->
     <div id="login-google-area">
@@ -455,12 +407,11 @@ select option{background:var(--brown);}
     <button class="btn btn-gold btn-full" onclick="startGame()" style="margin-top:8px;">🎮 Bắt Đầu Cuộc Đời</button>
   </div>
   <div class="card" style="font-size:0.78rem;color:#aaa;">
-    <h2>📖 Hướng Dẫn v9.0</h2>
+    <h2>📖 Hướng Dẫn v4.0</h2>
     <p style="margin-bottom:4px;">• Mỗi lần bấm <strong style="color:var(--gold)">Sống Tiếp</strong> = 1 mùa trôi qua (4 mùa = 1 tuổi)</p>
     <p style="margin-bottom:4px;">• Đến tuổi đến trường → chọn trường cụ thể (tên thật)</p>
     <p style="margin-bottom:4px;">• 🧬 Tố Chất Bẩm Sinh: Thiên Tài / Học Giỏi / Bình Thường / Học Yếu</p>
     <p style="margin-bottom:4px;">• 📈 Chứng khoán: Mua/Bán cổ phiếu FPT, VIC, HPG... theo giá thị trường</p>
-    <p style="margin-bottom:4px;">📱 Điện thoại: nhắn tin, ngân hàng, đặt đồ ăn, bản đồ, mini game và các app giải trí 18+ dùng tiền ảo.</p>
     <p>• 💑 Tên vợ/chồng được random không trùng lặp • Căn Cước Công Dân (CCCD)</p>
   </div>
 </div>
@@ -495,13 +446,13 @@ select option{background:var(--brown);}
     <button onclick="showSection('edu')" id="nav-edu">🎓 Học</button>
     <button onclick="showSection('job')" id="nav-job">💼 Nghề</button>
     <button onclick="showSection('farm')" id="nav-farm">🌾 Nông</button>
-    <button onclick="showSection('city')" id="nav-city">🌆 Thành Phố</button>
     <button onclick="showSection('shop')" id="nav-shop">🛒 Mua</button>
     <button onclick="showSection('life')" id="nav-life">🏡 Đời</button>
     <button onclick="showSection('marriage')" id="nav-marriage">💑 Hôn Nhân</button>
     <button onclick="showSection('hokhau')" id="nav-hokhau">📋 Hộ Khẩu</button>
     <button onclick="showSection('stock')" id="nav-stock">📈 CK</button>
-    <button onclick="showSection('phone')" id="nav-phone">📱 Điện Thoại</button>
+    <button onclick="showSection('lottery')" id="nav-lottery">🎫 Xổ Số</button>
+    <button onclick="showSection('phone')" id="nav-phone">📱 Máy</button>
     <button onclick="showSection('lb')" id="nav-lb">🏆 BXH</button>
   </div>
 
@@ -584,38 +535,6 @@ select option{background:var(--brown);}
     </div>
   </div>
 
-
-  <!-- REAL VIETNAM CITY LIFE -->
-  <div id="section-city" class="section">
-    <div class="city-hero">
-      <div style="font-size:1.15rem;font-weight:800;color:#2ecc71;">🌆 NHỊP SỐNG VIỆT NAM</div>
-      <div id="city-weather" style="font-size:.76rem;color:#ddd;margin-top:2px;"></div>
-      <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px;">
-        <span class="badge-energy" id="city-energy"></span>
-        <span class="badge-rep" id="city-rep"></span>
-        <span class="life-chip">📍 <span id="city-hometown"></span></span>
-      </div>
-    </div>
-    <div class="card">
-      <h2>🧭 Một Ngày Của Bạn</h2>
-      <div style="font-size:.74rem;color:#aaa;text-align:center;">Mỗi mùa có <b style="color:var(--gold);">3 năng lượng</b>. Chọn việc bạn muốn làm trước khi Sống Tiếp.</div>
-      <div id="city-stats" class="city-stat-grid"></div>
-      <div id="city-activities" class="activity-grid"></div>
-      <div class="bank-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-weight:800;color:#5dade2;">🏦 Tài Chính Cá Nhân</span>
-          <span style="font-size:.7rem;color:#aaa;">Ngân hàng an toàn hơn giữ tiền mặt</span>
-        </div>
-        <div id="city-bank"></div>
-      </div>
-    </div>
-    <div class="card">
-      <h2>📰 Chuyện Xóm & Chuyện Phố</h2>
-      <div id="city-events"></div>
-      <div class="activity-history" id="city-history"></div>
-    </div>
-  </div>
-
   <!-- SHOP -->
   <div id="section-shop" class="section">
     <div class="card">
@@ -679,78 +598,52 @@ select option{background:var(--brown);}
     </div>
   </div>
 
-
-  <!-- PHONE -->
+  <!-- LOTTERY -->
   <div id="section-phone" class="section">
     <div class="card">
-      <h2>📱 Điện Thoại</h2>
-      <div class="phone-wrap">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="phone-status"><span id="phone-clock">20:53</span><span>📶 5G · 🔋 92%</span></div>
+      <h2>📱 Điện Thoại & Mã Kết Bạn</h2>
+      <div style="background:linear-gradient(135deg,#182848,#4b6cb7);border-radius:14px;padding:18px;text-align:center;border:1px solid rgba(255,255,255,.15);">
+        <div style="font-size:2.4rem;">📱</div>
+        <div style="font-size:.72rem;color:#cbd5e1;margin-top:5px;">MÃ KẾT BẠN CỦA BẠN</div>
+        <div id="kb-code-display" style="font-size:1.55rem;letter-spacing:3px;font-weight:800;color:#ffd54a;margin:8px 0;">KB-........</div>
+        <button class="btn btn-gold btn-sm" onclick="copyKBCode()">📋 Sao chép mã KB</button>
+      </div>
+      <p style="font-size:.74rem;color:#999;text-align:center;margin-top:9px;">Mã KB gắn với tài khoản và không thay đổi khi đổi máy hoặc tải lại trang.</p>
+    </div>
+  </div>
 
-          <div id="phone-home" class="phone-page active">
-            <div style="text-align:center;color:#fff;font-weight:800;font-size:.9rem;padding:8px 0 2px;">VIETNAM LIFE PHONE</div>
-            <div style="text-align:center;color:#94a3b8;font-size:.62rem;margin-bottom:8px;">Điện thoại của bạn</div>
-            <div class="phone-balance"><div class="v" id="phone-home-money">0 VNĐ</div><div class="s">Số dư tiền trong game</div></div>
-            <div class="phone-home">
-              <button class="phone-app" onclick="phoneOpen('social')"><div class="ico" style="background:linear-gradient(135deg,#2563eb,#60a5fa)">💬</div><div class="nm">Tin nhắn</div></button>
-              <button class="phone-app" onclick="phoneOpen('bank')"><div class="ico" style="background:linear-gradient(135deg,#0f766e,#22c55e)">🏦</div><div class="nm">Ngân hàng</div></button>
-              <button class="phone-app" onclick="phoneOpen('map')"><div class="ico" style="background:linear-gradient(135deg,#db2777,#f472b6)">🗺️</div><div class="nm">Bản đồ</div></button>
-              <button class="phone-app" onclick="phoneOpen('food')"><div class="ico" style="background:linear-gradient(135deg,#ea580c,#f59e0b)">🍜</div><div class="nm">Đồ ăn</div></button>
-              <button class="phone-app" onclick="phoneOpen('games')"><div class="ico" style="background:linear-gradient(135deg,#7c3aed,#c084fc)">🎮</div><div class="nm">Game</div></button>
-              <button class="phone-app" onclick="phoneOpen('xocdia')"><div class="ico" style="background:linear-gradient(135deg,#92400e,#f59e0b)">🥣</div><div class="nm">Xóc Đĩa</div><div class="badge">18+</div></button>
-              <button class="phone-app" onclick="phoneOpen('cuabau')"><div class="ico" style="background:linear-gradient(135deg,#047857,#34d399)">🦀</div><div class="nm">Cua Bầu</div><div class="badge">18+</div></button>
-              <button class="phone-app" onclick="phoneOpen('taixiu')"><div class="ico" style="background:linear-gradient(135deg,#b91c1c,#f97316)">🎲</div><div class="nm">Tài Xỉu</div><div class="badge">18+</div></button>
-              <button class="phone-app" onclick="phoneOpen('settings')"><div class="ico" style="background:linear-gradient(135deg,#475569,#94a3b8)">⚙️</div><div class="nm">Cài đặt</div></button>
-            </div>
-            <div class="phone-dock">
-              <button onclick="phoneOpen('social')">💬</button><button onclick="phoneOpen('food')">🍜</button><button onclick="phoneOpen('map')">🗺️</button><button onclick="phoneOpen('home')">🏠</button>
-            </div>
-          </div>
-
-          <div id="phone-social" class="phone-page">
-            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">💬 Tin nhắn</span></div>
-            <div class="phone-balance"><div class="v" style="font-size:.95rem;color:#fff;">Bạn bè đang hoạt động</div><div class="s">Kết nối bạn bè trong Vietnam Life</div></div>
-            <div class="phone-action-grid"><div class="phone-action"><div class="i">👨‍👩‍👧</div><div class="t">Gia đình</div></div><div class="phone-action"><div class="i">🧑‍🤝‍🧑</div><div class="t">Bạn bè</div></div><div class="phone-action"><div class="i">💌</div><div class="t">Tin mới</div></div></div>
-            <div class="phone-note">Hệ thống chat bên phải game vẫn dùng Firebase như cũ.</div>
-          </div>
-
-          <div id="phone-bank" class="phone-page">
-            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🏦 Ngân hàng</span></div>
-            <div class="phone-balance"><div class="v" id="phone-bank-money">0 VNĐ</div><div class="s">Tiền mặt</div></div>
-            <div class="phone-balance"><div class="v" id="phone-bank-saving">0 VNĐ</div><div class="s">Tiết kiệm</div></div>
-            <button class="btn btn-blue btn-full" onclick="showSection('city')">🏦 Mở quản lý tiết kiệm</button>
-          </div>
-
-          <div id="phone-map" class="phone-page">
-            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🗺️ Bản đồ Việt Nam</span></div>
-            <div class="phone-balance"><div class="v" style="color:#fff">📍 <span id="phone-hometown">Việt Nam</span></div><div class="s">Quê quán hiện tại</div></div>
-            <div class="phone-action-grid"><div class="phone-action" onclick="doPhoneTrip('Hà Nội',180000)"><div class="i">🏙️</div><div class="t">Hà Nội</div></div><div class="phone-action" onclick="doPhoneTrip('Đà Nẵng',260000)"><div class="i">🌊</div><div class="t">Đà Nẵng</div></div><div class="phone-action" onclick="doPhoneTrip('TP.HCM',320000)"><div class="i">🏢</div><div class="t">TP.HCM</div></div></div>
-            <div class="phone-note">Du lịch tốn tiền nhưng tăng hạnh phúc và trải nghiệm.</div>
-          </div>
-
-          <div id="phone-food" class="phone-page">
-            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🍜 Đặt đồ ăn</span></div>
-            <div class="phone-action-grid"><div class="phone-action" onclick="phoneFood('🍜 Phở bò',65000)"><div class="i">🍜</div><div class="t">Phở bò<br>65k</div></div><div class="phone-action" onclick="phoneFood('🍚 Cơm tấm',55000)"><div class="i">🍚</div><div class="t">Cơm tấm<br>55k</div></div><div class="phone-action" onclick="phoneFood('🧋 Trà sữa',45000)"><div class="i">🧋</div><div class="t">Trà sữa<br>45k</div></div></div>
-          </div>
-
-          <div id="phone-games" class="phone-page">
-            <div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🎮 Game</span></div>
-            <div class="phone-action-grid"><div class="phone-action" onclick="phonePlayTap()"><div class="i">⚡</div><div class="t">Tap nhanh</div></div><div class="phone-action" onclick="phonePlayGuess()"><div class="i">🔢</div><div class="t">Đoán số</div></div><div class="phone-action" onclick="phonePlayLucky()"><div class="i">🍀</div><div class="t">May mắn</div></div></div>
-            <div id="phone-game-result" class="dice-result"><div>Chọn một mini game</div></div>
-          </div>
-
-          <div id="phone-xocdia" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🥣 Xóc Đĩa</span></div><div class="phone-bet"><div style="font-size:.7rem;color:#cbd5e1;margin-bottom:5px">18+ · chỉ dùng tiền ảo trong game</div><input id="xocdia-bet" type="number" min="1000" step="1000" placeholder="Tiền cược (VNĐ)"><select id="xocdia-choice"><option value="chan">Chẵn</option><option value="le">Lẻ</option></select><button class="btn btn-gold btn-full" onclick="playXocDia()">🥣 Xóc!</button></div><div id="xocdia-result" class="dice-result"><div>Đặt cược rồi xóc</div></div><div class="phone-note">Trò chơi mô phỏng giải trí, không nạp/rút tiền thật.</div></div>
-
-          <div id="phone-cuabau" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🦀 Cua Bầu</span></div><div class="phone-bet"><div style="font-size:.7rem;color:#cbd5e1;margin-bottom:5px">18+ · chỉ dùng tiền ảo trong game</div><input id="cuabau-bet" type="number" min="1000" step="1000" placeholder="Tiền cược (VNĐ)"><select id="cuabau-choice"><option value="crab">🦀 Cua</option><option value="gourd">🎃 Bầu</option><option value="fish">🐟 Cá</option><option value="chicken">🐔 Gà</option><option value="shrimp">🦐 Tôm</option><option value="rooster">🐓 Nai</option></select><button class="btn btn-green btn-full" onclick="playCuaBau()">🎲 Lắc 3 viên</button></div><div id="cuabau-result" class="dice-result"><div>Chọn cửa rồi lắc</div></div></div>
-
-          <div id="phone-taixiu" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">🎲 Tài Xỉu</span></div><div class="phone-bet"><div style="font-size:.7rem;color:#cbd5e1;margin-bottom:5px">18+ · chỉ dùng tiền ảo trong game</div><input id="taixiu-bet" type="number" min="1000" step="1000" placeholder="Tiền cược (VNĐ)"><select id="taixiu-choice"><option value="tai">🔥 Tài (11–17)</option><option value="xiu">❄️ Xỉu (4–10)</option></select><button class="btn btn-red btn-full" onclick="playTaiXiu()">🎲 Tung 3 xúc xắc</button></div><div id="taixiu-result" class="dice-result"><div>Chọn Tài/Xỉu rồi tung</div></div></div>
-
-          <div id="phone-settings" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">⚙️ Cài đặt</span></div><div class="phone-balance"><div class="v" style="color:#fff">📱 Cấp điện thoại: <span id="phone-level-value">1</span></div><div class="s">Nâng cấp để mở thêm tiện ích trong các bản sau.</div></div><button class="btn btn-purple btn-full" onclick="upgradePhone()">⬆️ Nâng cấp điện thoại</button><div class="phone-note">Chi phí nâng cấp tăng theo từng cấp.</div></div>
+  <div id="section-lottery" class="section">
+    <div class="card">
+      <h2>🎫 Xổ Số Cào May Mắn</h2>
+      <div style="text-align:center;font-size:0.8rem;color:#f0a500;margin-bottom:10px;">💡 Mỗi vé 100.000 VNĐ – Cào 3 ô để xem kết quả!</div>
+      <div style="text-align:center;margin-bottom:10px;">
+        <span style="font-size:0.85rem;">💰 Tiền hiện có: </span>
+        <span id="lottery-money" style="color:var(--gold2);font-weight:800;font-size:1rem;"></span>
+      </div>
+      <!-- Ticket area -->
+      <div class="scratch-card" id="lottery-card">
+        <div style="font-size:0.95rem;font-weight:800;color:rgba(255,255,255,0.9);letter-spacing:1px;">✨ VÉ SỐ MAY MẮN ✨</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.6);margin-top:2px;">Nhấn từng ô để cào</div>
+        <div class="scratch-ticket" id="scratch-cells"></div>
+        <div id="lottery-result" style="display:none;"></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <button class="btn btn-gold btn-full" onclick="buyLotteryTicket()" id="lottery-buy-btn">🎫 Mua Vé (100.000 VNĐ)</button>
+        <button class="btn btn-gray btn-sm" onclick="resetLotteryCard()" style="min-width:80px;" id="lottery-reset-btn" disabled>🔄 Vé Mới</button>
+      </div>
+      <hr class="divider">
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:10px;font-size:0.8rem;">
+        <div style="color:var(--gold);font-weight:700;margin-bottom:6px;">🏆 Bảng Giải Thưởng</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;color:#ccc;">
+          <div>🌟🌟🌟 Ba sao = <span style="color:#ffd700;font-weight:700;">50.000.000 VNĐ</span></div>
+          <div>💎💎💎 Ba kim cương = <span style="color:#3498db;font-weight:700;">20.000.000 VNĐ</span></div>
+          <div>7️⃣7️⃣7️⃣ Ba số 7 = <span style="color:#e74c3c;font-weight:700;">10.000.000 VNĐ</span></div>
+          <div>🍀🍀🍀 Ba lá = <span style="color:#2ecc71;font-weight:700;">5.000.000 VNĐ</span></div>
+          <div>🎯🎯🎯 Ba hồng = <span style="color:#e67e22;font-weight:700;">2.000.000 VNĐ</span></div>
+          <div>Bất kỳ 2 giống = <span style="color:#f39c12;font-weight:700;">300.000 VNĐ</span></div>
         </div>
       </div>
-      <div style="text-align:center;font-size:.67rem;color:#777;margin-top:8px;">📱 Điện thoại là hệ thống trong game • các app cờ bạc chỉ dùng tiền ảo</div>
+      <div style="font-size:0.72rem;color:#666;text-align:center;margin-top:8px;">Lịch sử: <span id="lottery-stats">Chưa mua vé nào</span></div>
     </div>
   </div>
 
@@ -1007,17 +900,6 @@ const G={
   yearBorn:2000,
   usedSpouseNames:[],
   stockTotalBought:{}, // lifetime total bought per stock (limit 1000/stock)
-  birthDate:'',
-  energy:3,
-  reputation:0,
-  bank:0,
-  phoneLevel:0,
-  currentActivity:null,
-  activityHistory:[],
-  cityEvents:[],
-  weather:null,
-  phoneLevel:1,
-  phoneStats:{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}},
 };
 
 // ===================== CONSTANTS =====================
@@ -1054,7 +936,7 @@ const firebaseConfig={
 };
 // ===================== FIREBASE =====================
 let fbDB=null, fbAuth=null, fbStorage=null;
-let playerProfile={name:'',gender:'Nam',email:'',accountName:'',uid:''};
+let playerProfile={name:'',gender:'Nam',email:'',accountName:''};
 
 try{
   firebase.initializeApp(firebaseConfig);
@@ -1076,39 +958,36 @@ function isMobile(){
 }
 
 // ── Google Sign-In ──
+let authHandling = false;
 function signInWithGoogle(){
   if(!fbAuth){ showLoginError('Lỗi kết nối Firebase. Thử tải lại trang!'); return; }
+  if(authHandling) return;
+  authHandling = true;
   setLoginLoading(true);
   const provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({prompt:'select_account'});
-
-  // Mobile: dùng redirect thay popup để tránh bị trình duyệt chặn
-  if(isMobile()){
-    fbAuth.signInWithRedirect(provider).catch(err=>{
-      setLoginLoading(false);
-      showLoginError('Lỗi đăng nhập: '+(err.message||err.code));
-    });
-    return;
-  }
 
   fbAuth.signInWithPopup(provider)
     .then(result => onAuthSuccess(result.user))
     .catch(err => {
       console.warn('Popup error:', err.code, err.message);
-      if(err.code==='auth/popup-blocked'){
-        showLoginError('Popup bị chặn! Đang chuyển hướng...');
-        setTimeout(()=> fbAuth.signInWithRedirect(provider), 800);
+      if(err.code==='auth/popup-blocked' || err.code==='auth/cancelled-popup-request'){
+        // Redirect chỉ dùng khi popup không khả dụng.
+        fbAuth.signInWithRedirect(provider).catch(e=>{
+          authHandling=false; setLoginLoading(false);
+          showLoginError('Lỗi đăng nhập: '+(e.message||e.code));
+        });
       } else if(err.code==='auth/popup-closed-by-user'){
-        setLoginLoading(false);
+        authHandling=false; setLoginLoading(false);
         showLoginError('Bạn đã đóng cửa sổ đăng nhập. Thử lại nhé!');
       } else if(err.code==='auth/operation-not-allowed'){
-        setLoginLoading(false);
+        authHandling=false; setLoginLoading(false);
         showLoginError('⚙️ Chưa bật Google Sign-in trong Firebase Console!');
       } else if(err.code==='auth/unauthorized-domain'){
-        setLoginLoading(false);
+        authHandling=false; setLoginLoading(false);
         showLoginError('⚙️ Domain chưa được cấp phép trong Firebase Console!');
       } else {
-        setLoginLoading(false);
+        authHandling=false; setLoginLoading(false);
         showLoginError('Lỗi: '+(err.message||err.code));
       }
     });
@@ -1130,89 +1009,66 @@ function showLoginError(msg){
 }
 
 async function onAuthSuccess(user){
-  if(!user || !user.uid) return;
-  // Không xử lý cùng một phiên đăng nhập nhiều lần khi Firebase phát event + redirect result.
-  if(window.__authProcessingUid===user.uid && window.__authProcessingPromise){
-    return window.__authProcessingPromise;
+  if(!user || authHandling===false) return;
+  setLoginLoading(false);
+  const banned = await checkIfBanned(user.email);
+  if(banned){
+    authHandling=false;
+    showLoginError('🚫 Tài khoản của bạn đã bị cấm khỏi Vietnam Life!\nLiên hệ admin nếu có nhầm lẫn.');
+    if(fbAuth) fbAuth.signOut().catch(()=>{});
+    return;
   }
-  window.__authProcessingUid=user.uid;
-  window.__authProcessingPromise=(async()=>{
-    setLoginLoading(false);
-    const banned = await checkIfBanned(user.email);
-    if(banned){
-      showLoginError('🚫 Tài khoản của bạn đã bị cấm khỏi Vietnam Life!\\nLiên hệ admin nếu có nhầm lẫn.');
-      try{ await fbAuth.signOut(); }catch(e){}
-      return;
-    }
-
-    playerProfile.name = user.displayName || user.email || 'Người chơi';
-    playerProfile.email = user.email || '';
-    playerProfile.uid = user.uid;
-    playerProfile.accountName = emailToKey(user.email||'');
-    playerProfile.photoURL = user.photoURL || '';
-    playerProfile.gender = playerProfile.gender || 'Nam';
-
-    // Profile và mã KB vẫn nằm theo Firebase UID, nhưng gameplay save giữ nguyên hệ thống cũ.
-    if(fbDB){
-      const profRef=fbDB.ref('users/'+user.uid+'/profile');
-      const ps=await profRef.once('value').catch(()=>null);
-      const existing=ps?.val?.()||{};
-      playerProfile.kb=existing.kb||makePermanentKB();
-      playerProfile.avatarBase64=existing.avatarBase64||'';
-      await profRef.update({
-        name:playerProfile.name,
-        email:playerProfile.email,
-        photoURL:playerProfile.photoURL||existing.photoURL||'',
-        kb:playerProfile.kb,
-        avatarBase64:playerProfile.avatarBase64,
-        updatedAt:Date.now()
-      }).catch(e=>console.warn('Profile update:',e));
-    }
-
-    LS.set('vl_profile',playerProfile);
-    chatRegisterUser(playerProfile.accountName || playerProfile.uid);
-    await checkAndResume();
-  })().catch(err=>{
-    console.error('Auth success handler:',err);
-    showLoginError('Không thể mở game: '+(err.message||'lỗi không xác định'));
-    setLoginLoading(false);
-  }).finally(()=>{
-    if(window.__authProcessingUid===user.uid) window.__authProcessingPromise=null;
-  });
-  return window.__authProcessingPromise;
+  playerProfile.name = user.displayName || user.email || 'Người chơi';
+  playerProfile.email = user.email || '';
+  playerProfile.accountName = emailToKey(user.email || user.uid);
+  playerProfile.photoURL = user.photoURL||'';
+  playerProfile.gender = playerProfile.gender||'Nam';
+  playerProfile.uid = user.uid;
+  playerProfile.kbCode = 'KB-'+String(user.uid||'').replace(/[^a-z0-9]/gi,'').slice(0,8).toUpperCase();
+  LS.set('vl_profile', playerProfile);
+  if(fbDB) fbDB.ref('users/'+playerProfile.accountName).set({
+    name: playerProfile.name, email: user.email||'', uid:user.uid,
+    kbCode: playerProfile.kbCode, photoURL: user.photoURL||'', ts: Date.now()
+  }).catch(()=>{});
+  chatRegisterUser(playerProfile.accountName);
+  authHandling=false;
+  updateLoginUserBar();
+  checkAndResume();
 }
 
 function signOutGoogle(){
   if(fbAuth) fbAuth.signOut().catch(()=>{});
-  playerProfile={name:'',gender:'Nam',email:'',accountName:'',uid:'',kb:'',photoURL:'',avatarBase64:''};
+  authHandling=false;
+  playerProfile={name:'',gender:'Nam',email:'',accountName:'',uid:'',kbCode:''};
   LS.del('vl_profile');
-  window.__authProcessingUid='';
-  window.__authProcessingPromise=null;
   const st=document.getElementById('login-status');
   if(st){st.style.display='none';st.textContent='';}
   setLoginLoading(false);
   showScreen('login');
 }
 
-// Firebase Auth là nguồn xác thực duy nhất. Khi reload: chờ Auth xong -> load save -> vào thẳng game.
+// Chỉ một luồng xác thực. Khi reload, Firebase tự phục hồi session rồi check save.
 if(fbAuth){
   fbAuth.onAuthStateChanged(user=>{
-    authStateUser=user||null;
-    authStateKnown=true;
-    if(authReadyResolve){ authReadyResolve(authStateUser); authReadyResolve=null; }
-    if(user) onAuthSuccess(user);
-    else {
+    if(user){
+      if(authHandling) return;
+      authHandling=true;
+      onAuthSuccess(user).catch(e=>{
+        console.error('Auth resume error:',e);
+        authHandling=false;setLoginLoading(false);
+        showLoginError('Không thể tải tài khoản. Hãy thử đăng nhập lại.');
+      });
+    } else {
+      authHandling=false;
+      const loginScreen=document.getElementById('screen-login');
+      if(loginScreen && !loginScreen.classList.contains('active')) showScreen('login');
       setLoginLoading(false);
-      showScreen('login');
     }
   });
-  fbAuth.getRedirectResult().then(result=>{
-    if(result&&result.user) onAuthSuccess(result.user);
-  }).catch(err=>{
+  // Redirect result chỉ xử lý nếu có kết quả; không gọi onAuthSuccess lần nữa nếu auth state đã chạy.
+  fbAuth.getRedirectResult().catch(err=>{
     if(err.code && err.code!=='auth/no-auth-event') console.warn('Redirect result:',err);
   });
-}else if(authReadyResolve){
-  authReadyResolve(null); authReadyResolve=null;
 }
 
 // Device ID duy nhất
@@ -1236,38 +1092,31 @@ function selectProfileGender(g){
 }
 
 async function checkAndResume(){
-  if(fbAuth && !authStateKnown) await authReady;
-  const uid=playerProfile?.uid || fbAuth?.currentUser?.uid || authStateUser?.uid || '';
-  if(!uid || !fbDB){
-    showScreen('intro');
-    updateLoginUserBar();
-    return;
+  const acc = playerProfile?.accountName;
+  let fbSave = null;
+  if(fbDB && acc){
+    try{
+      const snap = await fbDB.ref('users/'+acc+'/savestate').once('value');
+      fbSave = snap.val();
+    }catch(e){ console.warn('Load save error:',e); }
   }
+  const localSave = LS.get('vl_savestate', null);
+  let sg = null;
+  if(fbSave?.alive && fbSave.name && fbSave.age>=0) sg = fbSave;
+  else if(localSave?.alive && localSave.name && localSave.age>=0) sg = localSave;
 
-  let fbSave=null;
-  try{
-    fbSave=(await fbDB.ref('users/'+uid+'/savestate').once('value')).val();
-  }catch(e){
-    console.warn('Không tải được save tài khoản:',e);
-  }
-
-  // Có save -> VÀO THẲNG GAME, tuyệt đối không hỏi confirm.
-  if(fbSave?.alive && fbSave.name && Number.isFinite(Number(fbSave.age)) && Number(fbSave.age)>=0){
-    loadSavedGame(fbSave);
-    return;
-  }
-
-  // Không có save -> bắt đầu từ màn tạo cuộc đời.
-  LS.del('vl_savestate');
-  showScreen('intro');
   updateLoginUserBar();
+  if(sg){
+    // Có game dở thì vào thẳng, không popup để không che/mất trạng thái tài khoản.
+    loadSavedGame(sg);
+    return;
+  }
+  showScreen('intro');
 }
 
 function loadSavedGame(sg){
   const clean=JSON.parse(JSON.stringify(sg));
   Object.assign(G,clean);
-  G.energy=Number.isFinite(G.energy)?G.energy:3; G.reputation=Number.isFinite(G.reputation)?G.reputation:0; G.bank=Number.isFinite(G.bank)?G.bank:0; ensurePhoneState();
-  G.activityHistory=Array.isArray(G.activityHistory)?G.activityHistory:[]; G.cityEvents=Array.isArray(G.cityEvents)?G.cityEvents:[]; G.weather=G.weather||VIETNAM_WEATHER[0];
   showScreen('game'); showSection('main'); renderGame(); chatInit();
   showNotif(`✅ Tiếp tục: ${G.name} – ${G.age} tuổi!`,'#2ecc71');
   // Lắng nghe buff realtime từ admin
@@ -1287,35 +1136,32 @@ function updateLoginUserBar(){
   } else {
     bar.innerHTML=`<span style="font-size:0.78rem;color:#888;">👤 Chưa đăng nhập</span>`;
   }
+  renderKBCode();
 }
 
-// Khởi động: không tự đăng nhập bằng localStorage; chỉ dùng Firebase Auth.
-async function initProfile(){
-  if(fbAuth && !authStateKnown) await authReady;
-  const user=fbAuth?.currentUser || authStateUser;
-  if(user){
-    await onAuthSuccess(user);
-    return;
+// Auto-login nếu đã có profile
+function initProfile(){
+  const p=LS.get('vl_profile',null);
+  if(p?.name&&p?.email){
+    playerProfile=p;
+    if(p.accountName) chatRegisterUser(p.accountName);
   }
-  updateLoginUserBar();
-  showScreen('login');
+  // Firebase Auth listener quyết định đăng nhập thật sự.
 }
 
-async function saveGameState(){
+function saveGameState(){
   if(!G.name) return;
-  // Không lưu tiến trình game vào localStorage. Save thuộc về Firebase Auth UID.
-  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || '';
-  if(!fbDB || !uid) return;
-  try{
-    await fbDB.ref('users/'+uid+'/savestate').set({...G, _ts: Date.now(), _saveVersion: 2, _ownerUid: uid});
-  }catch(e){
-    console.warn('Lỗi lưu game theo tài khoản:',e);
+  LS.set('vl_savestate',G);
+  // Đồng bộ lên Firebase để chơi tiếp trên trình duyệt khác
+  const acc = playerProfile?.accountName;
+  if(fbDB && acc){
+    fbDB.ref('users/'+acc+'/savestate').set({...G, _ts: Date.now()}).catch(()=>{});
   }
 }
 function clearSaveState(){
   LS.del('vl_savestate');
-  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || '';
-  if(fbDB && uid) fbDB.ref('users/'+uid+'/savestate').remove().catch(()=>{});
+  const acc = playerProfile?.accountName;
+  if(fbDB && acc) fbDB.ref('users/'+acc+'/savestate').remove().catch(()=>{});
 }
 function showHelp(){document.getElementById('help-modal').style.display='block';document.body.style.overflow='hidden';}
 function closeHelp(){document.getElementById('help-modal').style.display='none';document.body.style.overflow='';}
@@ -1501,6 +1347,7 @@ const JOBS=[
   {id:'crypto',name:'🪙 Crypto Trader',income:0,minAge:18,eduReq:null,cat:'Thời Đại',desc:'Đầu tư coin (rủi ro)'},
   // ── HỌC SINH ──
   {id:'study_child',name:'📚 Tập Trung Học',income:0,minAge:6,maxAge:17,eduReq:null,cat:'Học Sinh',desc:'IQ+20,EQ+5/mùa',childOnly:true},
+  {id:'sell_lottery',name:'🎫 Bán Vé Số',income:200000,minAge:8,maxAge:17,eduReq:null,cat:'Học Sinh',desc:'Kiếm ít tiền',childOnly:true},
   {id:'help_farm',name:'🌾 Phụ Nông',income:300000,minAge:10,maxAge:17,eduReq:null,cat:'Học Sinh',desc:'Phụ cha mẹ',childOnly:true},
 ];
 
@@ -1644,6 +1491,17 @@ function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
 }
+function renderKBCode(){
+  const el=document.getElementById('kb-code-display');
+  if(el) el.textContent=playerProfile?.kbCode || 'KB-........';
+}
+async function copyKBCode(){
+  const code=playerProfile?.kbCode;
+  if(!code){showNotif('⚠️ Hãy đăng nhập để có mã KB!','#e74c3c');return;}
+  try{await navigator.clipboard.writeText(code);showNotif('✅ Đã sao chép '+code,'#2ecc71');}
+  catch(e){showNotif(code,'#f0a500');}
+}
+
 function showSection(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('#top-nav button').forEach(b=>b.classList.remove('active'));
@@ -1653,13 +1511,12 @@ function showSection(id){
   if(id==='farm')renderFarm();
   if(id==='shop')renderShop();
   if(id==='lb'){showLbTab('age');showAdminPanel();}
-  if(id==='phone')renderPhone();
+  if(id==='lottery'){renderLotterySection();resetLotteryCard();}
   if(id==='marriage')renderMarriage();
   if(id==='hokhau')renderHoKhau();
   if(id==='edu')renderEdu();
   if(id==='life')renderLife();
   if(id==='cccd')renderCCCD();
-  if(id==='city')renderCity();
   if(id==='stock'){G.stockPrices=G.stockPrices||{};G.stockHoldings=G.stockHoldings||{};G.stockHistory=G.stockHistory||[];if(!Object.keys(G.stockPrices).length){const STKS=['VNM','VIC','HPG','FPT','MBB','TCB','VHM','MSN','GVR','POW'];const BP=[62000,45000,28000,95000,22000,35000,52000,78000,17000,14000];STKS.forEach((id,i)=>{G.stockPrices[id]=BP[i];});}renderStock();}
 }
 function selectGender(g){
@@ -1704,11 +1561,9 @@ function startGame(){
   G.edu={school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null};
   G.married=false;G.spouse=null;G.children=0;G.house=null;G.car=null;G.debt=0;
   G.usedSpouseNames=[];
-  if(typeof lotteryTicket!=='undefined'){lotteryTicket=null;lotteryRevealed=[false,false,false];lotteryUsed=false;lotteryStats={bought:0,won:0,totalWon:0};}
-  G.birthDate=`${rand(1,28).toString().padStart(2,'0')}/${rand(1,12).toString().padStart(2,'0')}/${G.yearBorn}`;
-  G.energy=3;G.reputation=0;G.bank=0;G.phoneLevel=0;G.currentActivity=null;G.activityHistory=[];G.cityEvents=[];
-  G.weather=VIETNAM_WEATHER[rand(0,VIETNAM_WEATHER.length-1)];
   G.cccdId=genCCCDId();
+  if(playerProfile?.uid && !playerProfile.kbCode) playerProfile.kbCode='KB-'+String(playerProfile.uid).replace(/[^a-z0-9]/gi,'').slice(0,8).toUpperCase();
+  LS.set('vl_profile',playerProfile);
   // Lưu game state ban đầu
   saveGameState();
   document.getElementById('birth-name').textContent=`${G.gender==='Nam'?'👦':'👧'} ${G.name}`;
@@ -1725,148 +1580,9 @@ function startGame(){
 function enterGame(){
   updateLoginUserBar();
   addLog(0,`${G.gender==='Nam'?'👦':'👧'} ${G.name} chào đời tại ${G.hometown} – Gia đình ${G.family.name}. Tố chất: ${G.talent.name} | IQ:${G.iq} EQ:${G.eq}`,'neutral');
-  ensurePhoneState(); showScreen('game');showSection('main');renderGame();chatInit();
+  showScreen('game');showSection('main');renderGame();chatInit();
   // Lắng nghe buff realtime từ admin
   startAdminBuffListener();
-}
-
-
-// ===================== REAL VIETNAM LIFE SYSTEM =====================
-const VIETNAM_WEATHER=[
-  {name:'☀️ Nắng đẹp',desc:'Trời quang, đi lại thuận lợi.',mult:1},
-  {name:'🌦️ Mưa rào',desc:'Đường ướt, hàng quán đông khách.',mult:.95},
-  {name:'⛈️ Mưa lớn',desc:'Dễ kẹt xe và phát sinh chi phí.',mult:.82},
-  {name:'🔥 Nắng nóng',desc:'Đi ngoài trời tốn sức hơn.',mult:.9},
-  {name:'🌫️ Sáng se lạnh',desc:'Thời tiết dễ chịu, tinh thần tốt.',mult:1.05}
-];
-const VIETNAM_ACTIVITIES=[
-  {id:'streetfood',icon:'🍜',name:'Ăn hàng vỉa hè',desc:'Bún/phở/cơm tấm và tám chuyện.',cost:60000,energy:1,effects:{happy:7,eq:3,stress:-3},req:0},
-  {id:'market',icon:'🛵',name:'Đi chợ',desc:'Mua đồ, săn giá rẻ cho gia đình.',cost:120000,energy:1,effects:{happy:3,stress:-2},req:0},
-  {id:'football',icon:'⚽',name:'Đá bóng sân cỏ',desc:'Tăng sức khỏe, giảm căng thẳng.',cost:30000,energy:1,effects:{hp:4,happy:6,stress:-5},req:0},
-  {id:'study',icon:'📚',name:'Học thêm / tự học',desc:'Dành thời gian nâng IQ và EQ.',cost:0,energy:1,effects:{iq:5,eq:3,stress:2,happy:1},req:6},
-  {id:'volunteer',icon:'🤝',name:'Làm thiện nguyện',desc:'Giúp cộng đồng và xây danh tiếng.',cost:10000,energy:1,effects:{eq:6,happy:4,stress:-2,reputation:3},req:8},
-  {id:'delivery',icon:'🛵',name:'Chạy giao hàng',desc:'Kiếm thêm tiền, đổi lại tốn sức.',cost:0,energy:1,effects:{money:160000,hp:-2,stress:3,reputation:1},req:18},
-  {id:'gig',icon:'💻',name:'Làm freelance',desc:'Dùng IQ để kiếm thu nhập online.',cost:0,energy:1,effects:{money:Math.max(180000,Math.round((G.iq||100)*2200)),iq:2,stress:4,reputation:1},req:16},
-  {id:'hospital',icon:'🏥',name:'Khám sức khỏe',desc:'Tốn tiền nhưng phục hồi sức khỏe.',cost:250000,energy:1,effects:{hp:12,stress:-7,happy:2},req:12},
-  {id:'coffee',icon:'☕',name:'Cà phê sáng',desc:'Một ly cà phê và vài câu chuyện đời.',cost:45000,energy:1,effects:{happy:5,eq:2,stress:-4},req:10},
-  {id:'travel',icon:'🚌',name:'Du lịch ngắn ngày',desc:'Đổi gió ở một thành phố khác.',cost:450000,energy:2,effects:{happy:14,eq:5,stress:-10,reputation:1},req:18}
-];
-
-function cityWeather(){return G.weather||VIETNAM_WEATHER[0];}
-function cityLevel(){return G.age<6?'Trẻ nhỏ':G.age<12?'Tiểu học':G.age<16?'Thiếu niên':G.age<22?'Sinh viên':G.age<40?'Người đi làm':G.age<60?'Trung niên':'Tuổi nghỉ ngơi';}
-function cityCanDo(a){
-  if(G.age<a.req)return {ok:false,reason:`🔒 Cần ${a.req} tuổi`};
-  if((G.energy||0)<a.energy)return {ok:false,reason:'⚡ Hết năng lượng'};
-  if((G.money||0)<a.cost)return {ok:false,reason:`💸 Cần ${fmt(a.cost)}`};
-  return {ok:true};
-}
-function doCityActivity(id){
-  if(!G.alive)return;
-  const a=VIETNAM_ACTIVITIES.find(x=>x.id===id); if(!a)return;
-  const c=cityCanDo(a);
-  if(!c.ok){showNotif(c.reason,'#e74c3c');return;}
-  G.energy-=a.energy;
-  if(a.cost)G.money-=a.cost;
-  const effects={...a.effects};
-  // Dynamic freelance reward
-  if(id==='gig')effects.money=Math.max(180000,Math.round((G.iq||100)*2200));
-  Object.entries(effects).forEach(([k,v])=>{
-    if(k==='money')G.money=Math.max(0,G.money+v);
-    else if(k==='reputation')G.reputation=clamp((G.reputation||0)+v,-100,100);
-    else if(k==='hp')G.hp=clamp(G.hp+v,0,HP_MAX);
-    else if(k==='iq')G.iq=clamp(G.iq+v,0,getIQMax());
-    else if(k==='eq')G.eq=clamp(G.eq+v,0,getEQMax());
-    else if(k==='happy')G.happy=clamp(G.happy+v,0,HAPPY_MAX);
-    else if(k==='stress')G.stress=clamp(G.stress+v,0,STRESS_MAX);
-  });
-  G.currentActivity=a.name;
-  const fx=[];
-  if(effects.money)fx.push((effects.money>0?'+':'')+fmt(effects.money)+'đ');
-  if(effects.hp)fx.push((effects.hp>0?'+':'')+effects.hp+' SK');
-  if(effects.iq)fx.push((effects.iq>0?'+':'')+effects.iq+' IQ');
-  if(effects.eq)fx.push((effects.eq>0?'+':'')+effects.eq+' EQ');
-  if(effects.happy)fx.push((effects.happy>0?'+':'')+effects.happy+' HPX');
-  if(effects.stress)fx.push((effects.stress>0?'+':'')+effects.stress+' stress');
-  if(effects.reputation)fx.push((effects.reputation>0?'+':'')+effects.reputation+' danh tiếng');
-  G.activityHistory.unshift({season:G.totalSeasons+1,age:G.age,text:`${a.icon} ${a.name}`,fx:fx.join(' · ')});
-  if(G.activityHistory.length>40)G.activityHistory.pop();
-  addLog(G.age,`${a.icon} ${a.name} – ${fx.join(' · ')||'Hoàn thành'}`,'event');
-  showNotif(`${a.icon} ${a.name}: ${fx.join(' · ')||'xong!'}`,'#2ecc71');
-  renderCity();renderGame();saveGameState();
-}
-function cityBankDeposit(){
-  const amount=Number(document.getElementById('city-bank-deposit')?.value)||0;
-  if(amount<=0||amount>G.money){showNotif('❌ Số tiền gửi không hợp lệ!','#e74c3c');return;}
-  G.money-=amount;G.bank=(G.bank||0)+amount;
-  addLog(G.age,`🏦 Gửi tiết kiệm ${fmt(amount)} VNĐ`,'good');renderCity();renderGame();saveGameState();
-}
-function cityBankWithdraw(){
-  const amount=Number(document.getElementById('city-bank-withdraw')?.value)||0;
-  if(amount<=0||amount>(G.bank||0)){showNotif('❌ Số tiền rút không hợp lệ!','#e74c3c');return;}
-  G.bank-=amount;G.money+=amount;
-  addLog(G.age,`🏦 Rút ${fmt(amount)} VNĐ từ tiết kiệm`,'neutral');renderCity();renderGame();saveGameState();
-}
-function renderCity(){
-  const w=cityWeather();
-  const weatherEl=document.getElementById('city-weather'); if(weatherEl)weatherEl.textContent=`${w.name} • ${w.desc}`;
-  const e=document.getElementById('city-energy'); if(e)e.textContent=`⚡ ${G.energy||0}/3 năng lượng`;
-  const r=document.getElementById('city-rep'); if(r)r.textContent=`⭐ Danh tiếng ${G.reputation||0}`;
-  const h=document.getElementById('city-hometown'); if(h)h.textContent=G.hometown||'Việt Nam';
-  const stats=document.getElementById('city-stats');
-  if(stats)stats.innerHTML=`
-    <div class="city-stat"><div class="v">${fmt(G.money||0)}</div><div class="l">💵 Tiền mặt</div></div>
-    <div class="city-stat"><div class="v">${fmt(G.bank||0)}</div><div class="l">🏦 Tiết kiệm</div></div>
-    <div class="city-stat"><div class="v">${cityLevel()}</div><div class="l">👤 Giai đoạn</div></div>`;
-  const acts=document.getElementById('city-activities');
-  if(acts)acts.innerHTML=VIETNAM_ACTIVITIES.map(a=>{
-    const c=cityCanDo(a); const dynamic=a.id==='gig'?Math.max(180000,Math.round((G.iq||100)*2200)):a.effects.money;
-    const fx=[];
-    if(a.cost)fx.push(`-${fmt(a.cost)}đ`);
-    if(dynamic)fx.push(`${dynamic>0?'+':''}${fmt(dynamic)}đ`);
-    if(a.effects.happy)fx.push(`${a.effects.happy>0?'+':''}${a.effects.happy} 😊`);
-    if(a.effects.hp)fx.push(`${a.effects.hp>0?'+':''}${a.effects.hp} 💪`);
-    if(a.effects.iq)fx.push(`${a.effects.iq>0?'+':''}${a.effects.iq} 🧠`);
-    return `<div class="activity-card ${c.ok?'':'disabled'}" onclick="${c.ok?`doCityActivity('${a.id}')`:''}">
-      <div class="ico">${a.icon}</div><div class="nm">${a.name}</div><div class="ds">${a.desc}</div>
-      <div class="fx">${c.ok?(fx.join(' · ')||'Miễn phí'):'🚫 '+c.reason}</div>
-    </div>`;
-  }).join('');
-  const bank=document.getElementById('city-bank');
-  if(bank)bank.innerHTML=`
-    <div style="font-size:.74rem;color:#bbb;margin:5px 0;">Số dư tiết kiệm: <b style="color:#5dade2;">${fmt(G.bank||0)} VNĐ</b> • Lãi mùa: <b style="color:#2ecc71;">+1%</b></div>
-    <div style="display:flex;gap:4px;">
-      <input id="city-bank-deposit" type="number" min="1" placeholder="Gửi VNĐ" style="margin:0;font-size:.72rem;">
-      <button class="btn btn-blue btn-sm" onclick="cityBankDeposit()">Gửi</button>
-      <input id="city-bank-withdraw" type="number" min="1" placeholder="Rút VNĐ" style="margin:0;font-size:.72rem;">
-      <button class="btn btn-gold btn-sm" onclick="cityBankWithdraw()">Rút</button>
-    </div>`;
-  const ev=document.getElementById('city-events');
-  if(ev)ev.innerHTML=(G.cityEvents||[]).slice(0,5).map(x=>`<div class="vietnam-event">${x}</div>`).join('')||'<div style="color:#888;font-size:.75rem;text-align:center;padding:6px;">Chưa có chuyện gì đặc biệt.</div>';
-  const hist=document.getElementById('city-history');
-  if(hist)hist.innerHTML=(G.activityHistory||[]).slice(0,15).map(x=>`<div style="padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04);">[${x.age??G.age}t] ${x.text} <span style="color:#888;">${x.fx||''}</span></div>`).join('')||'<div style="color:#666;text-align:center;">Lịch sử hoạt động sẽ xuất hiện ở đây.</div>';
-}
-function processCitySeason(){
-  // Interest on savings
-  if((G.bank||0)>0){
-    const interest=Math.max(1000,Math.round(G.bank*0.01));
-    G.bank+=interest;
-    G.cityEvents.unshift(`🏦 Tiền gửi sinh lãi +${fmt(interest)} VNĐ.`);
-  }
-  // Weather can create a small local flavor event
-  const w=cityWeather();
-  if(w.name.includes('Mưa lớn')){
-    const cost=Math.min(G.money,50000);
-    if(cost>0){G.money-=cost;G.cityEvents.unshift(`🌧️ Mưa lớn làm phát sinh ${fmt(cost)} VNĐ chi phí đi lại.`);}
-  }else if(w.name.includes('Nắng đẹp')){
-    G.cityEvents.unshift('☀️ Nắng đẹp: đường phố nhộn nhịp, tinh thần cả ngày tốt hơn.');
-  }
-  // Reputation milestones
-  if((G.reputation||0)>=25 && G.reputation<999){
-    G.cityEvents.unshift('🏅 Bạn bắt đầu được mọi người trong khu phố biết đến!');
-  }
-  if((G.cityEvents||[]).length>12)G.cityEvents.length=12;
-  G.energy=3;G.currentActivity=null;
-  G.weather=VIETNAM_WEATHER[rand(0,VIETNAM_WEATHER.length-1)];
 }
 
 // ===================== RENDER =====================
@@ -1900,8 +1616,6 @@ function renderGame(){
   if(G.car)badges+=` <span style="color:#e67e22;font-size:0.72rem;">${G.car.icon}</span>`;
   document.getElementById('g-badges').innerHTML=badges;
   renderLog();
-  renderCity();
-  renderPhone();
 }
 
 function updateBar(stat,val,max){
@@ -1925,7 +1639,7 @@ function renderLog(){
 function renderCCCD(){
   const el=document.getElementById('cccd-content');
   const avatar=G.gender==='Nam'?'👨':'👩';
-  const dob=G.birthDate||`01/01/${G.yearBorn}`;
+  const dob=`${rand(1,28).toString().padStart(2,'0')}/${rand(1,12).toString().padStart(2,'0')}/${G.yearBorn}`;
   const expiry=`${G.yearBorn+25}`;
   const face=G.gender==='Nam'?(G.age<18?'👦':G.age<60?'👨':'🧓'):(G.age<18?'👧':G.age<60?'👩':'👵');
   el.innerHTML=`
@@ -1984,9 +1698,6 @@ function nextSeason(){
 
   // --- Farm season ---
   processFarmSeason();
-
-  // --- Player-chosen real-life activities + bank ---
-  processCitySeason();
 
   // --- Seasonal random event ---
   if(Math.random()<0.5){
@@ -3038,88 +2749,6 @@ async function checkIfBanned(email){
 function openDonate(){document.getElementById('donate-modal').style.display='flex';}
 function closeDonate(){document.getElementById('donate-modal').style.display='none';}
 
-
-// ===================== PHONE SYSTEM =====================
-function ensurePhoneState(){
-  G.phoneLevel=Number.isFinite(G.phoneLevel)?Math.max(1,G.phoneLevel):1;
-  G.phoneStats=G.phoneStats||{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}};
-  ['xocdia','cuabau','taixiu'].forEach(k=>G.phoneStats[k]=G.phoneStats[k]||{plays:0,wins:0});
-}
-function phoneOpen(page){
-  ensurePhoneState();
-  document.querySelectorAll('.phone-page').forEach(x=>x.classList.remove('active'));
-  const el=document.getElementById('phone-'+page); if(el)el.classList.add('active');
-  renderPhone();
-}
-function renderPhone(){
-  ensurePhoneState();
-  const money=document.getElementById('phone-home-money'); if(money)money.textContent=fmt(G.money||0)+' VNĐ';
-  const bm=document.getElementById('phone-bank-money'); if(bm)bm.textContent=fmt(G.money||0)+' VNĐ';
-  const bs=document.getElementById('phone-bank-saving'); if(bs)bs.textContent=fmt(G.bank||0)+' VNĐ';
-  const pl=document.getElementById('phone-level-value'); if(pl)pl.textContent=G.phoneLevel;
-  const ph=document.getElementById('phone-hometown'); if(ph)ph.textContent=G.hometown||'Việt Nam';
-  const clock=document.getElementById('phone-clock'); if(clock)clock.textContent=new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
-}
-function phoneSpend(amount,desc){
-  if(amount<=0||G.money<amount){showNotif('💸 Không đủ tiền!','#e74c3c');return false;}
-  G.money-=amount; addLog(G.age,desc+' -'+fmt(amount)+' VNĐ','neutral'); renderPhone();renderGame();saveGameState(); return true;
-}
-function phoneFood(name,cost){
-  if(!phoneSpend(cost,`🍜 Đặt ${name}`))return;
-  G.happy=clamp(G.happy+5,0,HAPPY_MAX); G.stress=clamp(G.stress-2,0,STRESS_MAX);
-  document.getElementById('phone-home').classList.remove('active'); document.getElementById('phone-food').classList.add('active');
-  showNotif(`🍜 ${name} đã giao tới! +5 hạnh phúc`,'#2ecc71'); renderGame(); saveGameState();
-}
-function doPhoneTrip(city,cost){
-  if(G.age<12){showNotif('🔒 Cần từ 12 tuổi để tự đi du lịch!','#e74c3c');return;}
-  if(!phoneSpend(cost,`🚌 Du lịch ${city}`))return;
-  G.happy=clamp(G.happy+10,0,HAPPY_MAX); G.eq=clamp(G.eq+3,0,getEQMax());
-  showNotif(`🚌 Đã tới ${city}! +10 😊 +3 EQ`,'#2ecc71'); renderGame();saveGameState();
-}
-function phoneGameResult(text){const el=document.getElementById('phone-game-result');if(el)el.innerHTML=text;}
-function phonePlayTap(){
-  const reward=Math.floor(5000+Math.random()*25000); G.money+=reward; phoneGameResult(`<div>⚡ CLICK!</div><div style="color:#2ecc71">+${fmt(reward)} VNĐ</div>`); showNotif(`⚡ Mini game: +${fmt(reward)} VNĐ`,'#2ecc71'); addLog(G.age,`⚡ Chơi Tap nhanh +${fmt(reward)} VNĐ`,'good'); renderGame();saveGameState();
-}
-function phonePlayGuess(){
-  const secret=rand(1,5),guess=prompt('Đoán số từ 1 đến 5'); if(guess===null)return; const n=parseInt(guess); const win=n===secret; const reward=win?50000:0; if(reward)G.money+=reward; phoneGameResult(`<div>🎯 Số bí mật: ${secret}</div><div style="color:${win?'#2ecc71':'#ef4444'}">${win?'+50.000 VNĐ':'Trượt rồi!'}</div>`); showNotif(win?'🎉 Đoán đúng! +50.000 VNĐ':'😅 Sai số rồi!','#f39c12'); renderGame();saveGameState();
-}
-function phonePlayLucky(){
-  const win=Math.random()<0.45,reward=win?Math.floor(10000+Math.random()*60000):0; if(reward)G.money+=reward; phoneGameResult(`<div>🍀 ${win?'MAY MẮN!':'XUI RỒI!'}</div><div style="color:${win?'#2ecc71':'#ef4444'}">${win?'+'+fmt(reward)+' VNĐ':'Không có thưởng'}</div>`); addLog(G.age,`🍀 Mini game may mắn ${win?'thắng +'+fmt(reward):'không thưởng'}` ,win?'good':'neutral'); renderGame();saveGameState();
-}
-function validateBet(id){
-  const bet=Number(document.getElementById(id)?.value)||0;
-  if(G.age<18){showNotif('🔞 Ứng dụng này yêu cầu nhân vật 18+ trong game.','#e74c3c');return 0;}
-  if(bet<1000){showNotif('💸 Mức cược tối thiểu 1.000 VNĐ tiền ảo.','#e74c3c');return 0;}
-  if(bet>G.money){showNotif('💸 Không đủ tiền để đặt cược!','#e74c3c');return 0;}
-  G.money-=bet; return bet;
-}
-function finishBet(app,bet,won,payout,resultId,logText){
-  ensurePhoneState(); G.phoneStats[app].plays++; if(won)G.phoneStats[app].wins++;
-  if(payout>0)G.money+=payout;
-  const el=document.getElementById(resultId); if(el)el.innerHTML=`<div>${won?'🎉 THẮNG':'😵 THUA'}</div><div class="big">${logText}</div><div style="color:${won?'#2ecc71':'#ef4444'}">${won?'+'+fmt(payout)+' VNĐ':'-'+fmt(bet)+' VNĐ'}</div>`;
-  addLog(G.age,`${app==='xocdia'?'🥣':app==='cuabau'?'🦀':'🎲'} ${logText} – ${won?'thắng '+fmt(payout):'thua '+fmt(bet)}` ,won?'good':'bad');
-  renderPhone();renderGame();saveGameState();
-}
-function playXocDia(){
-  const bet=validateBet('xocdia-bet'); if(!bet)return; const choice=document.getElementById('xocdia-choice').value;
-  const coins=[0,0,0,0].map(()=>Math.random()<0.5?1:0); const heads=coins.reduce((a,b)=>a+b,0); const even=heads%2===0; const won=(choice==='chan')===even; const payout=won?bet*2:0;
-  finishBet('xocdia',bet,won,payout,'xocdia-result',`${['⚪','⚫'].slice(0,2).join('')} ${heads} mặt`);
-}
-function playCuaBau(){
-  const bet=validateBet('cuabau-bet'); if(!bet)return; const choice=document.getElementById('cuabau-choice').value;
-  const faces=[['crab','🦀'],['gourd','🎃'],['fish','🐟'],['chicken','🐔'],['shrimp','🦐'],['rooster','🐓']]; const rolls=[0,0,0].map(()=>faces[Math.floor(Math.random()*faces.length)]); const count=rolls.filter(x=>x[0]===choice).length; const won=count>0; const multiplier=count===3?4:count===2?3:count===1?2:0; const payout=bet*multiplier;
-  finishBet('cuabau',bet,won,payout,'cuabau-result',rolls.map(x=>x[1]).join(' '));
-}
-function playTaiXiu(){
-  const bet=validateBet('taixiu-bet'); if(!bet)return; const choice=document.getElementById('taixiu-choice').value;
-  const rolls=[rand(1,6),rand(1,6),rand(1,6)],sum=rolls.reduce((a,b)=>a+b,0); const isTai=sum>=11; const won=(choice==='tai')===isTai; const payout=won?bet*2:0;
-  finishBet('taixiu',bet,won,payout,'taixiu-result',`${rolls.join(' + ')} = ${sum}`);
-}
-function upgradePhone(){
-  ensurePhoneState(); if(G.phoneLevel>=10){showNotif('📱 Điện thoại đã đạt cấp tối đa!','#f0a500');return;}
-  const cost=500000*G.phoneLevel; if(!phoneSpend(cost,`📱 Nâng cấp điện thoại lên cấp ${G.phoneLevel+1}`))return; G.phoneLevel++; showNotif(`📱 Nâng cấp thành công! Cấp ${G.phoneLevel}`,'#9b59b6'); renderPhone();saveGameState();
-}
-
 // ===================== STOCK MARKET =====================
 const STOCKS=[
   {id:'FPT',name:'FPT Corporation',icon:'💻',basePrice:95000,sector:'Công Nghệ'},
@@ -3331,7 +2960,7 @@ function setMaxBuy(id,price){
 function restartGame(){
   stopAdminBuffListener();
   clearSaveState();
-  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{},birthDate:'',energy:3,reputation:0,bank:0,phoneLevel:0,currentActivity:null,activityHistory:[],cityEvents:[],weather:null,phoneLevel:1,phoneStats:{xocdia:{plays:0,wins:0},cuabau:{plays:0,wins:0},taixiu:{plays:0,wins:0}}});
+  Object.assign(G,{name:'',age:0,seasonInYear:0,totalSeasons:0,money:0,totalMoney:0,job:null,alive:true,married:false,spouse:null,children:0,house:null,car:null,debt:0,log:[],iq:100,eq:100,hp:100,happy:70,stress:10,talent:null,usedSpouseNames:[],farm:{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0},farmSick:{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false},hasVaccine:false,hasPesticide:false,edu:{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null},stockPrices:{},stockHoldings:{},stockHistory:[],stockTotalBought:{}});
   document.getElementById('player-name').value='';
   showScreen('intro'); updateLoginUserBar();
 }
@@ -3638,13 +3267,6 @@ let lotteryTicket = null; // current ticket symbols
 let lotteryRevealed = [false,false,false];
 let lotteryUsed = false;
 let lotteryStats = {bought:0, won:0, totalWon:0};
-if(window.__savedLotteryState){
-  lotteryTicket=window.__savedLotteryState.ticket||null;
-  lotteryRevealed=Array.isArray(window.__savedLotteryState.revealed)?window.__savedLotteryState.revealed:[false,false,false];
-  lotteryUsed=!!window.__savedLotteryState.used;
-  lotteryStats={...lotteryStats,...(window.__savedLotteryState.stats||{})};
-  delete window.__savedLotteryState;
-}
 
 function renderLotterySection(){
   const el = document.getElementById('lottery-money');
@@ -3724,7 +3346,6 @@ function scratchCell(i){
 function checkLotteryResult(){
   lotteryUsed = true;
   const sym = lotteryTicket;
-  saveGameState();
   const resultEl = document.getElementById('lottery-result');
   // Check prizes
   let prizeAmount = 0, msg = '';
@@ -3767,7 +3388,6 @@ function resetLotteryCard(){
   document.getElementById('lottery-result').style.display='none';
   document.getElementById('lottery-reset-btn').disabled=true;
   document.getElementById('lottery-buy-btn').disabled=false;
-  saveGameState();
 }
 
 
@@ -3792,7 +3412,7 @@ function chatRegisterUser(accountName){
   <div id="chat-header">
     <h3>👥 Bạn Bè & Chat</h3>
     <div id="chat-add-friend">
-      <input type="text" id="chat-friend-input" placeholder="Nhập Gmail của bạn bè..." maxlength="60">
+      <input type="text" id="chat-friend-input" placeholder="Nhập mã KB của bạn bè..." maxlength="60">
       <button onclick="chatSendFriendReq()">➕ KB</button>
     </div>
     <div id="chat-req-notif" style="font-size:0.65rem;color:#aaa;display:none;padding:2px 0;"></div>
