@@ -372,6 +372,7 @@ select option{background:var(--brown);}
 .phone-bet input,.phone-bet select{margin:0 0 6px;background:#0b1220;border-color:#334155;color:#fff;}
 .dice-result{min-height:95px;border-radius:14px;background:radial-gradient(circle,#263855,#111827);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:1.15rem;font-weight:800;margin:8px 0;}
 .dice-result .big{font-size:2.2rem;letter-spacing:6px;}.phone-note{font-size:.62rem;color:#94a3b8;text-align:center;margin-top:7px;line-height:1.4;}
+.mini-canvas{width:100%;max-width:340px;height:auto;border-radius:14px;border:1px solid rgba(255,255,255,.12);display:block;margin:8px auto;touch-action:none;cursor:pointer}.mini-game-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:6px 0}.mini-game-tab{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;padding:7px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:.7rem}.mini-game-tab.active{background:rgba(245,158,11,.18);color:#ffd54a;border-color:#f59e0b}.mini-game-panel{display:none}.mini-game-panel.active{display:block}.mini-game-head{display:flex;justify-content:space-between;align-items:center;color:#e5e7eb;font-size:.75rem}.snake-controls{text-align:center;margin:4px 0}.snake-controls button{min-width:42px;height:38px;margin:2px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.07);color:white;cursor:pointer}.phone-locked{text-align:center;padding:40px 20px;background:linear-gradient(180deg,#111827,#0b1020);border-radius:18px}.lock-ico{font-size:4rem;margin-bottom:10px}
 .mini-game-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}.mini-game-tab{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#cbd5e1;border-radius:10px;padding:8px;font-family:'Baloo 2',cursive;font-weight:800;cursor:pointer}.mini-game-tab.active{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;border-color:#a78bfa}.mini-game-panel{display:none}.mini-game-panel.active{display:block}.mini-game-head{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:8px 10px;border-radius:10px 10px 0 0;color:#fff;font-size:.75rem}.mini-canvas{display:block;width:100%;max-width:340px;margin:0 auto 8px;background:#93c5fd;border:1px solid rgba(255,255,255,.12);border-radius:0 0 12px 12px}.snake-controls{display:flex;flex-direction:column;align-items:center;gap:4px;margin:5px 0}.snake-controls button{width:42px;height:36px;border:0;border-radius:9px;background:rgba(255,255,255,.08);color:#fff;cursor:pointer}.snake-controls>div{display:flex;gap:4px}.news-banner{background:linear-gradient(135deg,#0f766e,#115e59);border-radius:12px;padding:12px;margin-bottom:8px;border:1px solid rgba(45,212,191,.35)}.news-banner-title{font-size:.95rem;font-weight:900;color:#fff}.news-banner-sub{font-size:.62rem;color:#ccfbf1;margin-top:2px}.news-list{display:flex;flex-direction:column;gap:6px}.news-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:9px}.news-card .tag{display:inline-block;font-size:.58rem;color:#99f6e4;border:1px solid rgba(45,212,191,.35);border-radius:999px;padding:2px 6px;margin-bottom:4px}.news-card h4{font-size:.76rem;color:#fff;margin-bottom:3px}.news-card p{font-size:.64rem;color:#cbd5e1;line-height:1.45}.news-card .time{font-size:.57rem;color:#64748b;margin-top:4px}
 
 </style>
@@ -380,7 +381,7 @@ select option{background:var(--brown);}
 <div id="app">
 <div class="game-logo">
   <h1>🇻🇳 VIETNAM LIFE</h1>
-  <p>by PHUCRAM • v9.0 – Real Vietnam Life • Thành Phố • Tài Chính • Hoạt Động</p>
+  <p>by PHUCRAM • v10.0 – Real Vietnam Life • Thành Phố • Tài Chính • Hoạt Động</p>
 </div>
 <div id="notif"></div>
 
@@ -471,7 +472,7 @@ select option{background:var(--brown);}
     <button class="btn btn-gold btn-full" onclick="startGame()" style="margin-top:8px;">🎮 Bắt Đầu Cuộc Đời</button>
   </div>
   <div class="card" style="font-size:0.78rem;color:#aaa;">
-    <h2>📖 Hướng Dẫn v9.0</h2>
+    <h2>📖 Hướng Dẫn v10.0</h2>
     <p style="margin-bottom:4px;">• Mỗi lần bấm <strong style="color:var(--gold)">Sống Tiếp</strong> = 1 mùa trôi qua (4 mùa = 1 tuổi)</p>
     <p style="margin-bottom:4px;">• Đến tuổi đến trường → chọn trường cụ thể (tên thật)</p>
     <p style="margin-bottom:4px;">• 🧬 Tố Chất Bẩm Sinh: Thiên Tài / Học Giỏi / Bình Thường / Học Yếu</p>
@@ -729,6 +730,7 @@ select option{background:var(--brown);}
               <button class="phone-app" onclick="phoneOpen('map')"><div class="ico" style="background:linear-gradient(135deg,#db2777,#f472b6)">🗺️</div><div class="nm">Bản đồ</div></button>
               <button class="phone-app" onclick="phoneOpen('food')"><div class="ico" style="background:linear-gradient(135deg,#ea580c,#f59e0b)">🍜</div><div class="nm">Đồ ăn</div></button>
               <button class="phone-app" onclick="phoneOpen('games')"><div class="ico" style="background:linear-gradient(135deg,#7c3aed,#c084fc)">🎮</div><div class="nm">Game</div></button>
+              <button class="phone-app" onclick="phoneOpen('profile')"><div class="ico" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">👤</div><div class="nm">Hồ sơ</div></button>
               <button class="phone-app" onclick="phoneOpen('news')"><div class="ico" style="background:linear-gradient(135deg,#0f766e,#14b8a6)">📰</div><div class="nm">Tin tức</div></button>
               <button class="phone-app" onclick="phoneOpen('xocdia')"><div class="ico" style="background:linear-gradient(135deg,#92400e,#f59e0b)">🥣</div><div class="nm">Xóc Đĩa</div><div class="badge">18+</div></button>
               <button class="phone-app" onclick="phoneOpen('cuabau')"><div class="ico" style="background:linear-gradient(135deg,#047857,#34d399)">🦀</div><div class="nm">Cua Bầu</div><div class="badge">18+</div></button>
@@ -774,13 +776,13 @@ select option{background:var(--brown);}
             </div>
             <div id="mini-game-flappy" class="mini-game-panel active">
               <div class="mini-game-head"><b>🐦 Flappy Bird</b><span id="flappy-score">Điểm: 0</span></div>
-              <canvas id="flappy-canvas" width="340" height="420" class="mini-canvas"></canvas>
+              <canvas id="flappy-canvas" width="340" height="420" class="mini-canvas" onpointerdown="flap()"></canvas>
               <button class="btn btn-gold btn-full" onclick="startFlappy()">▶️ Bắt đầu / Chơi lại</button>
               <div class="phone-note">Nhấn nút hoặc phím Space để bay. Game chỉ tính điểm, không thưởng tiền.</div>
             </div>
             <div id="mini-game-snake" class="mini-game-panel">
               <div class="mini-game-head"><b>🐍 Rắn ăn táo</b><span id="snake-score">Điểm: 0</span></div>
-              <canvas id="snake-canvas" width="340" height="340" class="mini-canvas"></canvas>
+              <canvas id="snake-canvas" width="340" height="340" class="mini-canvas" ontouchstart="snakeTouchStart(event)" ontouchend="snakeTouchEnd(event)"></canvas>
               <div class="snake-controls"><button onclick="snakeDir('up')">⬆️</button><div><button onclick="snakeDir('left')">⬅️</button><button onclick="snakeDir('down')">⬇️</button><button onclick="snakeDir('right')">➡️</button></div></div>
               <button class="btn btn-green btn-full" onclick="startSnake()">▶️ Bắt đầu / Chơi lại</button>
               <div class="phone-note">Ăn táo để dài thêm. Dùng phím mũi tên trên máy tính.</div>
@@ -818,6 +820,8 @@ select option{background:var(--brown);}
               <div class="taixiu-rules"><b>Luật mô phỏng:</b> 3 viên xúc xắc được tung cùng lúc. Tổng 4–10 là Xỉu, 11–17 là Tài. Bộ ba đồng mặt được xử lý riêng trong game để tránh thắng Tài/Xỉu thông thường.</div>
             </div>
           </div>
+
+          <div id="phone-profile" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">👤 Hồ sơ</span></div><div class="phone-balance"><div id="profile-avatar-preview" style="width:72px;height:72px;margin:0 auto 8px;border-radius:20px;overflow:hidden;background:#1f2937;display:flex;align-items:center;justify-content:center;font-size:2rem;">👤</div><div class="v" style="color:#fff" id="profile-display-name">Người chơi</div><div class="s">Mã tài khoản vĩnh viễn: <b id="profile-kb" style="color:#ffd54a">KB---------</b></div></div><input id="avatar-file-input" type="file" accept="image/*" style="display:none" onchange="changeAvatar(this)"><button class="btn btn-blue btn-full" onclick="document.getElementById('avatar-file-input').click()">🖼️ Đổi ảnh đại diện</button><div class="phone-note">Ảnh được nén và lưu vĩnh viễn theo tài khoản. Gmail chỉ dùng cho đăng nhập, không phải mã người chơi.</div></div>
 
           <div id="phone-settings" class="phone-page"><div class="phone-back"><button onclick="phoneOpen('home')">‹</button><span class="phone-title">⚙️ Cài đặt</span></div><div class="phone-balance"><div class="v" style="color:#fff">📱 Cấp điện thoại: <span id="phone-level-value">1</span></div><div class="s">Nâng cấp để mở thêm tiện ích trong các bản sau.</div></div><button class="btn btn-purple btn-full" onclick="upgradePhone()">⬆️ Nâng cấp điện thoại</button><div class="phone-note">Chi phí nâng cấp tăng theo từng cấp.</div></div>
         </div>
@@ -1128,7 +1132,7 @@ const firebaseConfig={
 };
 // ===================== FIREBASE =====================
 let fbDB=null, fbAuth=null, fbStorage=null;
-let playerProfile={name:'',gender:'Nam',email:'',accountName:'',uid:''};
+let playerProfile={name:'',gender:'Nam',email:'',accountName:'',uid:'',kb:'',photoURL:'',avatarBase64:''};
 let authHandlingUid='';
 let authHandlingPromise=null;
 let authStateKnown=false;
@@ -1228,12 +1232,24 @@ async function onAuthSuccess(user){
   playerProfile.accountName = emailToKey(user.email);
   playerProfile.photoURL = user.photoURL||'';
   playerProfile.gender = playerProfile.gender||'Nam';
+  // Tài khoản vĩnh viễn: tạo/mở mã KB một lần theo Firebase UID, không dùng Gmail làm ID người chơi.
+  if(fbDB){
+    const profRef=fbDB.ref('users/'+playerProfile.uid+'/profile');
+    const ps=await profRef.once('value').catch(()=>({val:()=>null}));
+    const existing=ps?.val?.()||{};
+    playerProfile.kb=existing.kb||makePermanentKB();
+    playerProfile.avatarBase64=existing.avatarBase64||'';
+    await profRef.update({
+      name: playerProfile.name,
+      email: user.email,
+      photoURL: user.photoURL||existing.photoURL||'',
+      kb: playerProfile.kb,
+      avatarBase64: playerProfile.avatarBase64,
+      updatedAt: Date.now()
+    });
+  }
   LS.set('vl_profile', playerProfile);
-  if(fbDB) fbDB.ref('users/'+playerProfile.accountName).set({
-    name: playerProfile.name, email: user.email,
-    photoURL: user.photoURL||'', ts: Date.now()
-  });
-  chatRegisterUser(playerProfile.accountName);
+  chatRegisterUser(playerProfile.kb);
   await checkAndResume();
   })().catch(err=>{
     console.error('Auth success handler:',err);
@@ -1247,7 +1263,7 @@ async function onAuthSuccess(user){
 
 function signOutGoogle(){
   if(fbAuth) fbAuth.signOut().catch(()=>{});
-  playerProfile={name:'',gender:'Nam',email:'',accountName:'',uid:''};
+  playerProfile={name:'',gender:'Nam',email:'',accountName:'',uid:'',kb:'',photoURL:'',avatarBase64:''};
   LS.del('vl_profile');
   // Reset login error
   const st=document.getElementById('login-status');
@@ -1298,27 +1314,47 @@ function selectProfileGender(g){
   document.getElementById('profile-btn-female')?.classList.toggle('selected',g==='Nữ');
 }
 
-async function checkAndResume(){
-  // Chờ Firebase xác định session trước khi đọc save; fix lỗi reload mất game dở.
-  if(fbAuth && !authStateKnown){
-    await authReady;
+function makePermanentKB(){
+  const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let out='KB-';
+  const bytes=new Uint8Array(8);
+  if(window.crypto?.getRandomValues) crypto.getRandomValues(bytes);
+  else for(let i=0;i<bytes.length;i++) bytes[i]=Math.floor(Math.random()*256);
+  for(const b of bytes) out+=alphabet[b%alphabet.length];
+  return out;
+}
+
+function cleanForFirebase(value){
+  if(value===undefined) return null;
+  if(typeof value==='number' && !Number.isFinite(value)) return 0;
+  if(Array.isArray(value)) return value.map(cleanForFirebase);
+  if(value && typeof value==='object'){
+    const o={}; for(const [k,v] of Object.entries(value)){ if(v!==undefined) o[k]=cleanForFirebase(v); } return o;
   }
-  // SAVE CHỈ THEO TÀI KHOẢN FIREBASE: không dùng localStorage để lưu tiến trình.
-  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || authStateUser?.uid || '';
-  let fbSave = null;
-  if(fbDB && uid){
+  return value;
+}
+
+async function checkAndResume(){
+  if(fbAuth && !authStateKnown) await authReady;
+  const uid=fbAuth?.currentUser?.uid || authStateUser?.uid || playerProfile?.uid || '';
+  if(!uid || !fbDB){ showScreen('intro'); updateLoginUserBar(); return; }
+  let fbSave=null, source='uid';
+  try{ fbSave=(await fbDB.ref('users/'+uid+'/savestate').once('value')).val(); }catch(e){ console.warn('UID save read failed',e); }
+  // Compatibility: khôi phục save cũ dùng email-key rồi migrate sang UID.
+  if(!fbSave){
     try{
-      const snap = await fbDB.ref('users/'+uid+'/savestate').once('value');
-      fbSave = snap.val();
-    }catch(e){
-      console.warn('Không tải được save tài khoản:',e);
-    }
+      const legacyKey=playerProfile.accountName||emailToKey(playerProfile.email||'');
+      if(legacyKey){ fbSave=(await fbDB.ref('users/'+legacyKey+'/savestate').once('value')).val(); source='legacy'; }
+    }catch(e){ console.warn('Legacy save read failed',e); }
   }
   if(fbSave?.alive && fbSave.name && Number.isFinite(Number(fbSave.age)) && Number(fbSave.age)>=0){
-    // Có game dở thì vào thẳng, không hiện confirm nữa.
-    loadSavedGame(fbSave); return;
+    loadSavedGame(fbSave);
+    if(source==='legacy'){
+      saveGameState();
+      showNotif('✅ Đã chuyển save cũ sang tài khoản KB của bạn.','#2ecc71');
+    }
+    return;
   }
-  // Xóa save cũ dạng local của phiên bản trước để tránh nhầm dữ liệu.
   LS.del('vl_savestate');
   showScreen('intro'); updateLoginUserBar();
 }
@@ -1326,11 +1362,20 @@ async function checkAndResume(){
 function loadSavedGame(sg){
   const clean=JSON.parse(JSON.stringify(sg));
   Object.assign(G,clean);
-  G.energy=Number.isFinite(G.energy)?G.energy:3; G.reputation=Number.isFinite(G.reputation)?G.reputation:0; G.bank=Number.isFinite(G.bank)?G.bank:0; ensurePhoneState();
-  G.activityHistory=Array.isArray(G.activityHistory)?G.activityHistory:[]; G.cityEvents=Array.isArray(G.cityEvents)?G.cityEvents:[]; G.weather=G.weather||VIETNAM_WEATHER[0]; G.studyEffort=Number(G.studyEffort)||0; G.spouseBirthOffset=Number(G.spouseBirthOffset)||0;
+  G.money=Number(G.money)||0; G.totalMoney=Math.max(Number(G.totalMoney)||0,G.money);
+  G.energy=Number.isFinite(G.energy)?G.energy:3; G.reputation=Number.isFinite(G.reputation)?G.reputation:0; G.bank=Number.isFinite(G.bank)?G.bank:0;
+  G.activityHistory=Array.isArray(G.activityHistory)?G.activityHistory:[]; G.cityEvents=Array.isArray(G.cityEvents)?G.cityEvents:[]; G.weather=G.weather||VIETNAM_WEATHER[0];
+  G.studyEffort=Number(G.studyEffort)||0; G.spouseBirthOffset=Number(G.spouseBirthOffset)||0;
+  G.farm=G.farm||{chicken:0,pig:0,fish:0,veggie:0,rice:0,cow:0};
+  G.farmSick=G.farmSick||{chicken:false,pig:false,fish:false,veggie:false,rice:false,cow:false};
+  G.edu=G.edu||{school:null,yearInSchool:0,completed:[],grades:[],currentLevelId:null};
+  G.log=Array.isArray(G.log)?G.log:[]; G.alive=G.alive!==false;
+  ensurePhoneState();
+  playerProfile.kb=playerProfile.kb||makePermanentKB();
+  playerProfile.avatarBase64=playerProfile.avatarBase64||G.avatarBase64||'';
+  G.avatarBase64=playerProfile.avatarBase64;
   showScreen('game'); showSection('main'); renderGame(); chatInit();
   showNotif(`✅ Tiếp tục: ${G.name} – ${G.age} tuổi!`,'#2ecc71');
-  // Lắng nghe buff realtime từ admin
   startAdminBuffListener();
 }
 
@@ -1342,7 +1387,7 @@ function updateLoginUserBar(){
     const letter = p.name[0]?.toUpperCase()||'?';
     bar.innerHTML=`<span style="display:flex;align-items:center;gap:8px;">
       <span style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#4285F4,#34A853);display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem;color:white;">${letter}</span>
-      <span style="font-size:0.82rem;">Xin chào: <strong style="color:var(--gold)">${p.name}</strong></span>
+      <span style="font-size:0.82rem;">Xin chào: <strong style="color:var(--gold)">${p.name}</strong><br><small style="color:#7dd3fc">${p.kb||''}</small></span>
     </span>`;
   } else {
     bar.innerHTML=`<span style="font-size:0.78rem;color:#888;">👤 Chưa đăng nhập</span>`;
@@ -1364,21 +1409,25 @@ async function initProfile(){
   showScreen('login');
 }
 
+let saveInFlight=false;
 async function saveGameState(){
-  if(!G.name) return;
-  // Không lưu tiến trình game vào localStorage. Save thuộc về Firebase Auth UID.
-  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || authStateUser?.uid || '';
-  if(!fbDB || !uid) return;
+  if(!G.name || !G.alive) return;
+  const uid=playerProfile?.uid || fbAuth?.currentUser?.uid || authStateUser?.uid || '';
+  if(!fbDB || !uid || saveInFlight) return;
+  saveInFlight=true;
   try{
-    await fbDB.ref('users/'+uid+'/savestate').set({...G, _ts: Date.now(), _saveVersion: 2, _ownerUid: uid});
-  }catch(e){
-    console.warn('Lỗi lưu game theo tài khoản:',e);
-  }
+    G.avatarBase64=playerProfile.avatarBase64||G.avatarBase64||'';
+    const payload=cleanForFirebase({...G,_ts:Date.now(),_saveVersion:5,_ownerUid:uid});
+    await fbDB.ref('users/'+uid+'/savestate').set(payload);
+  }catch(e){ console.warn('Lỗi lưu game theo tài khoản:',e); }
+  finally{ saveInFlight=false; }
 }
 function clearSaveState(){
   LS.del('vl_savestate');
-  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || '';
-  if(fbDB && uid) fbDB.ref('users/'+uid+'/savestate').remove().catch(()=>{});
+  const uid=playerProfile?.uid || fbAuth?.currentUser?.uid || '';
+  const legacy=playerProfile?.accountName||'';
+  if(fbDB&&uid) fbDB.ref('users/'+uid+'/savestate').remove().catch(()=>{});
+  if(fbDB&&legacy) fbDB.ref('users/'+legacy+'/savestate').remove().catch(()=>{});
 }
 function showHelp(){document.getElementById('help-modal').style.display='block';document.body.style.overflow='hidden';}
 function closeHelp(){document.getElementById('help-modal').style.display='none';document.body.style.overflow='';}
@@ -3167,6 +3216,9 @@ function renderPhone(){
   const pl=document.getElementById('phone-level-value'); if(pl)pl.textContent=G.phoneLevel;
   const ph=document.getElementById('phone-hometown'); if(ph)ph.textContent=G.hometown||'Việt Nam';
   const clock=document.getElementById('phone-clock'); if(clock)clock.textContent=new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit'});
+  const pName=document.getElementById('profile-display-name'); if(pName)pName.textContent=playerProfile.name||G.name||'Người chơi';
+  const pkb=document.getElementById('profile-kb'); if(pkb)pkb.textContent=playerProfile.kb||'KB--------';
+  const pav=document.getElementById('profile-avatar-preview'); if(pav){ const av=playerProfile.avatarBase64||G.avatarBase64; pav.innerHTML=av?`<img src="${av}" style="width:100%;height:100%;object-fit:cover">`:(G.gender==='Nam'?'👨':'👩'); }
   renderPhoneNews();
   if(document.getElementById('flappy-canvas'))drawFlappy(); if(document.getElementById('snake-canvas'))drawSnake();
   // 15–17 tuổi: điện thoại cơ bản; app cờ bạc vẫn bị khóa ở 18+.
@@ -3175,6 +3227,20 @@ function renderPhone(){
     if(b){b.style.opacity=age<18?'0.45':'1'; b.title=age<18?'Mở khóa ở tuổi 18':'Đã mở khóa';}
   });
 }
+async function changeAvatar(input){
+  const file=input.files?.[0]; if(!file)return;
+  if(Number(G.age||0)<15){showNotif('📵 Cần từ 15 tuổi để dùng điện thoại.','#e74c3c');input.value='';return;}
+  const b64=await compressImage(file,512,0.72); input.value='';
+  if(!b64){showNotif('❌ Không đọc được ảnh.','#e74c3c');return;}
+  // Base64 giới hạn ~512 KB để save vẫn nhẹ và bền.
+  if(b64.length>512*1024){showNotif('❌ Ảnh sau nén vẫn vượt 512 KB. Hãy chọn ảnh khác.','#e74c3c');return;}
+  playerProfile.avatarBase64=b64; G.avatarBase64=b64;
+  if(fbDB&&playerProfile.uid){
+    try{ await fbDB.ref('users/'+playerProfile.uid+'/profile').update({avatarBase64:b64,updatedAt:Date.now()}); }catch(e){showNotif('❌ Không lưu được ảnh đại diện.','#e74c3c');return;}
+  }
+  saveGameState(); renderPhone(); renderGame(); showNotif('✅ Đã lưu ảnh đại diện vĩnh viễn.','#2ecc71');
+}
+
 function phoneSpend(amount,desc){
   if(amount<=0||G.money<amount){showNotif('💸 Không đủ tiền!','#e74c3c');return false;}
   G.money-=amount; addLog(G.age,desc+' -'+fmt(amount)+' VNĐ','neutral'); renderPhone();renderGame();saveGameState(); return true;
@@ -3247,6 +3313,9 @@ function startSnake(){
   if(Number(G.age||0)<15){showNotif('📵 Cần từ 15 tuổi để dùng điện thoại.','#e74c3c');return;}
   clearInterval(snakeTimer);snakeState={running:true,snake:[{x:8,y:8},{x:7,y:8},{x:6,y:8}],dir:{x:1,y:0},nextDir:{x:1,y:0},apple:{x:12,y:8},score:0};document.getElementById('snake-score').textContent='Điểm: 0';snakeTimer=setInterval(()=>{snakeState.dir=snakeState.nextDir;snakeTick();},120);drawSnake();
 }
+let snakeTouchOrigin=null;
+function snakeTouchStart(e){const t=e.changedTouches?.[0]; if(t)snakeTouchOrigin={x:t.clientX,y:t.clientY};}
+function snakeTouchEnd(e){const t=e.changedTouches?.[0]; if(!t||!snakeTouchOrigin)return; const dx=t.clientX-snakeTouchOrigin.x,dy=t.clientY-snakeTouchOrigin.y; snakeTouchOrigin=null; if(Math.max(Math.abs(dx),Math.abs(dy))<15)return; snakeDir(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));}
 function snakeDir(d){if(!snakeState||!snakeState.running){if(d==='up'||d==='down'||d==='left'||d==='right')startSnake();return;}const m={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}}[d];if(!m)return;if(m.x===-snakeState.dir.x&&m.y===-snakeState.dir.y)return;snakeState.nextDir=m;}
 const VIETNAM_NEWS=[
   {tag:'ĐỜI SỐNG',title:'Chợ sáng đông khách, giá rau thay đổi theo mùa',text:'Người dân tranh thủ đi chợ sớm. Giá một số mặt hàng trong thế giới game thay đổi theo cung cầu và mùa vụ.',time:'08:10'},
@@ -3543,13 +3612,10 @@ let myAccount = null;
 function chatInit(){
   if(!fbDB) return;
   try { fbStorage = firebase.storage(); } catch(e){}
-  // Dùng accountName (sanitized email) làm định danh
-  myAccount = playerProfile?.accountName || LS.get('vl_profile',{}).accountName || getDeviceId();
-  if(myAccount) fbDB.ref('users/'+myAccount).set({
-    name: playerProfile?.name || myAccount,
-    email: playerProfile?.email || '',
-    ts: Date.now()
-  });
+  // Mã KB vĩnh viễn mới là định danh người chơi trong hệ thống bạn bè/chat.
+  myAccount = playerProfile?.kb || LS.get('vl_profile',{}).kb || '';
+  if(!myAccount && playerProfile?.uid){ myAccount=makePermanentKB(); playerProfile.kb=myAccount; }
+  if(myAccount && playerProfile?.uid) fbDB.ref('users/'+playerProfile.uid+'/profile').update({kb:myAccount,name:playerProfile.name||'',avatarBase64:playerProfile.avatarBase64||'',ts:Date.now()});
   chatRenderFriendList();
   chatListenFriendRequests();
   chatShowFriendsView();
@@ -3577,29 +3643,23 @@ function chatToggle(){
 
 function chatKey(a,b){ return [a,b].sort().join('__'); }
 
-function chatSendFriendReq(){
-  if(!fbDB){ alert('Cần bật Firebase!'); return; }
-  if(!myAccount) chatInit();
-  const inp = document.getElementById('chat-friend-input');
-  const rawTarget = inp.value.trim();
-  if(!rawTarget){ showNotif('⚠️ Nhập Gmail của bạn bè!','#e74c3c'); return; }
-  // Sanitize Gmail thành key
-  const target = rawTarget.includes('@') ? emailToKey(rawTarget) : rawTarget;
-  if(target === myAccount){ showNotif('⚠️ Không thể kết bạn với chính mình!','#e74c3c'); return; }
-  // Kiểm tra đã kết bạn chưa
-  fbDB.ref('friends/'+myAccount+'/'+target).once('value', fs => {
-    if(fs.exists()){ showNotif('💬 Đã là bạn bè!','#f39c12'); return; }
-    // Kiểm tra đã gửi lời mời chưa
-    fbDB.ref('friendRequests/'+target+'/'+myAccount).once('value', fr => {
-      if(fr.exists()){ showNotif('📨 Đã gửi lời mời rồi!','#f39c12'); return; }
-      fbDB.ref('friendRequests/'+target+'/'+myAccount).set({
-        from: myAccount, fromName: playerProfile?.name || myAccount, ts: Date.now(), status:'pending'
-      }).then(()=>{
-        inp.value='';
-        showNotif('✅ Đã gửi lời mời tới "'+rawTarget+'"!','#27ae60');
-      }).catch(()=>showNotif('❌ Lỗi gửi lời mời – kiểm tra Gmail đúng chưa!','#e74c3c'));
-    });
-  });
+async function chatSendFriendReq(){
+  if(!fbDB||!myAccount){showNotif('❌ Chưa đăng nhập tài khoản.','#e74c3c');return;}
+  const inp=document.getElementById('chat-friend-input'); const raw=(inp.value||'').trim().toUpperCase();
+  if(!raw){showNotif('⚠️ Nhập mã KB của bạn bè (ví dụ KB-ABC12345)!','#e74c3c');return;}
+  const target=raw; if(target===myAccount){showNotif('⚠️ Không thể kết bạn với chính mình!','#e74c3c');return;}
+  try{
+    // Tra cứu mã KB -> UID/profile. Không cần biết Gmail.
+    const snap=await fbDB.ref('kb_index/'+target).once('value'); const targetUid=snap.val();
+    if(!targetUid){showNotif('❌ Không tìm thấy mã KB này.','#e74c3c');return;}
+    const targetProfile=(await fbDB.ref('users/'+targetUid+'/profile').once('value')).val()||{};
+    const existing=await fbDB.ref('friends/'+myAccount+'/'+target).once('value');
+    if(existing.exists()){showNotif('💬 Đã là bạn bè!','#f39c12');return;}
+    const fromData={from:myAccount,fromName:playerProfile?.name||myAccount,fromUid:playerProfile.uid||'',ts:Date.now(),status:'pending'};
+    await fbDB.ref('friendRequests/'+target+'/'+myAccount).set(fromData);
+    await fbDB.ref('friends/'+myAccount+'/'+target+'/profile').set({uid:targetUid,name:targetProfile.name||target,avatarBase64:targetProfile.avatarBase64||''});
+    inp.value=''; showNotif(`✅ Đã gửi lời mời tới ${target}!`,'#27ae60');
+  }catch(e){showNotif('❌ Không gửi được lời mời. Kiểm tra Firebase Rules.','#e74c3c');}
 }
 
 function chatListenFriendRequests(){
@@ -3619,9 +3679,11 @@ function chatListenFriendRequests(){
   });
 }
 
-function chatAcceptReq(from){
-  fbDB.ref('friends/'+myAccount+'/'+from).set({since:Date.now()});
-  fbDB.ref('friends/'+from+'/'+myAccount).set({since:Date.now()});
+async function chatAcceptReq(from){
+  let prof={}; try{ const uid=await fbDB.ref('kb_index/'+from).once('value').then(x=>x.val()); if(uid)prof=await fbDB.ref('users/'+uid+'/profile').once('value').then(x=>x.val()||{}); }catch(e){}
+  const selfProf={name:playerProfile?.name||myAccount,avatarBase64:playerProfile?.avatarBase64||''};
+  await fbDB.ref('friends/'+myAccount+'/'+from).update({since:Date.now(),profile:{name:prof.name||from,avatarBase64:prof.avatarBase64||''}});
+  await fbDB.ref('friends/'+from+'/'+myAccount).update({since:Date.now(),profile:selfProf});
   fbDB.ref('friendRequests/'+myAccount+'/'+from).remove();
   showNotif('🤝 Đã kết bạn với '+from+'!','#27ae60');
   chatRenderFriendList();
@@ -3632,46 +3694,41 @@ function chatDeclineReq(from){
 }
 
 function chatRenderFriendList(){
-  if(!fbDB||!myAccount) return;
-  fbDB.ref('friends/'+myAccount).on('value', snap=>{
-    chatFriends = {};
-    const val = snap.val()||{};
-    const keys = Object.keys(val);
-    if(!keys.length){
-      const el = document.getElementById('chat-fr-list');
-      if(el) el.innerHTML='<div id="chat-empty">Chưa có bạn bè.<br>Nhập Gmail để kết bạn!</div>';
-      return;
+  if(!fbDB||!myAccount)return;
+  fbDB.ref('friends/'+myAccount).on('value', async snap=>{
+    chatFriends={}; const val=snap.val()||{}; const keys=Object.keys(val);
+    if(!keys.length){ const el=document.getElementById('chat-fr-list'); if(el)el.innerHTML='<div id="chat-empty">Chưa có bạn bè.<br>Nhập mã KB để kết bạn!</div>'; return; }
+    for(const k of keys){
+      let displayName=k, avatar='';
+      try{
+        const stored=val[k]?.profile||{};
+        if(stored.name){ displayName=stored.name; avatar=stored.avatarBase64||''; }
+        else { const uid=await fbDB.ref('kb_index/'+k).once('value').then(x=>x.val()); if(uid){ const prof=await fbDB.ref('users/'+uid+'/profile').once('value').then(x=>x.val()||{}); displayName=prof.name||k; avatar=prof.avatarBase64||''; } }
+      }catch(e){}
+      chatFriends[k]={since:val[k]?.since||Date.now(),displayName,avatar};
     }
-    // Fetch display names from users node
-    let loaded=0;
-    keys.forEach(k=>{
-      chatFriends[k]={since:val[k].since,displayName:k};
-      fbDB.ref('users/'+k+'/name').once('value',ns=>{
-        chatFriends[k].displayName = ns.val()||k;
-        loaded++;
-        if(loaded===keys.length) chatRenderFriendListUI();
-      });
-    });
+    chatRenderFriendListUI();
   });
 }
 
 function chatRenderFriendListUI(){
-  const el = document.getElementById('chat-fr-list');
-  if(!el) return;
-  if(!Object.keys(chatFriends).length){
-    el.innerHTML='<div id="chat-empty">Chưa có bạn bè.<br>Nhập Gmail để kết bạn!</div>';
-    return;
-  }
-  el.innerHTML = Object.keys(chatFriends).map(accountKey=>{
-    const unread = chatUnread[accountKey]||0;
-    const displayName = chatFriends[accountKey].displayName || accountKey;
+  const el=document.getElementById('chat-fr-list'); if(!el)return;
+  const keys=Object.keys(chatFriends);
+  if(!keys.length){el.innerHTML='<div id="chat-empty">Chưa có bạn bè.<br>Nhập mã KB để kết bạn!</div>';return;}
+  el.innerHTML=keys.map(accountKey=>{
+    const d=chatFriends[accountKey]||{};
+    const unread=chatUnread[accountKey]||0;
+    const avatar=d.avatar||'';
+    const avHtml=avatar?`<img src="${avatar}" style="width:100%;height:100%;object-fit:cover">`:'👤';
     return `<div class="chat-fr-item" onclick="chatOpenConvo('${accountKey}')">
-      <div><span class="online-dot"></span><span class="chat-fr-name">${displayName}</span></div>
+      <span style="display:flex;align-items:center;gap:7px;min-width:0;">
+        <span style="width:30px;height:30px;border-radius:50%;overflow:hidden;background:#243447;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">${avHtml}</span>
+        <span style="min-width:0;"><span class="online-dot"></span><span class="chat-fr-name">${d.displayName||accountKey}</span><div style="font-size:.55rem;color:#64748b;">${accountKey}</div></span>
+      </span>
       ${unread?`<span class="unread-dot"></span>`:''}
     </div>`;
   }).join('');
-  // Listen for unread
-  Object.keys(chatFriends).forEach(k=>chatListenMessages(k));
+  keys.forEach(k=>chatListenMessages(k));
 }
 
 function chatListenMessages(friend){
@@ -3776,37 +3833,18 @@ function compressImage(file, maxPx=900, quality=0.75){
 }
 
 async function chatUploadFile(input){
-  const file = input.files[0];
-  if(!file||!chatActiveTab) return;
-  const isImg=file.type.startsWith('image/');
-  const prog=document.getElementById('chat-upload-progress');
-  const key=chatKey(myAccount,chatActiveTab);
-  try{ input.value=''; }catch(e){}
-
-  if(isImg){
+  const file=input.files?.[0]; if(!file||!chatActiveTab||!myAccount)return;
+  const prog=document.getElementById('chat-upload-progress'); const key=chatKey(myAccount,chatActiveTab);
+  try{input.value='';}catch(e){}
+  if(!file.type.startsWith('image/')){showNotif('🚫 Chat chỉ hỗ trợ văn bản và ảnh. Không gửi video/file.','#e74c3c');return;}
+  try{
     prog.style.display='block'; prog.textContent='🖼 Đang nén ảnh...';
-    const b64=await compressImage(file);
-    if(!b64){ prog.textContent='❌ Lỗi ảnh'; setTimeout(()=>prog.style.display='none',2000); return; }
-    if(b64.length>3*1024*1024){ prog.textContent='❌ Ảnh quá lớn (>3MB sau nén)'; setTimeout(()=>prog.style.display='none',3000); return; }
+    const b64=await compressImage(file,900,0.72);
+    if(!b64){prog.textContent='❌ Ảnh lỗi';setTimeout(()=>prog.style.display='none',2000);return;}
+    if(b64.length>512*1024){prog.textContent='❌ Ảnh quá 512 KB sau nén';setTimeout(()=>prog.style.display='none',3000);return;}
     await fbDB.ref('chats/'+key).push({from:myAccount,url:b64,type:'image',ts:Date.now()});
     prog.style.display='none';
-  } else {
-    if(!fbStorage){ try{ fbStorage=firebase.storage(); }catch(e){} }
-    if(!fbStorage){ showNotif('❌ Chưa kết nối storage'); return; }
-    prog.style.display='block';
-    prog.innerHTML=`📎 <b>${file.name}</b> <span id="up-pct">0%</span>`;
-    const ref=fbStorage.ref('chat_files/'+Date.now()+'_'+file.name);
-    const task=ref.put(file);
-    task.on('state_changed',
-      s=>{ const pct=Math.round(s.bytesTransferred/s.totalBytes*100); document.getElementById('up-pct').textContent=pct+'%'; },
-      e=>{ prog.textContent='❌ Lỗi: '+e.message; setTimeout(()=>prog.style.display='none',3000); },
-      async ()=>{
-        const url=await task.snapshot.ref.getDownloadURL();
-        await fbDB.ref('chats/'+key).push({from:myAccount,url,name:file.name,type:'file',ts:Date.now()});
-        prog.style.display='none';
-      }
-    );
-  }
+  }catch(e){prog.textContent='❌ Không gửi được ảnh';setTimeout(()=>prog.style.display='none',2500);}
 }
 
 function showLightbox(url){
@@ -3962,15 +4000,15 @@ function resetLotteryCard(){
 }
 
 
-function chatRegisterUser(accountName){
-  if(!fbDB||!accountName) return;
-  myAccount = accountName;
-  fbDB.ref('users/'+accountName).set({
-    name: playerProfile?.name || accountName,
-    email: playerProfile?.email || '',
-    ts: Date.now()
-  });
+function chatRegisterUser(kb){
+  if(!fbDB||!kb||!playerProfile?.uid)return;
+  myAccount=kb;
+  const profile={name:playerProfile?.name||kb,email:playerProfile?.email||'',kb,uid:playerProfile.uid,avatarBase64:playerProfile?.avatarBase64||'',ts:Date.now()};
+  // Profile công khai theo UID; index KB vĩnh viễn trỏ về UID.
+  fbDB.ref('users/'+playerProfile.uid+'/profile').update(profile).catch(()=>{});
+  fbDB.ref('kb_index/'+kb).set(playerProfile.uid).catch(()=>{});
 }
+
 
 </script>
 
@@ -3983,7 +4021,7 @@ function chatRegisterUser(accountName){
   <div id="chat-header">
     <h3>👥 Bạn Bè & Chat</h3>
     <div id="chat-add-friend">
-      <input type="text" id="chat-friend-input" placeholder="Nhập Gmail của bạn bè..." maxlength="60">
+      <input type="text" id="chat-friend-input" placeholder="Nhập mã KB của bạn bè (KB-XXXXXXXX)!" maxlength="60">
       <button onclick="chatSendFriendReq()">➕ KB</button>
     </div>
     <div id="chat-req-notif" style="font-size:0.65rem;color:#aaa;display:none;padding:2px 0;"></div>
@@ -3994,11 +4032,11 @@ function chatRegisterUser(accountName){
   <div id="chat-upload-progress"></div>
   <div id="chat-input-area" style="display:none;">
     <div id="chat-input-row">
-      <button class="btn-attach" onclick="document.getElementById('chat-file-input').click()" title="Gửi file/ảnh">📎</button>
+      <button class="btn-attach" onclick="document.getElementById('chat-file-input').click()" title="Gửi ảnh (tối đa 512 KB)">📎</button>
       <input type="text" id="chat-text-input" placeholder="Nhắn tin..." onkeydown="if(event.key==='Enter')chatSendMsg()">
       <button class="btn-send" onclick="chatSendMsg()">➤</button>
     </div>
-    <input type="file" id="chat-file-input" accept="image/*,video/*,.pdf,.doc,.docx,.xls,.xlsx,.txt" style="display:none;" onchange="chatUploadFile(this)">
+    <input type="file" id="chat-file-input" accept="image/*" style="display:none;" onchange="chatUploadFile(this)">
   </div>
 </div>
 
