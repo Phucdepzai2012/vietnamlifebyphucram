@@ -1131,6 +1131,10 @@ let fbDB=null, fbAuth=null, fbStorage=null;
 let playerProfile={name:'',gender:'Nam',email:'',accountName:'',uid:''};
 let authHandlingUid='';
 let authHandlingPromise=null;
+let authStateKnown=false;
+let authStateUser=null;
+let authReadyResolve;
+const authReady=new Promise(resolve=>{authReadyResolve=resolve;});
 
 try{
   firebase.initializeApp(firebaseConfig);
@@ -1255,20 +1259,23 @@ function signOutGoogle(){
 // Auto-login nếu Firebase nhớ session
 if(fbAuth){
   fbAuth.onAuthStateChanged(user=>{
+    authStateUser=user||null;
+    authStateKnown=true;
+    if(authReadyResolve){ authReadyResolve(authStateUser); authReadyResolve=null; }
     if(user){
-      // Nếu đang ở màn login → tự login luôn
-      const loginScreen=document.getElementById('screen-login');
-      if(loginScreen&&loginScreen.classList.contains('active')){
-        onAuthSuccess(user);
-      }
+      // Luôn đồng bộ profile + load save theo UID; tránh race khi reload trang.
+      onAuthSuccess(user);
+    }else{
+      setLoginLoading(false);
+      showScreen('login');
     }
   });
   // Xử lý kết quả redirect (nếu signInWithRedirect được gọi)
-  fbAuth.getRedirectResult().then(result=>{
-    if(result&&result.user) onAuthSuccess(result.user);
-  }).catch(err=>{
+  fbAuth.getRedirectResult().catch(err=>{
     if(err.code&&err.code!=='auth/no-auth-event') console.warn('Redirect result:',err);
   });
+}else if(authReadyResolve){
+  authReadyResolve(null); authReadyResolve=null;
 }
 
 // Device ID duy nhất
@@ -1292,8 +1299,12 @@ function selectProfileGender(g){
 }
 
 async function checkAndResume(){
+  // Chờ Firebase xác định session trước khi đọc save; fix lỗi reload mất game dở.
+  if(fbAuth && !authStateKnown){
+    await authReady;
+  }
   // SAVE CHỈ THEO TÀI KHOẢN FIREBASE: không dùng localStorage để lưu tiến trình.
-  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || '';
+  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || authStateUser?.uid || '';
   let fbSave = null;
   if(fbDB && uid){
     try{
@@ -1338,21 +1349,25 @@ function updateLoginUserBar(){
   }
 }
 
-// Auto-login nếu đã có profile
-function initProfile(){
-  const p=LS.get('vl_profile',null);
-  if(p?.accountName&&p?.name&&p?.email){
-    playerProfile=p;
-    chatRegisterUser(p.accountName);
-    checkAndResume();
+// Auto-login nếu Firebase còn session; KHÔNG tự vào bằng profile local nếu chưa xác thực.
+async function initProfile(){
+  if(fbAuth && !authStateKnown){
+    await authReady;
   }
-  // else stay on login screen
+  const user=fbAuth?.currentUser || authStateUser;
+  if(user){
+    await onAuthSuccess(user);
+    return;
+  }
+  // Có profile cũ nhưng Firebase không còn session → yêu cầu đăng nhập lại.
+  updateLoginUserBar();
+  showScreen('login');
 }
 
 async function saveGameState(){
   if(!G.name) return;
   // Không lưu tiến trình game vào localStorage. Save thuộc về Firebase Auth UID.
-  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || '';
+  const uid = playerProfile?.uid || fbAuth?.currentUser?.uid || authStateUser?.uid || '';
   if(!fbDB || !uid) return;
   try{
     await fbDB.ref('users/'+uid+'/savestate').set({...G, _ts: Date.now(), _saveVersion: 2, _ownerUid: uid});
